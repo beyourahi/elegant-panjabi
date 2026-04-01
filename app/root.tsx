@@ -162,7 +162,8 @@ export function links() {
         // Favicon - dynamic route that redirects to Shopify CDN or static fallback
         {rel: "icon", href: "/favicon.ico"},
         // PWA manifest (dynamic route)
-        {rel: "manifest", href: "/manifest.webmanifest"},
+        // crossOrigin="use-credentials" is required for browsers that enforce CORS on manifest requests
+        {rel: "manifest", href: "/manifest.webmanifest", crossOrigin: "use-credentials" as const},
         // Apple Touch Icon (dynamic route that redirects to actual icon)
         {rel: "apple-touch-icon", href: "/apple-touch-icon.png"}
     ];
@@ -235,10 +236,10 @@ async function loadCriticalData({context}: Route.LoaderArgs) {
     ]);
 
     // Parse shipping config from shop metafields
-    // Currency derived from shop payment settings with BDT fallback
+    // Currency derived from shop payment settings with USD fallback
     const shippingConfig = parseShippingConfig(
         shopData?.shop?.freeShippingThreshold?.value,
-        shopData?.shop?.paymentSettings?.currencyCode ?? "BDT"
+        shopData?.shop?.paymentSettings?.currencyCode ?? "USD"
     );
 
     // Process collections to compute product counts (only available products)
@@ -503,6 +504,9 @@ export default function App() {
     return (
         <SiteContentProvider siteContent={data.siteContent}>
             <WishlistProvider>
+                {/* Shopify analytics (monorail-edge.shopifysvc.com) may abort in dev or
+                    when ad blockers are active. This is expected behavior and does not
+                    affect storefront functionality. See entry.server.tsx connectSrc. */}
                 <Analytics.Provider cart={data.cart} shop={data.shop} consent={data.consent}>
                     <ServiceWorkerUpdateBanner />
                     <NetworkStatusIndicator />

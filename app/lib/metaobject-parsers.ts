@@ -167,7 +167,33 @@ const FALLBACK_SITE_SETTINGS = {
     promotionalBannerTwoMedia: undefined,
     socialLinks: [],
     testimonials: [],
-    faqItems: [],
+    faqItems: [
+        {
+            id: "faq-default-1",
+            question: "What shipping options do you offer?",
+            answer: "We offer standard and express shipping. Standard delivery takes 5-7 business days, while express delivery arrives in 2-3 business days."
+        },
+        {
+            id: "faq-default-2",
+            question: "What is your return policy?",
+            answer: "We accept returns within 30 days of purchase. Items must be unused and in original packaging. Contact us to initiate a return."
+        },
+        {
+            id: "faq-default-3",
+            question: "How can I track my order?",
+            answer: "Once your order ships, you'll receive a confirmation email with a tracking number. You can also check your order status in your account."
+        },
+        {
+            id: "faq-default-4",
+            question: "Do you ship internationally?",
+            answer: "Yes, we ship to most countries worldwide. Shipping costs and delivery times vary by destination."
+        },
+        {
+            id: "faq-default-5",
+            question: "How do I contact customer support?",
+            answer: "You can reach us via email, phone, or our contact page. Our support team is available during business hours."
+        }
+    ],
     instagramMedia: [],
     faviconUrl: null,
     icon192Url: null,
@@ -702,16 +728,47 @@ function parseFaqItemsJson(jsonField: MetaobjectField | undefined): FAQItem[] {
         const parsed = JSON.parse(jsonField.value) as unknown;
         if (!Array.isArray(parsed)) return [];
 
-        return (parsed as Record<string, unknown>[])
+        const items = (parsed as Record<string, unknown>[])
             .map((item, index) => ({
                 id: (item.id as string) || `faq-${index}`,
                 question: (item.question as string) || "",
                 answer: (item.answer as string) || ""
             }))
             .filter((f: FAQItem) => f.question && f.answer);
+
+        // Detect generic Shopify placeholder FAQs that aren't useful for an
+        // e-commerce storefront. When ALL questions are generic placeholders,
+        // return [] so the caller falls back to e-commerce defaults.
+        if (items.length > 0 && items.every(item => isGenericFaqQuestion(item.question))) {
+            return [];
+        }
+
+        return items;
     } catch {
         return [];
     }
+}
+
+/**
+ * Known generic/placeholder FAQ questions that Shopify metaobject templates
+ * ship with. These are not e-commerce-relevant and should trigger a fallback
+ * to the curated defaults in DEFAULT_SITE_SETTINGS.
+ */
+const GENERIC_FAQ_QUESTIONS = new Set([
+    "what is this?",
+    "who is this for?",
+    "how does it work?",
+    "do i need any special knowledge to use this?",
+    "can i get started quickly?",
+    "is everything easy to understand?",
+    "is this designed to be user-friendly?",
+    "can i explore it at my own pace?",
+    "what makes this stand out?",
+    "where can i find more information?"
+]);
+
+function isGenericFaqQuestion(question: string): boolean {
+    return GENERIC_FAQ_QUESTIONS.has(question.trim().toLowerCase());
 }
 
 /**
@@ -963,7 +1020,7 @@ export function parseSiteSettings(rawData: unknown): SiteSettings {
         // Collections - parsers return [] when empty, components handle visibility
         socialLinks: parseSocialLinks(data.socialLinksData),
         testimonials: parsedTestimonials,
-        faqItems: parsedFaqItems,
+        faqItems: parsedFaqItems.length > 0 ? parsedFaqItems : DEFAULT_SITE_SETTINGS.faqItems,
         instagramMedia: parsedInstagramMedia,
 
         // Favicon - extracted from file reference
