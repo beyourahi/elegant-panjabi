@@ -580,7 +580,6 @@ export function mapSortToProductSortKey(sort: string): {sortKey: string; reverse
         case "price-desc":
             return {sortKey: "PRICE", reverse: true};
         case "best-selling":
-            // QueryRoot.products doesn't expose sales data; preserve API order (same as storefront_001)
             return {sortKey: "BEST_SELLING", reverse: false};
         case "newest":
         default:
