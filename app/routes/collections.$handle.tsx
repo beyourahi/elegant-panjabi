@@ -87,6 +87,7 @@ export const meta: Route.MetaFunction = ({data, matches}) => {
     return (
         getSeoMeta({
             title,
+            titleTemplate: `%s | ${brandName}`,
             description,
             url: buildCanonicalUrl(`/collections/${collection.handle}`, siteUrl),
             media: collection.image?.url
@@ -98,7 +99,7 @@ export const meta: Route.MetaFunction = ({data, matches}) => {
                       type: "image" as const
                   }
                 : undefined,
-            jsonLd: generateCollectionSchema(collection, products) as any
+            jsonLd: generateCollectionSchema(collection, products, siteUrl) as any
         }) ?? []
     );
 };

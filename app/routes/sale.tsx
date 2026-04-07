@@ -49,22 +49,23 @@ import {CollectionPageLayout, useGridColumns, useLayoutMode, getGridClassName} f
 import {AnimatedSection} from "~/components/AnimatedSection";
 import type {CollectionWithCount} from "~/components/CollectionSidebar";
 import {filterAndSortDiscountedProducts, type DiscountedProduct, type RawDiscountProduct} from "~/lib/discounts";
-import {buildCanonicalUrl, getSiteUrlFromMatches} from "~/lib/seo";
+import {buildCanonicalUrl, getBrandNameFromMatches, getSiteUrlFromMatches} from "~/lib/seo";
 
 export const meta: Route.MetaFunction = ({data, matches}) => {
+    const brandName = getBrandNameFromMatches(matches);
     const siteUrl = getSiteUrlFromMatches(matches);
     const maxDiscount = data?.maxDiscount ?? 0;
-    const totalCount = data?.totalCount ?? 0;
 
     const title = maxDiscount > 0 ? `SALE - Up to ${maxDiscount}% Off` : `SALE`;
     const description =
-        totalCount > 0
-            ? `Discover ${totalCount} discounted items with savings up to ${maxDiscount}% off.`
-            : `Check back soon for sale items and amazing deals.`;
+        maxDiscount > 0
+            ? `Discover discounted items with savings up to ${maxDiscount}% off.`
+            : "Check back soon for sale items and amazing deals.";
 
     return (
         getSeoMeta({
             title,
+            titleTemplate: `%s | ${brandName}`,
             description,
             url: buildCanonicalUrl("/sale", siteUrl)
         }) ?? []
