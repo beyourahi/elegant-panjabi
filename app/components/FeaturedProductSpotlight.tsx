@@ -3,6 +3,7 @@ import {ArrowUpRight} from "lucide-react";
 import {Link} from "react-router";
 import type {FeaturedProductSection} from "types";
 import {Money} from "~/components/Money";
+import {QuickAddButton} from "~/components/QuickAddButton";
 import {Button} from "~/components/ui/button";
 import {parseProductTitle} from "~/lib/product";
 
@@ -82,9 +83,6 @@ export function FeaturedProductSpotlight({product}: {product: FeaturedProductSec
                                 {secondary}
                             </p>
                         )}
-                        {product.vendor ? (
-                            <p className="text-primary text-sm uppercase tracking-[0.28em]">{product.vendor}</p>
-                        ) : null}
                     </div>
 
                     <p className="text-muted-foreground max-w-xl text-sm leading-7 md:text-base">
@@ -103,16 +101,20 @@ export function FeaturedProductSpotlight({product}: {product: FeaturedProductSec
                         ) : null}
                     </div>
 
-                    <Button
-                        asChild
-                        size="lg"
-                        className="group/cta w-full justify-between rounded-[var(--radius-pill-raw)] px-6 py-6 text-sm uppercase tracking-[0.24em] md:w-auto transition-[background-color,border-color,box-shadow,color,opacity] [backface-visibility:hidden]"
-                    >
-                        <Link to={`/products/${product.handle}`} prefetch="intent">
-                            View featured product
-                            <ArrowUpRight className="h-4 w-4" />
-                        </Link>
-                    </Button>
+                    <div className="flex flex-wrap items-center gap-3">
+                        <QuickAddButton product={product} className="hover:scale-100" />
+                        <Button
+                            asChild
+                            variant="outline"
+                            size="lg"
+                            className="group/cta justify-between rounded-[var(--radius-pill-raw)] px-6 py-6 text-sm uppercase tracking-[0.24em] hover:translate-y-0"
+                        >
+                            <Link to={`/products/${product.handle}`} prefetch="intent">
+                                View featured product
+                                <ArrowUpRight className="h-4 w-4" />
+                            </Link>
+                        </Button>
+                    </div>
                 </div>
             </div>
         </section>
