@@ -53,7 +53,7 @@
 
 import {Suspense} from "react";
 import {Await, NavLink, useLocation, useRouteLoaderData} from "react-router";
-import {Copyright as CopyrightIcon} from "lucide-react";
+import {ArrowUpRight, Copyright as CopyrightIcon} from "lucide-react";
 import type {FooterProps} from "types";
 import {NewsletterForm} from "~/components/NewsletterForm";
 import {useSiteSettings, useSocialLinks, useFaqItems} from "~/lib/site-content-context";
@@ -126,8 +126,9 @@ export function Footer({footer: footerPromise, header: _header}: FooterProps) {
                                     >
                                         /
                                     </span>
-                                    <span className="pl-2.5 pr-1.5 py-1.5 font-semibold text-primary-foreground transition-colors duration-[220ms] ease-[var(--motion-ease-standard)] group-hover:text-primary-foreground">
+                                    <span className="inline-flex items-center gap-1.5 pl-2.5 pr-1.5 py-1.5 font-semibold text-primary-foreground transition-colors duration-[220ms] ease-[var(--motion-ease-standard)] group-hover:text-primary-foreground">
                                         Rahi Khan
+                                        <ArrowUpRight className="size-3.5 shrink-0" aria-hidden="true" />
                                     </span>
                                 </a>
                             </div>
