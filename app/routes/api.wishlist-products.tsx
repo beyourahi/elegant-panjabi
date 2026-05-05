@@ -175,6 +175,7 @@ const WISHLIST_PRODUCTS_QUERY = `#graphql
                 id
                 title
                 availableForSale
+                quantityAvailable
                 selectedOptions {
                     name
                     value
