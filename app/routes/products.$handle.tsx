@@ -85,6 +85,7 @@ import {Badge} from "~/components/ui/badge";
 import {OfflineAwareErrorPage} from "~/components/OfflineAwareErrorPage";
 import {trackErrorBoundary} from "~/hooks/usePwaAnalytics";
 import {hasSpecialTag, getSpecialTags} from "~/lib/product-tags";
+import {OUT_OF_STOCK_LABEL} from "~/lib/product/product-card-utils";
 import {AgentProductBrief} from "~/components/product/AgentProductBrief";
 import {useAgentSurface} from "~/lib/agent-surface-context";
 import {ProductBadgeStack} from "~/components/product/ProductBadge";
@@ -392,6 +393,15 @@ export default function Product() {
                     <ProductTagList tags={product.tags} />
                     <ProductTitle title={title} variant="pdp" />
                     <ProductDiscountBadge selectedVariant={selectedVariant} product={product} />
+                    {!selectedVariant?.availableForSale && (
+                        <span
+                            className="inline-flex items-center justify-center rounded-full bg-destructive px-3 py-1.5 text-sm font-medium uppercase tracking-wide text-destructive-foreground shadow-sm"
+                            role="status"
+                            aria-label="Out of stock"
+                        >
+                            {OUT_OF_STOCK_LABEL}
+                        </span>
+                    )}
                 </div>
 
                 {/* 3. Description - Comprehensive prose typography */}
@@ -528,6 +538,15 @@ export default function Product() {
                                     <ProductTagList tags={product.tags} />
                                     <ProductTitle title={title} variant="pdp" />
                                     <ProductDiscountBadge selectedVariant={selectedVariant} product={product} />
+                                    {!selectedVariant?.availableForSale && (
+                                        <span
+                                            className="inline-flex items-center justify-center rounded-full bg-destructive px-3 py-1.5 text-sm font-medium uppercase tracking-wide text-destructive-foreground shadow-sm"
+                                            role="status"
+                                            aria-label="Out of stock"
+                                        >
+                                            {OUT_OF_STOCK_LABEL}
+                                        </span>
+                                    )}
                                 </div>
                                 <ProductForm
                                     product={product}

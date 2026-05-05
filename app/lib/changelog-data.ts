@@ -31,6 +31,13 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
     {
         date: "2026-05-06",
         category: "Improvement",
+        headline: "Out-of-stock badges now use bold, consistent destructive styling",
+        summary:
+            "The out-of-stock badge on product cards now uses strong destructive colours so unavailable items are unmistakable at a glance. Product detail pages also show the same badge near the title, keeping the experience consistent wherever you browse."
+    },
+    {
+        date: "2026-05-06",
+        category: "Improvement",
         headline: "Out-of-stock products now show muted media with no hover effects",
         summary:
             "Product images and videos for out-of-stock items are now displayed in grayscale with reduced opacity, making it immediately clear that the item isn't available. All interactive hover effects — like image zoom and carousel arrows — are also disabled for out-of-stock products, keeping the experience focused on items you can actually buy."
