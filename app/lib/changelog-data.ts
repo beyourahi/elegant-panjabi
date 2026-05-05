@@ -30,24 +30,10 @@ import type {ChangelogEntry} from "~/lib/types/changelog";
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
     {
         date: "2026-05-06",
-        category: "Design",
-        headline: "Low-stock badge now shows a warning icon alongside the label",
-        summary:
-            "The 'Low Stock' badge on product cards now includes a small triangle warning icon to the left of the text, making limited-availability items easier to spot at a glance while browsing."
-    },
-    {
-        date: "2026-05-05",
-        category: "Fix",
-        headline: "Low-stock badge now reliably appears on product cards",
-        summary:
-            "The 'Low Stock' badge was not appearing on product cards across the homepage and search results. The storefront now fetches live inventory data for all product listings, so the badge correctly shows whenever any size or option is running low — matching the warning on the product page."
-    },
-    {
-        date: "2026-05-05",
         category: "New Feature",
-        headline: "Low-stock badge on product cards",
+        headline: "Low-stock indicator badge added to product cards",
         summary:
-            "Products running low on inventory now show a 'Low Stock' badge directly on the product card, so you can spot limited-availability items while browsing — no need to open the product page first."
+            "Products running low on inventory now show a 'Low Stock' badge — with a small triangle warning icon — directly on the product card, so limited-availability items are easy to spot at a glance while browsing. The badge fetches live inventory data and appears reliably across all product listings, matching the warning already shown on the product page."
     },
     {
         date: "2026-05-05",
