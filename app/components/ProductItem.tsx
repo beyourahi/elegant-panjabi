@@ -36,6 +36,7 @@
  */
 
 import * as React from "react";
+import {AlertTriangle} from "lucide-react";
 import {Link} from "react-router";
 import {Image} from "@shopify/hydrogen";
 import type {
@@ -706,11 +707,14 @@ export function ProductItem({
                         {/* Low stock badge - shown when tracked inventory <= 10 and product is available */}
                         {isLowStock && (
                             <span
-                                className="inline-flex items-center justify-center rounded-full bg-warning/20 px-2 py-1 text-xs font-medium uppercase tracking-wide text-warning-foreground shadow-md"
+                                className="inline-flex items-center gap-1.5 rounded-full bg-warning/80 pl-0.5 pr-2 py-0.5 text-xs text-warning-foreground shadow-md"
                                 role="status"
                                 aria-label="Low stock — limited quantity available"
                             >
-                                Low Stock
+                                <span className="bg-warning flex items-center justify-center rounded-full p-0.5">
+                                    <AlertTriangle size={12} className="pointer-events-none" />
+                                </span>
+                                <span className="font-medium uppercase">Low Stock</span>
                             </span>
                         )}
                     </div>

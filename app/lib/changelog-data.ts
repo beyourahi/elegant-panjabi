@@ -29,6 +29,13 @@ import type {ChangelogEntry} from "~/lib/types/changelog";
 // Newest entries at the top. Add new entries here in the same commit that ships the change.
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
     {
+        date: "2026-05-06",
+        category: "Design",
+        headline: "Low-stock badge now shows a warning icon alongside the label",
+        summary:
+            "The 'Low Stock' badge on product cards now includes a small triangle warning icon to the left of the text, making limited-availability items easier to spot at a glance while browsing."
+    },
+    {
         date: "2026-05-05",
         category: "Fix",
         headline: "Low-stock badge now reliably appears on product cards",
