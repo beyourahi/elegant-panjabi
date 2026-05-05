@@ -1313,6 +1313,7 @@ const SEARCH_PRODUCT_FRAGMENT = `#graphql
         id
         title
         availableForSale
+        quantityAvailable
         selectedOptions {
           name
           value

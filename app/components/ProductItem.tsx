@@ -439,7 +439,7 @@ export function ProductItem({
 
     // OOS state: product.availableForSale is always present in all fragment types
     const isOutOfStock = !product.availableForSale;
-    // Low stock: sum tracked available variant quantities; show badge when total > 0 and <= 10
+    // Low stock: true when any available, inventory-tracked variant has 1–10 units remaining
     const isLowStock = !isOutOfStock && isProductLowStock(product as any);
 
     // List variant - horizontal layout

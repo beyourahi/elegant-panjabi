@@ -759,6 +759,7 @@ const CURATED_COLLECTIONS_QUERY = `#graphql
         id
         title
         availableForSale
+        quantityAvailable
         selectedOptions {
           name
           value
