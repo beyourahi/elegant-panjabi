@@ -79,7 +79,6 @@ const FALLBACK_PRODUCT_CONTENT = {
     selectFrequency: "Select delivery frequency",
     stockInStock: "In Stock",
     stockOutOfStock: "Out of Stock",
-    stockLowTemplate: "Only {quantity} left",
     purchaseTypeLabel: "Purchase Type",
     oneTimeLabel: "One-time purchase",
     subscribeSaveLabel: "Subscribe & Save",
@@ -158,11 +157,14 @@ export function ProductForm({
         setQuantity(1);
     }, [selectedVariant?.id]);
 
-    /**
-     * Low stock threshold - show warning when 5 or fewer items remain.
-     * Only shown when inventory is tracked (quantityAvailable is not null).
-     */
-    const isLowStock = maxQuantity !== undefined && maxQuantity > 0 && maxQuantity <= 5;
+    // Low stock threshold: show indicator when a tracked variant has 10 or fewer units remaining.
+    // quantityAvailable is null when Shopify inventory tracking is disabled — those variants never trigger this.
+    const quantityLeft =
+        selectedVariant?.quantityAvailable != null &&
+        selectedVariant.quantityAvailable > 0 &&
+        selectedVariant.quantityAvailable <= 10
+            ? selectedVariant.quantityAvailable
+            : null;
 
     // =============================================================================
     // SELLING PLAN LOGIC
@@ -388,10 +390,16 @@ export function ProductForm({
                 </div>
 
                 {/* Low stock warning */}
-                {isLowStock && (
-                    <p className="text-sm text-amber-600 font-medium">
-                        {productContent.stockLowTemplate.replace("{quantity}", String(maxQuantity))}
-                    </p>
+                {quantityLeft !== null && (
+                    <div className="inline-flex items-center gap-2 rounded-full border border-warning/20 bg-warning/10 px-3 py-1">
+                        <span className="relative flex size-2 shrink-0" aria-hidden="true">
+                            <span className="absolute inline-flex size-full animate-ping rounded-full bg-warning opacity-60 motion-reduce:animate-none" />
+                            <span className="relative inline-flex size-2 rounded-full bg-warning" />
+                        </span>
+                        <span className="text-[11px] font-semibold uppercase tracking-widest text-warning-foreground">
+                            Only {quantityLeft} left
+                        </span>
+                    </div>
                 )}
 
                 <ShoppingSummary
@@ -515,10 +523,16 @@ export function ProductForm({
             </div>
 
             {/* Low stock warning */}
-            {isLowStock && (
-                <p className="text-sm text-amber-600 font-medium">
-                    {productContent.stockLowTemplate.replace("{quantity}", String(maxQuantity))}
-                </p>
+            {quantityLeft !== null && (
+                <div className="inline-flex items-center gap-2 rounded-full border border-warning/20 bg-warning/10 px-3 py-1">
+                    <span className="relative flex size-2 shrink-0" aria-hidden="true">
+                        <span className="absolute inline-flex size-full animate-ping rounded-full bg-warning opacity-60 motion-reduce:animate-none" />
+                        <span className="relative inline-flex size-2 rounded-full bg-warning" />
+                    </span>
+                    <span className="text-[11px] font-semibold uppercase tracking-widest text-warning-foreground">
+                        Only {quantityLeft} left
+                    </span>
+                </div>
             )}
 
             {/* Quantity Selector + Wishlist + Share row */}
