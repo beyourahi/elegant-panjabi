@@ -185,16 +185,15 @@ function VideoSlide({
     const posterUrl = slide.poster?.url;
 
     return (
-        <div className="relative h-full w-full overflow-hidden rounded-lg">
+        // Grayscale + opacity wrapper for OOS — placed here so the isReady opacity
+        // transition on the <video> element isn't overridden by a conflicting utility.
+        <div className={cn("relative h-full w-full overflow-hidden rounded-lg", isOutOfStock && "grayscale opacity-60")}>
             {/* Poster layer — holds its aspect until the video can paint. */}
             {posterUrl && !isReady && (
                 <Image
                     src={posterUrl}
                     alt={slide.poster?.altText || productTitle}
-                    className={cn(
-                        "absolute inset-0 h-full w-full rounded-lg object-cover",
-                        isOutOfStock && "opacity-60"
-                    )}
+                    className="absolute inset-0 h-full w-full rounded-lg object-cover"
                     loading="lazy"
                     decoding="async"
                 />
@@ -204,7 +203,7 @@ function VideoSlide({
                     ref={videoRef}
                     className={cn(
                         "sleek product-image h-full w-full rounded-lg object-cover",
-                        isOutOfStock ? "opacity-60" : "group-hover:scale-[1.03]",
+                        !isOutOfStock && "group-hover:scale-[1.03]",
                         isReady ? "opacity-100" : "opacity-0"
                     )}
                     muted
@@ -256,7 +255,7 @@ function ImageSlide({
                 sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
                 className={cn(
                     "sleek product-image h-auto w-full rounded-lg object-cover",
-                    !isOutOfStock && "group-hover:scale-[1.03]"
+                    isOutOfStock ? "grayscale opacity-60" : "group-hover:scale-[1.03]"
                 )}
             />
         </div>
@@ -442,7 +441,7 @@ export function ProductImageCarousel({
                 tabIndex={0}
                 className={cn(
                     "absolute left-2 top-1/2 -translate-y-1/2 z-20 size-8 rounded-full hidden md:flex items-center justify-center motion-overlay bg-primary border-0 hover:bg-primary/90 cursor-pointer",
-                    isOutOfStock ? "opacity-0" : "opacity-0 group-hover:opacity-100"
+                    isOutOfStock ? "opacity-0 pointer-events-none" : "opacity-0 group-hover:opacity-100"
                 )}
                 onClick={e => {
                     e.preventDefault();
@@ -465,7 +464,7 @@ export function ProductImageCarousel({
                 tabIndex={0}
                 className={cn(
                     "absolute right-2 top-1/2 -translate-y-1/2 z-20 size-8 rounded-full hidden md:flex items-center justify-center motion-overlay bg-primary border-0 hover:bg-primary/90 cursor-pointer",
-                    isOutOfStock ? "opacity-0" : "opacity-0 group-hover:opacity-100"
+                    isOutOfStock ? "opacity-0 pointer-events-none" : "opacity-0 group-hover:opacity-100"
                 )}
                 onClick={e => {
                     e.preventDefault();

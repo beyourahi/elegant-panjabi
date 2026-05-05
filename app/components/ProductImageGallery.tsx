@@ -286,7 +286,7 @@ export function ProductImageGallery({images, selectedVariantImage, media, isAvai
                             className={cn(
                                 "sleek product-image w-full h-full object-cover",
                                 !isLoaded && "opacity-0",
-                                isAvailableForSale && "hover:scale-105"
+                                isAvailableForSale ? "hover:scale-105" : "grayscale opacity-60"
                             )}
                         />
                     )}
@@ -326,7 +326,7 @@ export function ProductImageGallery({images, selectedVariantImage, media, isAvai
                     <video
                         src={source.url}
                         poster={item.previewImage?.url}
-                        className="w-full h-auto block"
+                        className={cn("w-full h-auto block", !isAvailableForSale && "grayscale opacity-60")}
                         autoPlay
                         loop
                         muted
@@ -395,7 +395,7 @@ export function ProductImageGallery({images, selectedVariantImage, media, isAvai
                         <Image
                             src={item.previewImage.url}
                             alt={item.alt || `Video thumbnail ${index + 1}`}
-                            className={cn("w-full h-full object-cover sleek", isAvailableForSale && "group-hover:scale-105")}
+                            className={cn("w-full h-full object-cover sleek", isAvailableForSale ? "group-hover:scale-105" : "grayscale opacity-60")}
                             loading={index === 0 ? "eager" : "lazy"}
                             width={800}
                             height={800}
@@ -405,7 +405,7 @@ export function ProductImageGallery({images, selectedVariantImage, media, isAvai
                     )}
 
                     {/* Centred play circle — pure SVG */}
-                    <div className="absolute inset-0 flex items-center justify-center bg-dark/20 group-hover:bg-dark/35 sleek pointer-events-none">
+                    <div className={cn("absolute inset-0 flex items-center justify-center bg-dark/20 sleek pointer-events-none", isAvailableForSale && "group-hover:bg-dark/35")}>
                         <div className="size-16 rounded-full bg-dark/70 flex items-center justify-center">
                             <svg width="20" height="24" viewBox="0 0 20 24" aria-hidden="true" className="text-light ml-1.5">
                                 <path d="M0 0L20 12L0 24V0Z" fill="currentColor" />
@@ -452,7 +452,7 @@ export function ProductImageGallery({images, selectedVariantImage, media, isAvai
                         <Image
                             src={item.previewImage.url}
                             alt={item.alt || `3D model ${index + 1}`}
-                            className={cn("w-full h-full object-cover sleek", isAvailableForSale && "group-hover:scale-105")}
+                            className={cn("w-full h-full object-cover sleek", isAvailableForSale ? "group-hover:scale-105" : "grayscale opacity-60")}
                             loading={index === 0 ? "eager" : "lazy"}
                             width={800}
                             height={800}
