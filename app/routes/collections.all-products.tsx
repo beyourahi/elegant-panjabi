@@ -319,6 +319,7 @@ const COLLECTION_ITEM_FRAGMENT = `#graphql
         compareAtPrice {
           ...MoneyCollectionItem
         }
+        quantityAvailable
       }
     }
   }

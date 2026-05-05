@@ -281,6 +281,7 @@ const DISCOUNT_VARIANT_FRAGMENT = `#graphql
   fragment DiscountVariant on ProductVariant {
     id
     availableForSale
+    quantityAvailable
     price {
       amount
       currencyCode

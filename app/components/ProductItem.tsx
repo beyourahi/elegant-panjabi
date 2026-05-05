@@ -56,7 +56,7 @@ import {ProductBadgeStack} from "~/components/ProductBadge";
 import {ProductTitle} from "~/components/ProductTitle";
 import {analyzeProductDiscount, type DiscountBadgeInfo, type ProductWithVariants} from "~/lib/discounts";
 import {getSpecialTags} from "~/lib/product-tags";
-import {OUT_OF_STOCK_LABEL} from "~/lib/product/product-card-utils";
+import {OUT_OF_STOCK_LABEL, isProductLowStock} from "~/lib/product/product-card-utils";
 import {cn} from "~/lib/utils";
 import type {GridColumns} from "~/lib/gridColumns";
 import {usePointerCapabilities} from "~/hooks/usePointerCapabilities";
@@ -439,6 +439,8 @@ export function ProductItem({
 
     // OOS state: product.availableForSale is always present in all fragment types
     const isOutOfStock = !product.availableForSale;
+    // Low stock: sum tracked available variant quantities; show badge when total > 0 and <= 10
+    const isLowStock = !isOutOfStock && isProductLowStock(product as any);
 
     // List variant - horizontal layout
     if (variant === "list") {
@@ -701,6 +703,16 @@ export function ProductItem({
                         )}
                         {/* Special tags badges - Premium, Pre-Order, New, Clearance */}
                         {specialTags.badgeTypes.length > 0 && <ProductBadgeStack types={specialTags.badgeTypes} />}
+                        {/* Low stock badge - shown when tracked inventory <= 10 and product is available */}
+                        {isLowStock && (
+                            <span
+                                className="inline-flex items-center justify-center rounded-full bg-warning/20 px-2 py-1 text-xs font-medium uppercase tracking-wide text-warning-foreground shadow-md"
+                                role="status"
+                                aria-label="Low stock — limited quantity available"
+                            >
+                                Low Stock
+                            </span>
+                        )}
                     </div>
                 )}
 

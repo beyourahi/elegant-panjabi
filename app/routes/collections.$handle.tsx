@@ -501,6 +501,7 @@ const PRODUCT_ITEM_FRAGMENT = `#graphql
         compareAtPrice {
           ...MoneyProductItem
         }
+        quantityAvailable
       }
     }
   }

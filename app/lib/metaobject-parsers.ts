@@ -290,6 +290,7 @@ const FALLBACK_PRODUCT_CONTENT: ProductContent = {
     selectFrequency: "Select delivery frequency",
     stockInStock: "In Stock",
     stockOutOfStock: "Out of Stock",
+    stockLowTemplate: "Only {quantity} left",
     purchaseTypeLabel: "Purchase Type",
     oneTimeLabel: "One-time purchase",
     subscribeSaveLabel: "Subscribe & Save",
@@ -1278,6 +1279,7 @@ export function parseProductContent(data: unknown): ProductContent {
         // Stock Status Labels
         stockInStock: d.stockInStock?.value || FALLBACK_PRODUCT_CONTENT.stockInStock,
         stockOutOfStock: d.stockOutOfStock?.value || FALLBACK_PRODUCT_CONTENT.stockOutOfStock,
+        stockLowTemplate: d.stockLowTemplate?.value || FALLBACK_PRODUCT_CONTENT.stockLowTemplate,
         // Purchase Type Options
         purchaseTypeLabel: d.purchaseTypeLabel?.value || FALLBACK_PRODUCT_CONTENT.purchaseTypeLabel,
         oneTimeLabel: d.oneTimeLabel?.value || FALLBACK_PRODUCT_CONTENT.oneTimeLabel,
