@@ -205,19 +205,20 @@ export function ProductForm({
     // VARIANT FILTERING & DISPLAY LOGIC
     // =============================================================================
 
-    // Filter options to only show available variants
+    // Include all option values where the variant exists — OOS values shown disabled.
+    // Non-existent combinations (exists=false) are excluded; OOS (exists=true, available=false) are kept.
     const filteredOptions = useMemo(
         () =>
             productOptions
                 .map(option => ({
                     ...option,
-                    optionValues: option.optionValues.filter(value => value.available)
+                    optionValues: option.optionValues.filter(value => value.exists !== false)
                 }))
                 .filter(option => option.optionValues.length > 0),
         [productOptions]
     );
 
-    // Check if there are any displayable variant options (options with more than 1 value)
+    // Check if there are any displayable variant options (options with more than 1 value, including OOS)
     const hasDisplayableVariants = filteredOptions.some(option => option.optionValues.length > 1);
 
     // Check if this is a single variant product and get the variant info
@@ -462,14 +463,18 @@ export function ProductForm({
                                 // Check if this option has a color/image swatch
                                 const hasSwatchData = hasSwatch(swatch);
 
-                                // Pill button styling - consistent for both swatch and non-swatch options
-                                // Reduced padding and text size for 320px viewport while maintaining 44px touch target
+                                // Pill button styling — OOS variants shown with diagonal strike, no hover effects.
+                                // Muted but still visible: opacity-45 over opacity-50 gives slightly more presence
+                                // while still clearly signaling unavailability at a glance.
+                                const isOos = !available;
                                 const buttonClasses = cn(
-                                    "inline-flex min-h-11 min-w-24 select-none items-center justify-center gap-1.5 sm:gap-2 rounded-full border-2 px-2.5 sm:px-4 py-1.5 text-sm sm:text-base lg:text-lg font-medium sleek hover:scale-[1.02] hover:shadow-md active:scale-[0.98]",
+                                    "relative overflow-hidden inline-flex min-h-11 min-w-24 select-none items-center justify-center gap-1.5 sm:gap-2 rounded-full border-2 px-2.5 sm:px-4 py-1.5 text-sm sm:text-base lg:text-lg font-medium",
                                     selected
                                         ? "border-primary bg-primary text-primary-foreground"
-                                        : "border-primary text-primary hover:bg-primary hover:text-primary-foreground",
-                                    exists && available ? "cursor-pointer" : "opacity-50 cursor-not-allowed"
+                                        : "border-primary text-primary",
+                                    exists && available
+                                        ? "sleek hover:bg-primary hover:text-primary-foreground hover:scale-[1.02] hover:shadow-md active:scale-[0.98] cursor-pointer"
+                                        : "opacity-45 cursor-not-allowed"
                                 );
 
                                 // Button content: swatch circle + name, or just name
@@ -482,6 +487,16 @@ export function ProductForm({
                                     <span className="leading-none">{name}</span>
                                 );
 
+                                // Diagonal strikethrough overlay rendered inside OOS buttons
+                                const oosOverlay = isOos ? (
+                                    <span
+                                        className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden rounded-full"
+                                        aria-hidden="true"
+                                    >
+                                        <span className="block h-[1.5px] w-[150%] rotate-[-28deg] bg-current opacity-30" />
+                                    </span>
+                                ) : null;
+
                                 if (isDifferentProduct) {
                                     return (
                                         <Link
@@ -491,8 +506,10 @@ export function ProductForm({
                                             replace
                                             to={`/products/${handle}?${variantUriQuery}`}
                                             className={buttonClasses}
+                                            aria-label={isOos ? `${name}, sold out` : undefined}
                                         >
                                             {optionContent}
+                                            {oosOverlay}
                                         </Link>
                                     );
                                 }
@@ -503,6 +520,7 @@ export function ProductForm({
                                         type="button"
                                         disabled={!exists || !available}
                                         className={buttonClasses}
+                                        aria-label={isOos ? `${name}, sold out` : undefined}
                                         onClick={() => {
                                             if (!selected) {
                                                 void navigate(`?${variantUriQuery}`, {
@@ -513,6 +531,7 @@ export function ProductForm({
                                         }}
                                     >
                                         {optionContent}
+                                        {oosOverlay}
                                     </button>
                                 );
                             })}

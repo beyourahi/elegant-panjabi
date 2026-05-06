@@ -363,12 +363,15 @@ export function QuickAddSheet({product, open, onOpenChange}: QuickAddSheetProps)
                                                 const hasSwatchData = isColor && hasColorMapping(value.value);
 
                                                 // Pill button styling — matches PDP variant pills exactly
+                                                const isOos = !isAvailable;
                                                 const buttonClasses = cn(
-                                                    "inline-flex min-h-11 min-w-24 select-none items-center justify-center gap-1.5 sm:gap-2 rounded-full border-2 px-2.5 sm:px-4 py-1.5 text-sm sm:text-base lg:text-lg font-medium sleek hover:scale-[1.02] hover:shadow-md active:scale-[0.98]",
+                                                    "relative overflow-hidden inline-flex min-h-11 min-w-24 select-none items-center justify-center gap-1.5 sm:gap-2 rounded-full border-2 px-2.5 sm:px-4 py-1.5 text-sm sm:text-base lg:text-lg font-medium",
                                                     isSelected
                                                         ? "border-primary bg-primary text-primary-foreground"
-                                                        : "border-primary text-primary hover:bg-primary hover:text-primary-foreground",
-                                                    isAvailable ? "cursor-pointer" : "opacity-50 cursor-not-allowed"
+                                                        : "border-primary text-primary",
+                                                    isAvailable
+                                                        ? "sleek hover:bg-primary hover:text-primary-foreground hover:scale-[1.02] hover:shadow-md active:scale-[0.98] cursor-pointer"
+                                                        : "opacity-45 cursor-not-allowed"
                                                 );
 
                                                 // Button content: swatch circle + name, or just name
@@ -392,6 +395,7 @@ export function QuickAddSheet({product, open, onOpenChange}: QuickAddSheetProps)
                                                         key={value.value}
                                                         type="button"
                                                         disabled={!isAvailable}
+                                                        aria-label={isOos ? `${value.value}, sold out` : undefined}
                                                         onClick={() => {
                                                             if (variant && isAvailable) {
                                                                 setSelectedVariantId(variant.id);
@@ -400,6 +404,14 @@ export function QuickAddSheet({product, open, onOpenChange}: QuickAddSheetProps)
                                                         className={buttonClasses}
                                                     >
                                                         {optionContent}
+                                                        {isOos && (
+                                                            <span
+                                                                className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden rounded-[inherit]"
+                                                                aria-hidden="true"
+                                                            >
+                                                                <span className="block h-[1.5px] w-[150%] rotate-[-28deg] bg-current opacity-30" />
+                                                            </span>
+                                                        )}
                                                     </button>
                                                 );
                                             })}
@@ -599,18 +611,15 @@ function groupVariantsByOption(
     }> = [];
 
     for (const [name, values] of optionMap) {
-        // Only include option values that have at least one available variant
-        const availableValues = Array.from(values.entries())
-            .filter(([, info]) => info.hasAvailableVariant)
-            .map(([value, info]) => ({
-                value,
-                variantId: info.variantId,
-                hasAvailableVariant: info.hasAvailableVariant
-            }));
-
-        // Show options with 1+ available values
-        if (availableValues.length > 0) {
-            result.push({name, values: availableValues});
+        // Include all option values (OOS + in-stock) — hasAvailableVariant drives disabled state in render
+        const allValues = Array.from(values.entries()).map(([value, info]) => ({
+            value,
+            variantId: info.variantId,
+            hasAvailableVariant: info.hasAvailableVariant
+        }));
+        // Show options with more than one total value — single-value axes offer no meaningful choice
+        if (allValues.length > 1) {
+            result.push({name, values: allValues});
         }
     }
 
