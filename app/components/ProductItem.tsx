@@ -673,12 +673,14 @@ export function ProductItem({
                     layoutClasses.padding
                 )}
             >
-                {/* Badge stack - OOS (topmost) + discount + special tags (below pin icon) */}
-                {/* When pinned, push badges down to avoid collision with pin icon */}
+                {/* Badge container - flex-wrap allows badges to sit on one row first;
+                    max-w reserves space for the wishlist button so badges never
+                    overlap it; they wrap to a new row when space runs out. */}
                 {showBadges && (
                     <div
                         className={cn(
-                            "absolute left-2 z-20 flex flex-col items-start gap-1",
+                            "absolute left-2 z-20 flex flex-wrap items-start gap-x-1.5 gap-y-1",
+                            "max-w-[calc(100%-52px)]",
                             specialTags.isPinned ? "top-6 sm:top-7" : "top-2"
                         )}
                     >

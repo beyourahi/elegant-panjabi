@@ -227,6 +227,8 @@ For portfolio Workers deploys, demo-store credentials live in `wrangler.jsonc`. 
 **Social Share Utils**: `lib/social-share.tsx` — platform URL generators (Facebook, X, WhatsApp, Pinterest), Web Share API integration, clipboard fallback, and analytics tracking against `POST /api/share/track`
 **Discount Utilities**: `lib/discounts.ts` — `calculateVariantDiscountPercentage()` and `analyzeProductDiscounts()` for exact vs. range badge logic; shared by `DiscountBadge.tsx`, `ProductDiscountBadge.tsx`, and the sale page sort
 **Pricing Analysis**: `lib/pricing-analysis.ts` — determines optimal price display strategy across variant configurations (single variant, multi-variant uniform/variable prices, compare-at pricing, discount %)
+**Product Tag Utilities**: `lib/product-tags.ts` — centralized tag detection, normalization, and badge configuration; `hasSpecialTag()`, `getSpecialTags()`, `filterDisplayTags()`, `sortWithPinnedFirst()`, `getButtonLabel()`; defines `BADGE_CONFIG` for all tag badge types (Premium, Pre-Order, New, Clearance, Coming Soon)
+**Date Formatters**: `lib/date-formatters.ts` — SSR-safe date formatting utilities using the Intl API (Cloudflare Workers supports Intl natively; no polyfills needed); used by the changelog route and components for relative and absolute date display
 
 ## Critical Warnings
 
@@ -396,6 +398,8 @@ Read all comments before editing. Update when changing code. Add for complex log
 
 **Sale Page**: `/sale` route — auto-filters all products to those with compare-at pricing (on-sale items), sorted by highest discount percentage. Shows max discount in page title/meta. Uses `InfiniteScrollSection` + collection sidebar layout.
 
+**All Products Page**: `/collections/all-products` route — lists every product in the store regardless of collection. Uses the same `CollectionPageLayout` as regular collection pages with sidebar navigation (links to all collections + `/sale`), sorting, grid/list toggle, and infinite scroll. Shows total product count in the page heading.
+
 **Newsletter**: `api.newsletter.tsx` — POST endpoint that creates a Shopify customer with `acceptsMarketing: true`. Components: `NewsletterForm.tsx` (email input + submission) + `NewsletterSection.tsx` (section wrapper that also renders `PromotionalBanner.tsx` above the form). `PromotionalBanner.tsx` renders full-width media (image or video, 90dvh) for hero/campaign banners on the homepage and newsletter section.
 
 **Product Recommendations (PDP)**: `RelatedProducts` section on the PDP loaded via `routes/products.$handle.tsx`. `components/product/AgentProductBrief.tsx` — agent-native PDP panel (monospace, structured field rows for title, pricing, options, description, tags, collections); rendered in `products.$handle.tsx` in place of the hero section when `useAgentSurface().isAgent` is true.
@@ -405,6 +409,8 @@ Read all comments before editing. Update when changing code. Add for complex log
 **Sticky Mobile CTA**: `StickyMobileGetNow.tsx` — mobile-only (`md:hidden`) fixed bottom bar (z-[103], above OpenInAppButton's z-[102]) that slides up when the `ProductHeroMobile` section scrolls out of viewport via Intersection Observer. Shows current price and sale discount %; smooth-scrolls back to the purchase section on tap accounting for fixed header height (80px). Used on the PDP.
 
 **Discount Badges**: `DiscountBadge.tsx` (product cards) and `ProductDiscountBadge.tsx` (PDP, variant-aware). Both render an emerald shimmer pill badge showing an exact discount (`"25% off"`) when all variants share the same %, or a range badge (`"up to X% off"`) when variants differ. Discount math lives in `lib/discounts.ts`. `ProductDiscountBadge` updates in real time as the user switches variants.
+
+**Product Tag Badges**: `components/ProductBadge.tsx` exports `ProductBadge` + `ProductBadgeStack` — tag-driven badges for special product states. Badge types: Premium (secondary), Pre-Order (muted), New (accent), Clearance (destructive/20), Coming Soon (primary/10). Badge config and tag detection live in `lib/product-tags.ts`. `components/product/ProductBadge.tsx` is a slimmer variant used on the PDP and agentic surfaces. OOS badge (destructive pill, `"Out of Stock"`) and Limited stock badge (warning triangle + `"Limited stock"`, shown when `quantityAvailable ≤ 10`) are rendered inline in `ProductItem.tsx`. Badge stack order from top to bottom: OOS → Discount → Tag Badges → Limited stock.
 
 **Brand Animation**: `BrandAnimation.tsx` — scroll-driven brand text transformation; animates the brand name from a large full-width hero block down to a smaller centered header position on scroll. Uses damped (frame-independent) interpolation and binary-search font sizing. Wraps `BrandAnimationProvider` (`lib/brand-animation-layout.ts`, `lib/brand-name-sizes.ts`); SSR-safe.
 

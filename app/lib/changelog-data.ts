@@ -30,6 +30,13 @@ import type {ChangelogEntry} from "~/lib/types/changelog";
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
     {
         date: "2026-05-06",
+        category: "Improvement",
+        headline: "Product card badges now wrap cleanly instead of stacking tall",
+        summary:
+            "Multiple badges on a product card — such as a discount, a tag badge, and a low-stock warning — now flow side by side in a single row and only wrap to a new line when space runs out. This keeps badge stacks compact and prevents them from obscuring the product image on smaller screens."
+    },
+    {
+        date: "2026-05-06",
         category: "Design",
         headline: "Out-of-stock badge now matches the discount badge size and style",
         summary:

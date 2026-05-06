@@ -140,8 +140,11 @@ export function ProductBadgeStack({types, className}: ProductBadgeStackProps) {
     const priorityOrder: BadgeType[] = ["premium", "preorder", "newArrival", "clearance"];
     const sortedTypes = types.sort((a, b) => priorityOrder.indexOf(a) - priorityOrder.indexOf(b));
 
+    // display: contents removes the wrapper from layout — badges become direct
+    // flex children of the parent container, joining its wrapping flow naturally
+    // alongside OOS, discount, and low-stock badges.
     return (
-        <div className={cn("flex flex-col items-start gap-1", className)}>
+        <div className={cn("contents", className)}>
             {sortedTypes.map(type => (
                 <ProductBadge key={type} type={type} />
             ))}

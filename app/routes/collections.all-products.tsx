@@ -105,16 +105,25 @@ async function loadCriticalData({context, request}: Route.LoaderArgs) {
     // Use official Hydrogen pagination pattern (24 items per page)
     const paginationVariables = getPaginationVariables(request, {pageBy: 24});
 
-    const {products} = await dataAdapter.query(CATALOG_QUERY, {
-        variables: {
-            ...paginationVariables,
-            sortKey: sortKey as ProductSortKeys,
-            reverse
-        },
-        cache: dataAdapter.CacheShort()
-    });
+    const [{products}, catalogCountData] = await Promise.all([
+        dataAdapter.query(CATALOG_QUERY, {
+            variables: {
+                ...paginationVariables,
+                sortKey: sortKey as ProductSortKeys,
+                reverse
+            },
+            cache: dataAdapter.CacheShort()
+        }),
+        // Lightweight count query — fetches only IDs to get accurate total (up to 250)
+        // The main CATALOG_QUERY paginates at 24, so its .nodes.length would be inaccurate
+        dataAdapter.query(CATALOG_COUNT_QUERY, {
+            cache: dataAdapter.CacheLong()
+        })
+    ]);
 
-    return {products};
+    const catalogProductCount = catalogCountData?.products?.nodes?.length ?? 0;
+
+    return {products, catalogProductCount};
 }
 
 /**
@@ -151,7 +160,7 @@ const SidebarSkeleton = () => (
 );
 
 export default function Collection() {
-    const {products, sidebarData} = useLoaderData<typeof loader>();
+    const {products, sidebarData, catalogProductCount} = useLoaderData<typeof loader>();
     const [gridColumns, setGridColumns] = useGridColumns();
     const [sortOption, setSortOption] = useSortOption("newest");
     const [layoutMode, setLayoutMode] = useLayoutMode();
@@ -164,6 +173,7 @@ export default function Collection() {
             title="All Products"
             description="Browse our complete collection, from timeless essentials to new arrivals."
             activeHandle="all-products"
+            collectionProductCount={catalogProductCount}
             gridColumns={gridColumns}
             onGridColumnsChange={setGridColumns}
             sortOption={sortOption}
@@ -333,6 +343,20 @@ const COLLECTION_ITEM_FRAGMENT = `#graphql
  *
  * @see https://shopify.dev/docs/api/storefront/latest/queries/products
  */
+// Lightweight query to get accurate total product count
+// The main CATALOG_QUERY paginates at 24, so .nodes.length caps at page size
+const CATALOG_COUNT_QUERY = `#graphql
+  query CatalogCount(
+    $country: CountryCode
+    $language: LanguageCode
+  ) @inContext(country: $country, language: $language) {
+    products(first: 250) {
+      nodes { id }
+      pageInfo { hasNextPage }
+    }
+  }
+` as const;
+
 const CATALOG_QUERY = `#graphql
   query Catalog(
     $country: CountryCode
