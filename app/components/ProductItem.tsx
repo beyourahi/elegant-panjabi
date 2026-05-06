@@ -709,12 +709,12 @@ export function ProductItem({
                             <span
                                 className="inline-flex items-center gap-1.5 rounded-full bg-warning/80 pl-0.5 pr-2 py-0.5 text-xs text-warning-foreground shadow-md"
                                 role="status"
-                                aria-label="Low stock — limited quantity available"
+                                aria-label="Limited stock — limited quantity available"
                             >
                                 <span className="bg-warning flex items-center justify-center rounded-full p-0.5">
                                     <AlertTriangle size={12} className="pointer-events-none" />
                                 </span>
-                                <span className="font-medium uppercase">Low Stock</span>
+                                <span className="font-medium uppercase">Limited stock</span>
                             </span>
                         )}
                     </div>

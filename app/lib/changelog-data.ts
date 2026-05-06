@@ -45,9 +45,9 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
     {
         date: "2026-05-06",
         category: "New Feature",
-        headline: "Low-stock indicator badge added to product cards",
+        headline: "Limited stock indicator badge added to product cards",
         summary:
-            "Products running low on inventory now show a 'Low Stock' badge — with a small triangle warning icon — directly on the product card, so limited-availability items are easy to spot at a glance while browsing. The badge fetches live inventory data and appears reliably across all product listings, matching the warning already shown on the product page."
+            "Products running low on inventory now show a 'Limited stock' badge — with a small triangle warning icon — directly on the product card, so limited-availability items are easy to spot at a glance while browsing. The badge fetches live inventory data and appears reliably across all product listings, matching the warning already shown on the product page."
     },
     {
         date: "2026-05-05",
