@@ -214,7 +214,7 @@ export function StickyMobileGetNow({
                 className={cn(
                     "w-full flex items-center min-h-[62px] rounded-[20px] select-none shadow-xl ring-1 overflow-hidden outline-none transition-transform duration-100",
                     outOfStock
-                        ? "bg-muted text-muted-foreground ring-border/40 cursor-not-allowed opacity-70"
+                        ? "bg-muted text-muted-foreground ring-border/40 cursor-not-allowed"
                         : "bg-card text-foreground ring-border focus-visible:ring-2 focus-visible:ring-ring active:scale-[0.99]"
                 )}
                 aria-label={outOfStock ? "Product is sold out" : "Scroll to product purchase section"}
