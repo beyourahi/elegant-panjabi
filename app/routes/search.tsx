@@ -1308,7 +1308,7 @@ const SEARCH_PRODUCT_FRAGMENT = `#graphql
         currencyCode
       }
     }
-    variants(first: 20) {
+    variants(first: 250) {
       nodes {
         id
         title

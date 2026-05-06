@@ -1260,7 +1260,7 @@ const RECENTLY_VIEWED_PRODUCTS_QUERY = `#graphql
           width
           height
         }
-        images(first: 10) {
+        images(first: 250) {
           nodes {
             id
             url
@@ -1269,7 +1269,7 @@ const RECENTLY_VIEWED_PRODUCTS_QUERY = `#graphql
             height
           }
         }
-        variants(first: 100) {
+        variants(first: 250) {
           nodes {
             id
             title
@@ -1329,7 +1329,7 @@ const RECOMMENDED_PRODUCTS_QUERY = `#graphql
           width
           height
         }
-        images(first: 10) {
+        images(first: 250) {
           nodes {
             id
             url
@@ -1338,7 +1338,7 @@ const RECOMMENDED_PRODUCTS_QUERY = `#graphql
             height
           }
         }
-        variants(first: 100) {
+        variants(first: 250) {
           nodes {
             id
             title
@@ -1398,7 +1398,7 @@ const ALL_PRODUCTS_QUERY = `#graphql
           width
           height
         }
-        images(first: 10) {
+        images(first: 250) {
           nodes {
             id
             url
@@ -1407,7 +1407,7 @@ const ALL_PRODUCTS_QUERY = `#graphql
             height
           }
         }
-        variants(first: 100) {
+        variants(first: 250) {
           nodes {
             id
             title

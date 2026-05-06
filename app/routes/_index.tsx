@@ -759,7 +759,7 @@ const CURATED_COLLECTIONS_QUERY = `#graphql
         }
       }
     }
-    variants(first: 5) {
+    variants(first: 250) {
       nodes {
         id
         title
@@ -813,7 +813,7 @@ const CURATED_COLLECTIONS_QUERY = `#graphql
         }
       }
     }
-    fallbackCollections: collections(first: 20) {
+    fallbackCollections: collections(first: 250) {
       nodes {
         id
         handle
@@ -908,7 +908,7 @@ const RECENTLY_VIEWED_PRODUCTS_QUERY = `#graphql
             }
           }
         }
-        variants(first: 5) {
+        variants(first: 250) {
           nodes {
             id
             title
@@ -1055,7 +1055,7 @@ const HERO_COLLECTIONS_QUERY = `#graphql
     $country: CountryCode
     $language: LanguageCode
   ) @inContext(country: $country, language: $language) {
-    collections(first: 10) {
+    collections(first: 250) {
       nodes {
         ...HeroCollection
       }

@@ -495,7 +495,7 @@ export function ProductItem({
                 <div className="flex-1 min-w-0 space-y-1">
                     {/* Badge row - discount badge + special tags inline */}
                     {showBadges && (
-                        <div className="flex flex-wrap items-center gap-1.5">
+                        <div className="flex flex-wrap justify-start items-center gap-1.5">
                             {/* Discount badge */}
                             {discountPercentageProp ? (
                                 <DiscountBadge percentage={discountPercentageProp} position="inline" />
@@ -679,7 +679,7 @@ export function ProductItem({
                 {showBadges && (
                     <div
                         className={cn(
-                            "absolute left-2 z-20 flex flex-wrap items-start gap-x-1.5 gap-y-1",
+                            "absolute left-2 z-20 flex flex-wrap justify-start items-start gap-x-1.5 gap-y-1",
                             "max-w-[calc(100%-52px)]",
                             specialTags.isPinned ? "top-6 sm:top-7" : "top-2"
                         )}

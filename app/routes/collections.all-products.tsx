@@ -314,7 +314,7 @@ const COLLECTION_ITEM_FRAGMENT = `#graphql
         ...MoneyCollectionItem
       }
     }
-    variants(first: 5) {
+    variants(first: 250) {
       nodes {
         id
         title

@@ -31,6 +31,27 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
     {
         date: "2026-05-06",
         category: "Improvement",
+        headline: "Products always show all options, images, and subscription plans",
+        summary:
+            "Products with large image galleries, many size or color variants, or multiple subscription frequency options now reliably show every available choice. Previously, items with more than a handful of options could appear incomplete, hiding valid variants or plans a shopper might want."
+    },
+    {
+        date: "2026-05-06",
+        category: "Design",
+        headline: "Out-of-stock product page images now match card styling",
+        summary:
+            "Product images, videos, and 3D previews on the product detail page now use the same softened, desaturated look as out-of-stock product cards in the collection grid — giving a consistent signal across the store that an item is unavailable."
+    },
+    {
+        date: "2026-05-06",
+        category: "Fix",
+        headline: "Product card badges always align left when they wrap",
+        summary:
+            "When multiple badges appear on a product card and the card is too narrow to fit them on a single row, all wrapped rows now start from the left edge. This makes the badge layout predictable and visually consistent at every screen size."
+    },
+    {
+        date: "2026-05-06",
+        category: "Improvement",
         headline: "Variant buttons are easier to tap across all sizes",
         summary:
             "Size and color option buttons on product pages now have a consistent minimum width so short labels like 'S' or 'XS' never produce a tiny, hard-to-tap chip. All variant buttons also meet the 44px minimum touch target on mobile, making option selection more comfortable on touchscreens."

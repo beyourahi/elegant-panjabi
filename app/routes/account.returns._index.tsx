@@ -91,7 +91,7 @@ export async function loader({context}: Route.LoaderArgs) {
 
     const {data, errors} = await customerAccount.query(CUSTOMER_RETURNS_QUERY, {
         variables: {
-            first: 50,
+            first: 250,
             language: customerAccount.i18n.language
         }
     });
