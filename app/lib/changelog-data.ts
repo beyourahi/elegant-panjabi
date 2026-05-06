@@ -30,6 +30,13 @@ import type {ChangelogEntry} from "~/lib/types/changelog";
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
     {
         date: "2026-05-06",
+        category: "Improvement",
+        headline: "Low stock badge is clearer and easier to read",
+        summary:
+            "The 'Only X left' badge on product pages now uses a solid light amber background instead of a near-transparent tint. Text contrast is now over 10:1 — well above accessibility requirements — making the badge reliably readable regardless of the page background."
+    },
+    {
+        date: "2026-05-06",
         category: "Fix",
         headline: "Sold-out sticky bar stays fully visible and never fades out",
         summary:
