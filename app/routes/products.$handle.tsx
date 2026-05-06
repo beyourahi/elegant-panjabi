@@ -626,6 +626,7 @@ export default function Product() {
                 targetId="product-hero-mobile"
                 buttonText={hasSpecialTag(product.tags, "preorder") ? "Pre Order" : "Get it Now"}
                 selectedVariant={selectedVariant}
+                outOfStock={!selectedVariant?.availableForSale}
             />
         </>
     );

@@ -286,7 +286,7 @@ export function ProductImageGallery({images, selectedVariantImage, media, isAvai
                             className={cn(
                                 "sleek product-image w-full h-full object-cover",
                                 !isLoaded && "opacity-0",
-                                isAvailableForSale ? "hover:scale-105" : "opacity-[0.82] [filter:saturate(0.65)]"
+                                isAvailableForSale ? "hover:scale-105" : "grayscale opacity-60"
                             )}
                         />
                     )}
@@ -326,7 +326,7 @@ export function ProductImageGallery({images, selectedVariantImage, media, isAvai
                     <video
                         src={source.url}
                         poster={item.previewImage?.url}
-                        className={cn("w-full h-auto block", !isAvailableForSale && "opacity-[0.82] [filter:saturate(0.65)]")}
+                        className={cn("w-full h-auto block", !isAvailableForSale && "grayscale opacity-60")}
                         autoPlay
                         loop
                         muted
@@ -395,7 +395,7 @@ export function ProductImageGallery({images, selectedVariantImage, media, isAvai
                         <Image
                             src={item.previewImage.url}
                             alt={item.alt || `Video thumbnail ${index + 1}`}
-                            className={cn("w-full h-full object-cover sleek", isAvailableForSale ? "group-hover:scale-105" : "opacity-[0.82] [filter:saturate(0.65)]")}
+                            className={cn("w-full h-full object-cover sleek", isAvailableForSale ? "group-hover:scale-105" : "grayscale opacity-60")}
                             loading={index === 0 ? "eager" : "lazy"}
                             width={800}
                             height={800}
@@ -452,7 +452,7 @@ export function ProductImageGallery({images, selectedVariantImage, media, isAvai
                         <Image
                             src={item.previewImage.url}
                             alt={item.alt || `3D model ${index + 1}`}
-                            className={cn("w-full h-full object-cover sleek", isAvailableForSale ? "group-hover:scale-105" : "opacity-[0.82] [filter:saturate(0.65)]")}
+                            className={cn("w-full h-full object-cover sleek", isAvailableForSale ? "group-hover:scale-105" : "grayscale opacity-60")}
                             loading={index === 0 ? "eager" : "lazy"}
                             width={800}
                             height={800}

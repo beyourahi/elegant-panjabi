@@ -31,6 +31,13 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
     {
         date: "2026-05-06",
         category: "Improvement",
+        headline: "Sticky mobile button now shows sold-out state clearly",
+        summary:
+            "The sticky “Get it Now” bar at the bottom of the screen on mobile now updates when a product or variant is unavailable — showing “Sold Out”, removing the discount badge, greying out the price, and disabling the tap interaction so you can't accidentally try to purchase something that's not available."
+    },
+    {
+        date: "2026-05-06",
+        category: "Improvement",
         headline: "Products always show all options, images, and subscription plans",
         summary:
             "Products with large image galleries, many size or color variants, or multiple subscription frequency options now reliably show every available choice. Previously, items with more than a handful of options could appear incomplete, hiding valid variants or plans a shopper might want."

@@ -135,11 +135,13 @@ const HEADER_HEIGHT = 80;
 export function StickyMobileGetNow({
     targetId = "product-hero-mobile",
     buttonText = "Get it Now",
-    selectedVariant
+    selectedVariant,
+    outOfStock = false
 }: {
     targetId?: string;
     buttonText?: string;
     selectedVariant?: StickyVariantPricing | null;
+    outOfStock?: boolean;
 }) {
     const [isVisible, setIsVisible] = useState(false);
 
@@ -191,7 +193,9 @@ export function StickyMobileGetNow({
     const price = selectedVariant?.price;
     const compareAtPrice = selectedVariant?.compareAtPrice;
     const discountPct = calculateVariantDiscountPercentage(selectedVariant);
-    const hasDiscount = discountPct > 0 && !!compareAtPrice;
+    // Never show discount badge when out of stock
+    const hasDiscount = !outOfStock && discountPct > 0 && !!compareAtPrice;
+    const displayText = outOfStock ? "Sold Out" : buttonText;
 
     return (
         <div
@@ -205,14 +209,26 @@ export function StickyMobileGetNow({
         >
             <button
                 type="button"
-                onClick={handleClick}
-                className="w-full flex items-center min-h-[62px] rounded-[20px] bg-card text-foreground select-none shadow-xl ring-1 ring-border overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-[0.99] transition-transform duration-100"
-                aria-label="Scroll to product purchase section"
+                onClick={outOfStock ? undefined : handleClick}
+                disabled={outOfStock}
+                className={cn(
+                    "w-full flex items-center min-h-[62px] rounded-[20px] select-none shadow-xl ring-1 overflow-hidden outline-none transition-transform duration-100",
+                    outOfStock
+                        ? "bg-muted text-muted-foreground ring-border/40 cursor-not-allowed opacity-70"
+                        : "bg-card text-foreground ring-border focus-visible:ring-2 focus-visible:ring-ring active:scale-[0.99]"
+                )}
+                aria-label={outOfStock ? "Product is sold out" : "Scroll to product purchase section"}
+                aria-disabled={outOfStock}
             >
                 {/* Light zone — CTA label + optional sale badge */}
                 <div className="flex-1 flex items-center gap-3 pl-4 pr-3">
-                    <span className="text-[17px] font-semibold tracking-[-0.015em] leading-none text-foreground">
-                        {buttonText}
+                    <span
+                        className={cn(
+                            "text-[17px] font-semibold tracking-[-0.015em] leading-none",
+                            outOfStock ? "text-muted-foreground" : "text-foreground"
+                        )}
+                    >
+                        {displayText}
                     </span>
                     {hasDiscount && (
                         <span className="rounded-[4px] bg-sale-text text-light text-[9px] font-bold tracking-wide px-[5px] py-[3px] leading-none shrink-0">
@@ -221,10 +237,20 @@ export function StickyMobileGetNow({
                     )}
                 </div>
 
-                {/* Dark chip — price info inverted */}
+                {/* Price chip — muted when out of stock, inverted dark when in stock */}
                 {price ? (
-                    <div className="m-2 px-4 self-stretch flex items-center justify-center gap-2 rounded-[13px] bg-foreground shrink-0">
-                        <span className="text-[17px] font-bold leading-none tabular-nums text-background">
+                    <div
+                        className={cn(
+                            "m-2 px-4 self-stretch flex items-center justify-center gap-2 rounded-[13px] shrink-0",
+                            outOfStock ? "bg-border/50" : "bg-foreground"
+                        )}
+                    >
+                        <span
+                            className={cn(
+                                "text-[17px] font-bold leading-none tabular-nums",
+                                outOfStock ? "text-muted-foreground" : "text-background"
+                            )}
+                        >
                             {formatShopifyMoney(price)}
                         </span>
                         {hasDiscount && compareAtPrice && (
