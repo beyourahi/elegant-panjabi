@@ -381,8 +381,8 @@ export function ProductForm({
                 <div className="flex flex-row items-center justify-between gap-3">
                     <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                         {singleVariantLabel && (
-                            <div className="inline-flex min-h-11 min-w-20 items-center rounded-full border-2 border-primary bg-primary px-2.5 sm:px-4 py-1.5 text-sm sm:text-base lg:text-lg font-medium text-primary-foreground">
-                                {singleVariantLabel}
+                            <div className="inline-flex min-h-11 min-w-20 items-center justify-center rounded-full border-2 border-primary bg-primary px-2.5 sm:px-4 py-1.5 text-sm sm:text-base lg:text-lg font-medium text-primary-foreground">
+                                <span className="leading-none">{singleVariantLabel}</span>
                             </div>
                         )}
                     </div>
@@ -476,10 +476,10 @@ export function ProductForm({
                                 const optionContent = hasSwatchData ? (
                                     <span className="inline-flex items-center gap-2">
                                         <ColorSwatch swatch={swatch} name={name} size="sm" selected={selected} />
-                                        <span>{name}</span>
+                                        <span className="leading-none">{name}</span>
                                     </span>
                                 ) : (
-                                    <span>{name}</span>
+                                    <span className="leading-none">{name}</span>
                                 );
 
                                 if (isDifferentProduct) {

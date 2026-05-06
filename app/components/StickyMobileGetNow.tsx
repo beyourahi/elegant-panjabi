@@ -70,16 +70,16 @@
  * WCAG 2.1 Level AA Color Contrast Compliance
  * ═══════════════════════════════════════════════════════════════════════════════
  *
- * BUTTON STYLING (bg-primary text-primary-foreground):
- *   Text: button label - #fff on #1f1f1f = 14.68:1 (WCAG AAA) ✓
- *   ChevronUp icon: Inherits text color = 14.68:1 (WCAG AAA) ✓
+ * IN-STOCK (bg-card text-foreground):
+ *   Text: button label - #1f1f1f on #fff = 14.68:1 (WCAG AAA) ✓
+ *   Price chip: text-background (#fff) on bg-foreground (#1f1f1f) = 14.68:1 (WCAG AAA) ✓
  *
- * BUTTON VISIBILITY:
- *   bg-primary (#1f1f1f) against page content = high contrast edge ✓
- *   Button is rendered full-width with solid background, no transparency issues.
+ * OUT-OF-STOCK (bg-primary text-primary-foreground opacity-50):
+ *   Matches PDP AddToCartButton disabled state exactly: bg-primary + disabled:opacity-50
+ *   WCAG 2.1 exempts disabled controls from contrast requirements (WCAG 1.4.3) ✓
  *
  * Touch target:
- *   min-h-14 (56px) - exceeds WCAG 2.5.5 minimum of 44px ✓
+ *   min-h-[62px] - exceeds WCAG 2.5.5 minimum of 44px ✓
  *   Full-width ensures easy tap target on mobile ✓
  *
  * ═══════════════════════════════════════════════════════════════════════════════
@@ -213,7 +213,7 @@ export function StickyMobileGetNow({
                 className={cn(
                     "w-full flex items-center min-h-[62px] rounded-[20px] select-none shadow-xl ring-1 overflow-hidden outline-none transition-transform duration-100",
                     outOfStock
-                        ? "bg-muted text-muted-foreground ring-border/40 cursor-not-allowed"
+                        ? "bg-primary text-primary-foreground ring-border/20 cursor-not-allowed opacity-50"
                         : "bg-card text-foreground ring-border focus-visible:ring-2 focus-visible:ring-ring active:scale-[0.99]"
                 )}
                 aria-label={outOfStock ? "Product is sold out" : "Scroll to product purchase section"}
@@ -221,12 +221,7 @@ export function StickyMobileGetNow({
             >
                 {/* Light zone — CTA label + optional sale badge */}
                 <div className="flex-1 flex items-center gap-3 pl-4 pr-3">
-                    <span
-                        className={cn(
-                            "text-[17px] font-semibold tracking-[-0.015em] leading-none",
-                            outOfStock ? "text-muted-foreground" : "text-foreground"
-                        )}
-                    >
+                    <span className="text-[17px] font-semibold tracking-[-0.015em] leading-none">
                         {displayText}
                     </span>
                     {hasDiscount && (
@@ -236,18 +231,18 @@ export function StickyMobileGetNow({
                     )}
                 </div>
 
-                {/* Price chip — muted when out of stock, inverted dark when in stock */}
+                {/* Price chip — muted translucent overlay when out of stock, inverted dark when in stock */}
                 {price ? (
                     <div
                         className={cn(
                             "m-2 px-4 self-stretch flex items-center justify-center gap-2 rounded-[13px] shrink-0",
-                            outOfStock ? "bg-border/50" : "bg-foreground"
+                            outOfStock ? "bg-primary-foreground/20" : "bg-foreground"
                         )}
                     >
                         <span
                             className={cn(
                                 "text-[17px] font-bold leading-none tabular-nums",
-                                outOfStock ? "text-muted-foreground" : "text-background"
+                                outOfStock ? "text-primary-foreground" : "text-background"
                             )}
                         >
                             {formatShopifyMoney(price)}

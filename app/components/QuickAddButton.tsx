@@ -187,9 +187,9 @@ interface QuickAddButtonProps {
  *   Effective contrast still high due to base ratio of 14.68:1
  *   Estimated: ~10:1 (WCAG AAA) ✓
  *
- * SOLD OUT STATE (bg-muted text-muted-foreground opacity-50):
- *   WCAG exempts disabled controls from contrast requirements ✓
- *   Base: #545454 on #f0f0f0 = 5.32:1 (WCAG AA) ✓
+ * SOLD OUT STATE (bg-primary text-primary-foreground disabled:opacity-50):
+ *   Matches PDP AddToCartButton disabled state: variant="default" + disabled
+ *   WCAG 2.1 exempts disabled controls from contrast requirements (WCAG 1.4.3) ✓
  *
  * Touch targets:
  *   - Default: h-11 (44px) - WCAG 2.5.5 compliant ✓
@@ -273,14 +273,14 @@ export function QuickAddButton({
         [isSoldOut, isSingleVariant]
     );
 
-    // For sold out products
+    // For sold out products — matches PDP: variant="default" disabled applies bg-primary text-primary-foreground disabled:opacity-50
     if (isSoldOut) {
         return (
             <Button
                 type="button"
-                variant="secondary"
+                variant="default"
                 disabled
-                className={cn(baseStyles, "opacity-50", className)}
+                className={cn(baseStyles, className)}
                 aria-label={`${product.title} is sold out`}
             >
                 <span className={iconOnlyMobile && !fullWidth ? "hidden md:inline" : undefined}>{buttonLabel}</span>
