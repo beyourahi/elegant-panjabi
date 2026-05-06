@@ -225,7 +225,7 @@ export function StickyMobileGetNow({
                         {displayText}
                     </span>
                     {hasDiscount && (
-                        <span className="rounded-[4px] bg-sale-text text-light text-[9px] font-bold tracking-wide px-[5px] py-[3px] leading-none shrink-0">
+                        <span className="rounded-[var(--radius)] bg-sale-text text-light text-[9px] font-bold tracking-wide px-[5px] py-[3px] leading-none shrink-0">
                             −{discountPct}%
                         </span>
                     )}

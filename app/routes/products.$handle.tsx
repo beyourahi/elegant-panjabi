@@ -397,11 +397,11 @@ export default function Product() {
                         <ProductDiscountBadge selectedVariant={selectedVariant} product={product} />
                         {!selectedVariant?.availableForSale && (
                             <span
-                                className="inline-flex items-center gap-1.5 rounded-full bg-destructive px-0.5 pr-1 py-0.5 shadow-md"
+                                className="inline-flex items-center gap-1.5 rounded-[var(--radius)] bg-destructive px-0.5 pr-1 py-0.5 shadow-md"
                                 role="status"
                                 aria-label="Out of stock"
                             >
-                                <span className="flex items-center justify-center rounded-full bg-destructive/80 p-1">
+                                <span className="flex items-center justify-center rounded-[var(--radius)] bg-destructive/80 p-1">
                                     <Ban size={12} className="pointer-events-none text-destructive-foreground" aria-hidden="true" />
                                 </span>
                                 <span className="text-[12px] sm:text-sm font-medium uppercase tracking-wide text-destructive-foreground">
@@ -549,11 +549,11 @@ export default function Product() {
                                         <ProductDiscountBadge selectedVariant={selectedVariant} product={product} />
                                         {!selectedVariant?.availableForSale && (
                                             <span
-                                                className="inline-flex items-center gap-1.5 rounded-full bg-destructive px-0.5 pr-1 py-0.5 shadow-md"
+                                                className="inline-flex items-center gap-1.5 rounded-[var(--radius)] bg-destructive px-0.5 pr-1 py-0.5 shadow-md"
                                                 role="status"
                                                 aria-label="Out of stock"
                                             >
-                                                <span className="flex items-center justify-center rounded-full bg-destructive/80 p-1">
+                                                <span className="flex items-center justify-center rounded-[var(--radius)] bg-destructive/80 p-1">
                                                     <Ban size={12} className="pointer-events-none text-destructive-foreground" aria-hidden="true" />
                                                 </span>
                                                 <span className="text-[12px] sm:text-sm font-medium uppercase tracking-wide text-destructive-foreground">

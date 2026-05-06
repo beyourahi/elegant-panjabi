@@ -30,6 +30,13 @@ import type {ChangelogEntry} from "~/lib/types/changelog";
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
     {
         date: "2026-05-06",
+        category: "Design",
+        headline: "Product page badges now match your store's corner style",
+        summary:
+            "Discount, out-of-stock, and special product badges on the product page now use the same corner rounding as the rest of your store's design. Previously they used fixed pill or rigid radius values regardless of your theme settings."
+    },
+    {
+        date: "2026-05-06",
         category: "Improvement",
         headline: "Sold-out options are now visible when browsing products",
         summary:

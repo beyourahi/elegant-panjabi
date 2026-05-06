@@ -132,7 +132,7 @@ export function ProductDiscountBadge({selectedVariant, product, className}: Prod
         <div
             className={cn(
                 // Shape & Layout (inline, not absolute positioned)
-                "inline-flex items-center gap-1.5 rounded-full",
+                "inline-flex items-center gap-1.5 rounded-[var(--radius)]",
                 // Background
                 "bg-discount-bg",
                 // Padding - slightly larger for product page prominence
@@ -143,7 +143,7 @@ export function ProductDiscountBadge({selectedVariant, product, className}: Prod
             )}
         >
             {/* Icon container - darker emerald rounded background */}
-            <span className="flex items-center justify-center rounded-full bg-discount-icon-bg p-1">
+            <span className="flex items-center justify-center rounded-[var(--radius)] bg-discount-icon-bg p-1">
                 <BadgePercent size={12} className="text-discount-text pointer-events-none" aria-hidden="true" />
             </span>
 
