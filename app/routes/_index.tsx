@@ -113,7 +113,7 @@ import {FeaturedProductSpotlight} from "~/components/FeaturedProductSpotlight";
 import {HomepageWishlistSection} from "~/components/HomepageWishlistSection";
 import {NewsletterSection} from "~/components/NewsletterSection";
 import {Container} from "~/components/Container";
-import {buildCollectionTabs} from "~/lib/collections";
+import {buildCollectionTabsWithDirectHits} from "~/lib/collections";
 import {getRecentlyViewedIds} from "~/lib/recently-viewed";
 import {withTimeoutAndFallback, TIMEOUT_DEFAULTS} from "~/lib/promise-utils";
 import {
@@ -338,8 +338,13 @@ export async function loader({context, request}: Route.LoaderArgs) {
         context.dataAdapter
             .query<CuratedCollectionsQuery>(CURATED_COLLECTIONS_QUERY, {cache: context.dataAdapter.CacheShort()})
             .then(response => {
-                if (!response?.collections?.nodes) return null;
-                const tabs = buildCollectionTabs(response.collections.nodes);
+                if (!response) return null;
+                const tabs = buildCollectionTabsWithDirectHits({
+                    featured: response.featured ?? null,
+                    newArrivals: response.newArrivals ?? null,
+                    bestSellers: response.bestSellers ?? null,
+                    fallbacks: response.fallbackCollections?.nodes ?? []
+                });
                 if (tabs.length === 0) return null;
                 return {tabs};
             })
@@ -778,12 +783,42 @@ const CURATED_COLLECTIONS_QUERY = `#graphql
 
   query CuratedCollections($country: CountryCode, $language: LanguageCode)
     @inContext(country: $country, language: $language) {
-    collections(first: 20) {
+    featured: collection(handle: "featured") {
+      id
+      handle
+      title
+      products(first: 12) {
+        nodes {
+          ...CuratedProduct
+        }
+      }
+    }
+    newArrivals: collection(handle: "new-arrivals") {
+      id
+      handle
+      title
+      products(first: 12) {
+        nodes {
+          ...CuratedProduct
+        }
+      }
+    }
+    bestSellers: collection(handle: "best-sellers") {
+      id
+      handle
+      title
+      products(first: 12) {
+        nodes {
+          ...CuratedProduct
+        }
+      }
+    }
+    fallbackCollections: collections(first: 20) {
       nodes {
         id
         handle
         title
-        products(first: 6) {
+        products(first: 12) {
           nodes {
             ...CuratedProduct
           }

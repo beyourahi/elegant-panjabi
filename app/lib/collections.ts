@@ -129,6 +129,76 @@ export const DEFAULT_TABS: Array<{
     {category: "bestSellers", config: {key: "best-sellers", label: "Best Sellers"}}
 ];
 
+export interface DirectHitInput<T extends CollectionNode> {
+    featured: T | null;
+    newArrivals: T | null;
+    bestSellers: T | null;
+    fallbacks: T[];
+}
+
+/**
+ * Builds tabs using direct handle lookups first, falling back to pattern matching
+ * on the bulk fallback list for any slot that returned null or had no products.
+ */
+export function buildCollectionTabsWithDirectHits<T extends CollectionNode>(
+    input: DirectHitInput<T>
+): Array<TabConfig & {collection: T}> {
+    const directHits: Record<CollectionCategory, T | null> = {
+        featured: input.featured?.products.nodes.length ? input.featured : null,
+        newArrivals: input.newArrivals?.products.nodes.length ? input.newArrivals : null,
+        bestSellers: input.bestSellers?.products.nodes.length ? input.bestSellers : null
+    };
+
+    // Only run fallback pattern matching for slots not filled by direct hits
+    const missedCategories = (Object.entries(directHits) as [CollectionCategory, T | null][])
+        .filter(([, col]) => col === null)
+        .map(([cat]) => cat);
+
+    const fallbackMatches = new Map<CollectionCategory, T>();
+    const usedFallbackIds = new Set(Object.values(directHits).filter(Boolean).map(c => c!.id));
+
+    for (const col of input.fallbacks) {
+        if (usedFallbackIds.has(col.id) || col.products.nodes.length === 0) continue;
+        const category = matchCollectionCategory(col.handle);
+        if (category && missedCategories.includes(category) && !fallbackMatches.has(category)) {
+            fallbackMatches.set(category, col);
+            usedFallbackIds.add(col.id);
+        }
+    }
+
+    // Fill remaining missed slots with any leftover valid fallback collection
+    const extras = input.fallbacks.filter(c => !usedFallbackIds.has(c.id) && c.products.nodes.length > 0);
+    for (const cat of missedCategories) {
+        if (!fallbackMatches.has(cat) && extras.length > 0) {
+            fallbackMatches.set(cat, extras.shift()!);
+        }
+    }
+
+    const tabs: Array<TabConfig & {collection: T}> = [];
+
+    for (const {category, config} of DEFAULT_TABS) {
+        const collection = directHits[category] ?? fallbackMatches.get(category) ?? null;
+        if (!collection) continue;
+
+        const isDirectHit = directHits[category] !== null;
+        const sortedCollection = {
+            ...collection,
+            products: {
+                ...collection.products,
+                nodes: sortWithPinnedFirst(collection.products.nodes as any)
+            }
+        };
+
+        tabs.push({
+            ...config,
+            label: isDirectHit ? config.label : collection.title,
+            collection: sortedCollection
+        });
+    }
+
+    return tabs;
+}
+
 /**
  * Processes collections and returns tab data with intelligent fallbacks.
  * If a primary collection is missing/empty, substitutes with another available collection.
