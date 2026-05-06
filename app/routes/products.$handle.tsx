@@ -98,6 +98,7 @@ import {parseProductTitle} from "~/lib/product";
 import {ProductReviews, type ReviewNode} from "~/components/ProductReviews";
 import {extractImagesFromMedia} from "~/lib/media-utils";
 import {CatalogExtensionDisplay} from "~/components/product/CatalogExtensionDisplay";
+import {Ban} from "lucide-react";
 
 // =============================================================================
 // META FUNCTION
@@ -392,16 +393,23 @@ export default function Product() {
                 <div className="px-3 sm:px-4 pt-4 sm:pt-6 space-y-2">
                     <ProductTagList tags={product.tags} />
                     <ProductTitle title={title} variant="pdp" />
-                    <ProductDiscountBadge selectedVariant={selectedVariant} product={product} />
-                    {!selectedVariant?.availableForSale && (
-                        <span
-                            className="inline-flex items-center justify-center rounded-full bg-destructive px-3 py-1.5 text-sm font-medium uppercase tracking-wide text-destructive-foreground shadow-sm"
-                            role="status"
-                            aria-label="Out of stock"
-                        >
-                            {OUT_OF_STOCK_LABEL}
-                        </span>
-                    )}
+                    <div className="flex flex-wrap items-center gap-2">
+                        <ProductDiscountBadge selectedVariant={selectedVariant} product={product} />
+                        {!selectedVariant?.availableForSale && (
+                            <span
+                                className="inline-flex items-center gap-1.5 rounded-full bg-destructive px-0.5 pr-1 py-0.5 shadow-md"
+                                role="status"
+                                aria-label="Out of stock"
+                            >
+                                <span className="flex items-center justify-center rounded-full bg-destructive/80 p-1">
+                                    <Ban size={12} className="pointer-events-none text-destructive-foreground" aria-hidden="true" />
+                                </span>
+                                <span className="text-[12px] sm:text-sm font-medium uppercase tracking-wide text-destructive-foreground">
+                                    {OUT_OF_STOCK_LABEL}
+                                </span>
+                            </span>
+                        )}
+                    </div>
                 </div>
 
                 {/* 3. Description - Comprehensive prose typography */}
@@ -537,16 +545,23 @@ export default function Product() {
                                 <div className="space-y-3 mb-12 lg:mb-16 xl:mb-20 2xl:mb-24">
                                     <ProductTagList tags={product.tags} />
                                     <ProductTitle title={title} variant="pdp" />
-                                    <ProductDiscountBadge selectedVariant={selectedVariant} product={product} />
-                                    {!selectedVariant?.availableForSale && (
-                                        <span
-                                            className="inline-flex items-center justify-center rounded-full bg-destructive px-3 py-1.5 text-sm font-medium uppercase tracking-wide text-destructive-foreground shadow-sm"
-                                            role="status"
-                                            aria-label="Out of stock"
-                                        >
-                                            {OUT_OF_STOCK_LABEL}
-                                        </span>
-                                    )}
+                                    <div className="flex flex-wrap items-center gap-2">
+                                        <ProductDiscountBadge selectedVariant={selectedVariant} product={product} />
+                                        {!selectedVariant?.availableForSale && (
+                                            <span
+                                                className="inline-flex items-center gap-1.5 rounded-full bg-destructive px-0.5 pr-1 py-0.5 shadow-md"
+                                                role="status"
+                                                aria-label="Out of stock"
+                                            >
+                                                <span className="flex items-center justify-center rounded-full bg-destructive/80 p-1">
+                                                    <Ban size={12} className="pointer-events-none text-destructive-foreground" aria-hidden="true" />
+                                                </span>
+                                                <span className="text-[12px] sm:text-sm font-medium uppercase tracking-wide text-destructive-foreground">
+                                                    {OUT_OF_STOCK_LABEL}
+                                                </span>
+                                            </span>
+                                        )}
+                                    </div>
                                 </div>
                                 <ProductForm
                                     product={product}

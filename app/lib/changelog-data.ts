@@ -30,6 +30,13 @@ import type {ChangelogEntry} from "~/lib/types/changelog";
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
     {
         date: "2026-05-06",
+        category: "Design",
+        headline: "Out-of-stock badge now matches the discount badge size and style",
+        summary:
+            "The out-of-stock indicator on product pages is now a compact icon-and-label pill that matches the size, padding, and typography of the discount badge sitting next to it. Both badges also sit side by side with a consistent gap instead of stacking vertically."
+    },
+    {
+        date: "2026-05-06",
         category: "Improvement",
         headline: "Out-of-stock badges now use bold, consistent destructive styling",
         summary:
