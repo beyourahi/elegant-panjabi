@@ -304,10 +304,7 @@ function WishlistCard({
                 <Image
                     data={product.featuredImage}
                     sizes="(min-width: 768px) 25vw, 50vw"
-                    className={cn(
-                        "w-full h-full object-cover motion-image",
-                        canHover && "group-hover:scale-105"
-                    )}
+                    className={cn("w-full h-full object-cover motion-image", canHover && "group-hover:scale-105")}
                 />
             )}
 

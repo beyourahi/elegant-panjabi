@@ -151,7 +151,13 @@ const POLICY_LINKS = [
  * @param discountCount - Count for "SALE" link (hidden if 0)
  * @param hasBlog - Whether to show "Blogs" link
  */
-export function FullScreenMenu({collections, totalCollections, totalProductCount, discountCount, hasBlog}: FullScreenMenuProps) {
+export function FullScreenMenu({
+    collections,
+    totalCollections,
+    totalProductCount,
+    discountCount,
+    hasBlog
+}: FullScreenMenuProps) {
     const {type, close, open} = useAside();
     const {canHover} = usePointerCapabilities();
     const {brandName} = useSiteSettings();

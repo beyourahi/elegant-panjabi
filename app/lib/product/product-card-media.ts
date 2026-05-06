@@ -72,8 +72,9 @@ export function getCardVideoMedia(product: unknown): CardVideoMedia | null {
 
     const video = first as MaybeVideoNode;
     const sources: ProductCardVideoSource[] = (video.sources ?? [])
-        .filter((s): s is {url: string; mimeType: string; width?: number | null; height?: number | null} =>
-            Boolean(s?.url) && Boolean(s?.mimeType)
+        .filter(
+            (s): s is {url: string; mimeType: string; width?: number | null; height?: number | null} =>
+                Boolean(s?.url) && Boolean(s?.mimeType)
         )
         .map(s => ({
             url: s.url,

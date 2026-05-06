@@ -136,12 +136,10 @@ function loadDeferredData({context}: Route.LoaderArgs) {
 
     // Sidebar collections - deferred so it doesn't block all-products above-fold rendering
     const sidebarData = withTimeoutAndFallback(
-        dataAdapter
-            .query(SIDEBAR_COLLECTIONS_QUERY, {cache: dataAdapter.CacheLong()})
-            .catch((error: unknown) => {
-                console.error("Failed to load sidebar collections:", error);
-                return null;
-            }),
+        dataAdapter.query(SIDEBAR_COLLECTIONS_QUERY, {cache: dataAdapter.CacheLong()}).catch((error: unknown) => {
+            console.error("Failed to load sidebar collections:", error);
+            return null;
+        }),
         null,
         TIMEOUT_DEFAULTS.API
     );

@@ -23,7 +23,12 @@ import type {Route} from "./+types/changelog";
 import {getSeoMeta} from "@shopify/hydrogen";
 import {ChangelogPage} from "~/components/changelog/ChangelogPage";
 import {CHANGELOG_ENTRIES} from "~/lib/changelog-data";
-import {buildCanonicalUrl, getBrandNameFromMatches, getSiteUrlFromMatches, generateBreadcrumbListSchema} from "~/lib/seo";
+import {
+    buildCanonicalUrl,
+    getBrandNameFromMatches,
+    getSiteUrlFromMatches,
+    generateBreadcrumbListSchema
+} from "~/lib/seo";
 
 // =============================================================================
 // META
@@ -33,10 +38,13 @@ export const meta: Route.MetaFunction = ({matches}) => {
     const brandName = getBrandNameFromMatches(matches);
     const siteUrl = getSiteUrlFromMatches(matches);
 
-    const breadcrumbSchema = generateBreadcrumbListSchema([
-        {name: "Home", url: "/"},
-        {name: "Changelog", url: "/changelog"}
-    ], siteUrl);
+    const breadcrumbSchema = generateBreadcrumbListSchema(
+        [
+            {name: "Home", url: "/"},
+            {name: "Changelog", url: "/changelog"}
+        ],
+        siteUrl
+    );
 
     return [
         ...(getSeoMeta({

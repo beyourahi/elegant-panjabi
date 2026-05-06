@@ -135,10 +135,7 @@ export const meta: Route.MetaFunction = ({data}) => {
             media: seoDefaults.media
         }) ?? [];
 
-    return [
-        ...seoMeta,
-        ...(data?.websiteSchema ? [{"script:ld+json": data.websiteSchema}] : [])
-    ];
+    return [...seoMeta, ...(data?.websiteSchema ? [{"script:ld+json": data.websiteSchema}] : [])];
 };
 
 /**
@@ -239,43 +236,53 @@ async function loadCriticalData({context, request}: Route.LoaderArgs) {
 
     const [header, menuCollectionsData, blogData, siteContentData, themeSettingsData] = await Promise.all([
         // Header - navigation menu and shop brand info (cached: layout data)
-        dataAdapter.query(HEADER_QUERY, {
-            cache: dataAdapter.CacheLong(),
-            variables: {
-                headerMenuHandle: "main-menu"
-            }
-        }).catch((error: unknown) => {
-            console.error("Failed to load header:", error);
-            return null;
-        }),
+        dataAdapter
+            .query(HEADER_QUERY, {
+                cache: dataAdapter.CacheLong(),
+                variables: {
+                    headerMenuHandle: "main-menu"
+                }
+            })
+            .catch((error: unknown) => {
+                console.error("Failed to load header:", error);
+                return null;
+            }),
         // Menu collections with product counts (cached: catalog metadata)
-        dataAdapter.query(MENU_COLLECTIONS_QUERY, {
-            cache: dataAdapter.CacheLong()
-        }).catch((error: unknown) => {
-            console.error("Failed to load menu collections:", error);
-            return null;
-        }),
+        dataAdapter
+            .query(MENU_COLLECTIONS_QUERY, {
+                cache: dataAdapter.CacheLong()
+            })
+            .catch((error: unknown) => {
+                console.error("Failed to load menu collections:", error);
+                return null;
+            }),
         // Blog existence check (cached: blog existence barely changes)
-        dataAdapter.query(HAS_BLOG_QUERY, {
-            cache: dataAdapter.CacheLong()
-        }).catch((error: unknown) => {
-            console.error("Failed to check blog availability:", error);
-            return null;
-        }),
+        dataAdapter
+            .query(HAS_BLOG_QUERY, {
+                cache: dataAdapter.CacheLong()
+            })
+            .catch((error: unknown) => {
+                console.error("Failed to check blog availability:", error);
+                return null;
+            }),
         // Site content - brand name, announcements, social links (cached: CMS metaobject)
-        dataAdapter.query(SITE_CONTENT_QUERY, {
-            cache: dataAdapter.CacheLong()
-        }).catch((error: unknown) => {
-            console.error("Failed to load site content:", error);
-            return null;
-        }),
+        dataAdapter
+            .query(SITE_CONTENT_QUERY, {
+                cache: dataAdapter.CacheLong()
+            })
+            .catch((error: unknown) => {
+                console.error("Failed to load site content:", error);
+                return null;
+            }),
         // Theme settings - colors and fonts (cached: merchant-updated)
-        dataAdapter.query(THEME_SETTINGS_QUERY, {
-            cache: dataAdapter.CacheLong()
-        }).catch((error: unknown) => {
-            console.error("Failed to load theme settings:", error);
-            return null;
-        })
+        dataAdapter
+            .query(THEME_SETTINGS_QUERY, {
+                cache: dataAdapter.CacheLong()
+            })
+            .catch((error: unknown) => {
+                console.error("Failed to load theme settings:", error);
+                return null;
+            })
     ]);
 
     // Capture raw total before filtering — used for "All Collections" count in FullScreenMenu
@@ -550,10 +557,7 @@ export function Layout({children}: {children?: React.ReactNode}) {
     // Compute SEO defaults in Layout so PWA meta tags are rendered as static JSX in <head>.
     // React Router 7 replaces ALL parent meta() tags when a child route exports meta() —
     // placing PWA tags here as static JSX ensures they survive child route meta overrides.
-    const layoutSeoDefaults = getSeoDefaults(
-        data?.siteContent?.siteSettings,
-        data?.siteContent?.themeConfig
-    );
+    const layoutSeoDefaults = getSeoDefaults(data?.siteContent?.siteSettings, data?.siteContent?.themeConfig);
 
     return (
         <html lang={STORE_LANGUAGE_CODE.toLowerCase()}>
@@ -578,7 +582,9 @@ export function Layout({children}: {children?: React.ReactNode}) {
                 {/* Google Fonts: preload hints the browser to fetch CSS early, NonBlockingFontLoader appends
                     the actual <link rel="stylesheet"> via useEffect on the client — never render-blocking.
                     The &display=swap URL param makes Google Fonts include font-display:swap in @font-face rules. */}
-                {generatedTheme?.googleFontsUrl && <link rel="preload" as="style" href={generatedTheme.googleFontsUrl} />}
+                {generatedTheme?.googleFontsUrl && (
+                    <link rel="preload" as="style" href={generatedTheme.googleFontsUrl} />
+                )}
                 <NonBlockingFontLoader url={generatedTheme?.googleFontsUrl} />
                 <Meta />
                 <Links />
@@ -663,30 +669,38 @@ export default function App() {
 
     // Memoized before the early return guard to satisfy the Rules of Hooks.
     const menuCollections = useMemo(() => data?.menuCollections ?? [], [data?.menuCollections]);
-    const mobileMenuCollections = useMemo(() => menuCollections.map((collection: any) => ({
-        id: collection.id,
-        title: collection.title,
-        handle: collection.handle,
-        description: "",
-        image: collection.image
-            ? {
-                  url: collection.image.url,
-                  altText: collection.image.altText ?? null
-              }
-            : null,
-        productCount: collection.productsCount ?? 0
-    })), [menuCollections]);
-    const searchCollections = useMemo(() => menuCollections.map((collection: any) => ({
-        id: collection.id,
-        title: collection.title,
-        handle: collection.handle,
-        image: collection.image
-            ? {
-                  url: collection.image.url,
-                  altText: collection.image.altText ?? null
-              }
-            : null
-    })), [menuCollections]);
+    const mobileMenuCollections = useMemo(
+        () =>
+            menuCollections.map((collection: any) => ({
+                id: collection.id,
+                title: collection.title,
+                handle: collection.handle,
+                description: "",
+                image: collection.image
+                    ? {
+                          url: collection.image.url,
+                          altText: collection.image.altText ?? null
+                      }
+                    : null,
+                productCount: collection.productsCount ?? 0
+            })),
+        [menuCollections]
+    );
+    const searchCollections = useMemo(
+        () =>
+            menuCollections.map((collection: any) => ({
+                id: collection.id,
+                title: collection.title,
+                handle: collection.handle,
+                image: collection.image
+                    ? {
+                          url: collection.image.url,
+                          altText: collection.image.altText ?? null
+                      }
+                    : null
+            })),
+        [menuCollections]
+    );
 
     if (!data) {
         return <Outlet />;
@@ -698,24 +712,24 @@ export default function App() {
 
     return (
         <AgentSurfaceProvider value={data.agentSurface ?? {isAgent: false, source: "none"}}>
-        <SiteContentProvider siteContent={data.siteContent}>
-            <WishlistProvider>
-                {/* Shopify analytics (monorail-edge.shopifysvc.com) may abort in dev or
+            <SiteContentProvider siteContent={data.siteContent}>
+                <WishlistProvider>
+                    {/* Shopify analytics (monorail-edge.shopifysvc.com) may abort in dev or
                     when ad blockers are active. This is expected behavior and does not
                     affect storefront functionality. See entry.server.tsx connectSrc. */}
-                <Analytics.Provider cart={data.cart} shop={data.shop} consent={data.consent}>
-                    <ServiceWorkerUpdateBanner />
-                    <NetworkStatusIndicator />
-                    <GtmScript gtmContainerId={data.gtmContainerId} />
-                    <PageLayout {...data} announcementTexts={announcementTexts}>
-                        <Outlet />
-                    </PageLayout>
-                    <GoogleTagManager />
-                    <ServiceWorkerRegistration />
-                    <FloatingButtonStack />
-                </Analytics.Provider>
-            </WishlistProvider>
-        </SiteContentProvider>
+                    <Analytics.Provider cart={data.cart} shop={data.shop} consent={data.consent}>
+                        <ServiceWorkerUpdateBanner />
+                        <NetworkStatusIndicator />
+                        <GtmScript gtmContainerId={data.gtmContainerId} />
+                        <PageLayout {...data} announcementTexts={announcementTexts}>
+                            <Outlet />
+                        </PageLayout>
+                        <GoogleTagManager />
+                        <ServiceWorkerRegistration />
+                        <FloatingButtonStack />
+                    </Analytics.Provider>
+                </WishlistProvider>
+            </SiteContentProvider>
         </AgentSurfaceProvider>
     );
 }

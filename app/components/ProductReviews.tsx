@@ -26,12 +26,7 @@ import {ArrowLeft, ArrowRight} from "lucide-react";
 
 import {cn} from "~/lib/utils";
 import {WheelGesturesPlugin} from "embla-carousel-wheel-gestures";
-import {
-    type CarouselApi,
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-} from "~/components/ui/carousel";
+import {type CarouselApi, Carousel, CarouselContent, CarouselItem} from "~/components/ui/carousel";
 
 // =============================================================================
 // HELPERS
@@ -72,11 +67,7 @@ function formatReviewDate(iso: string | null | undefined): string {
 function StarRow({rating, max = 5, size = 14}: {rating: number; max?: number; size?: number}) {
     const filled = Math.round(rating);
     return (
-        <div
-            className="flex items-center gap-0.5"
-            role="img"
-            aria-label={`${filled} out of ${max} stars`}
-        >
+        <div className="flex items-center gap-0.5" role="img" aria-label={`${filled} out of ${max} stars`}>
             {Array.from({length: max}, (_, i) => (
                 <svg
                     key={i}
@@ -175,10 +166,7 @@ function ReviewCard({
 
     return (
         <article
-            className={cn(
-                "flex flex-col gap-4 rounded-2xl animate-fade-in h-full",
-                featured ? "p-8 lg:p-10" : "p-5"
-            )}
+            className={cn("flex flex-col gap-4 rounded-2xl animate-fade-in h-full", featured ? "p-8 lg:p-10" : "p-5")}
             style={{
                 background: "var(--surface-raised)",
                 border: "1px solid var(--border-subtle)",
@@ -251,10 +239,7 @@ function ReviewCard({
                 >
                     {initials || "?"}
                 </div>
-                <span
-                    className="text-xs font-medium truncate"
-                    style={{color: "var(--text-primary)"}}
-                >
+                <span className="text-xs font-medium truncate" style={{color: "var(--text-primary)"}}>
                     {name}
                 </span>
             </div>
@@ -319,8 +304,7 @@ export function ProductReviews({reviews}: {reviews: ReviewNode[]}) {
               : "";
 
     // Composite key: no stable ID from Storefront API metaobject fields
-    const reviewKey = (r: ReviewNode, i: number) =>
-        `${r.reviewerName?.value ?? ""}-${r.date?.value ?? ""}-${i}`;
+    const reviewKey = (r: ReviewNode, i: number) => `${r.reviewerName?.value ?? ""}-${r.date?.value ?? ""}-${i}`;
 
     return (
         <section
@@ -385,12 +369,7 @@ export function ProductReviews({reviews}: {reviews: ReviewNode[]}) {
                         {/* Distribution bars */}
                         <div className="flex-1 flex flex-col gap-2">
                             {["5", "4", "3", "2", "1"].map(star => (
-                                <RatingBar
-                                    key={star}
-                                    label={star}
-                                    count={distribution[star] ?? 0}
-                                    total={count}
-                                />
+                                <RatingBar key={star} label={star} count={distribution[star] ?? 0} total={count} />
                             ))}
                         </div>
                     </div>
@@ -457,9 +436,7 @@ export function ProductReviews({reviews}: {reviews: ReviewNode[]}) {
                                             )}
                                             style={{
                                                 background:
-                                                    i === selectedIndex
-                                                        ? "var(--brand-accent)"
-                                                        : "var(--border-strong)"
+                                                    i === selectedIndex ? "var(--brand-accent)" : "var(--border-strong)"
                                             }}
                                         />
                                     ))}
@@ -514,12 +491,7 @@ export function ProductReviews({reviews}: {reviews: ReviewNode[]}) {
                             </div>
                             <div className="flex flex-col gap-2.5">
                                 {["5", "4", "3", "2", "1"].map(star => (
-                                    <RatingBar
-                                        key={star}
-                                        label={star}
-                                        count={distribution[star] ?? 0}
-                                        total={count}
-                                    />
+                                    <RatingBar key={star} label={star} count={distribution[star] ?? 0} total={count} />
                                 ))}
                             </div>
                         </div>

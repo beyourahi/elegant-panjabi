@@ -312,10 +312,12 @@ function CollectionCard({collection, index}: {collection: CollectionFragment; in
                         </sup>
                     </div>
                     {/* Explore hint — fades in from invisible on hover (pointer devices only) */}
-                    <p className={cn(
-                        "mt-1 text-xs text-light/80 sm:text-sm motion-overlay",
-                        canHover ? "opacity-0 group-hover:opacity-100" : "opacity-100"
-                    )}>
+                    <p
+                        className={cn(
+                            "mt-1 text-xs text-light/80 sm:text-sm motion-overlay",
+                            canHover ? "opacity-0 group-hover:opacity-100" : "opacity-100"
+                        )}
+                    >
                         Explore collection →
                     </p>
                 </div>

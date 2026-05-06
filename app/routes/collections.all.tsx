@@ -15,10 +15,7 @@
 import {redirect, type MetaFunction} from "react-router";
 
 export const meta: MetaFunction = () => {
-    return [
-        {title: "Redirecting..."},
-        {name: "robots", content: "noindex"}
-    ];
+    return [{title: "Redirecting..."}, {name: "robots", content: "noindex"}];
 };
 
 export const loader = async () => {

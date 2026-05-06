@@ -237,8 +237,8 @@ export default function OrderReturnRoute() {
                                 Return Request Submitted
                             </h2>
                             <p className="text-muted-foreground text-sm md:text-base mb-8 max-w-md leading-relaxed">
-                                Your return request {actionData.returnName} has been submitted successfully.
-                                We will review your request and get back to you shortly.
+                                Your return request {actionData.returnName} has been submitted successfully. We will
+                                review your request and get back to you shortly.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-3">
                                 <Button asChild size="lg" className="motion-interactive">
@@ -303,7 +303,12 @@ export default function OrderReturnRoute() {
                     </div>
 
                     <div className="mt-6 flex gap-3">
-                        <Button type="submit" size="lg" disabled={isSubmitting} className="relative h-11 motion-interactive">
+                        <Button
+                            type="submit"
+                            size="lg"
+                            disabled={isSubmitting}
+                            className="relative h-11 motion-interactive"
+                        >
                             <span className={isSubmitting ? "invisible" : ""}>Submit Return Request</span>
                             {isSubmitting && (
                                 <span className="absolute inset-0 flex items-center justify-center">
@@ -358,7 +363,10 @@ function ReturnableItemCard({item}: {item: ReturnableItem}) {
                     )}
                     <div className="flex-1">
                         <CardTitle className="text-base">
-                            <label htmlFor={`selected_${lineItem.id}`} className="cursor-pointer font-serif font-medium">
+                            <label
+                                htmlFor={`selected_${lineItem.id}`}
+                                className="cursor-pointer font-serif font-medium"
+                            >
                                 {lineItem.title}
                             </label>
                         </CardTitle>

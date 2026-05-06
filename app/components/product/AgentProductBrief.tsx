@@ -57,9 +57,7 @@ export function AgentProductBrief({product, selectedVariant, productOptions}: Ag
                     </div>
                     <div className="mt-3 border-t border-border pt-3 flex items-baseline justify-between">
                         <h1 className="text-base font-semibold leading-snug">{product.title}</h1>
-                        <span
-                            className={`text-[10px] ${isAvailable ? "text-foreground" : "text-muted-foreground"}`}
-                        >
+                        <span className={`text-[10px] ${isAvailable ? "text-foreground" : "text-muted-foreground"}`}>
                             {isAvailable ? "In Stock" : "Unavailable"}
                         </span>
                     </div>
@@ -67,18 +65,14 @@ export function AgentProductBrief({product, selectedVariant, productOptions}: Ag
 
                 {/* Identity */}
                 <section className="mb-8">
-                    <h3 className="mb-3 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                        Details
-                    </h3>
+                    <h3 className="mb-3 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Details</h3>
                     <div className="divide-y divide-border/50 border-y border-border">
                         {product.vendor && <FieldRow label="Brand" value={product.vendor} />}
                         {product.productType && <FieldRow label="Type" value={product.productType} />}
                         <div className="grid grid-cols-3 py-2.5">
                             <span className="text-[10px] uppercase tracking-widest text-muted-foreground">Price</span>
                             <div className="col-span-2 flex items-baseline gap-2">
-                                <span className="text-xs font-semibold">
-                                    {price ? formatShopifyMoney(price) : "—"}
-                                </span>
+                                <span className="text-xs font-semibold">{price ? formatShopifyMoney(price) : "—"}</span>
                                 {compareAtPrice && (
                                     <span className="text-[10px] text-muted-foreground line-through">
                                         {formatShopifyMoney(compareAtPrice)}
@@ -87,14 +81,9 @@ export function AgentProductBrief({product, selectedVariant, productOptions}: Ag
                             </div>
                         </div>
                         {collections.length > 0 && (
-                            <FieldRow
-                                label="Collections"
-                                value={collections.map(c => c.title).join(", ")}
-                            />
+                            <FieldRow label="Collections" value={collections.map(c => c.title).join(", ")} />
                         )}
-                        {tags.length > 0 && (
-                            <FieldRow label="Tags" value={tags.slice(0, 8).join(", ")} />
-                        )}
+                        {tags.length > 0 && <FieldRow label="Tags" value={tags.slice(0, 8).join(", ")} />}
                         <FieldRow label="Handle" value={product.handle} />
                     </div>
                 </section>
@@ -102,9 +91,7 @@ export function AgentProductBrief({product, selectedVariant, productOptions}: Ag
                 {/* Options */}
                 {productOptions.length > 0 && (
                     <section className="mb-8">
-                        <h3 className="mb-3 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                            Options
-                        </h3>
+                        <h3 className="mb-3 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Options</h3>
                         <div className="divide-y divide-border/50 border-y border-border">
                             {productOptions.map(option => (
                                 <div key={option.name} className="py-2.5">

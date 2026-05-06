@@ -308,8 +308,8 @@ export function AnimatedBrandText() {
                 viewportWidth < SM_BREAKPOINT
                     ? BRAND_NAME_SIZES_PX.mobile // 14px — text-sm
                     : viewportWidth < MD_BREAKPOINT
-                        ? BRAND_NAME_SIZES_PX.sm  // 18px — text-lg
-                        : BRAND_NAME_SIZES_PX.md; // 20px — text-xl
+                      ? BRAND_NAME_SIZES_PX.sm // 18px — text-lg
+                      : BRAND_NAME_SIZES_PX.md; // 20px — text-xl
             const endScale = targetTextSize / fontSize;
 
             const scaledWidth = startWidth * endScale;

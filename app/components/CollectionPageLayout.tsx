@@ -420,7 +420,14 @@ export function useLayoutMode(storageKey: string = "collection-layout-mode"): [L
 }
 
 // Valid sort options for URL validation
-const VALID_SORT_OPTIONS: SortOption[] = ["title-asc", "title-desc", "price-asc", "price-desc", "newest", "best-selling"];
+const VALID_SORT_OPTIONS: SortOption[] = [
+    "title-asc",
+    "title-desc",
+    "price-asc",
+    "price-desc",
+    "newest",
+    "best-selling"
+];
 
 // Hook to manage sort option with URL params for server-side sorting
 export function useSortOption(defaultSort: SortOption = "newest"): [SortOption, (sort: SortOption) => void] {

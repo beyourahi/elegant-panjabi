@@ -14,7 +14,6 @@
 import {useAnalytics} from "@shopify/hydrogen";
 import {useEffect} from "react";
 
-
 /**
  * GoogleTagManager - Forwards Hydrogen analytics events to GTM dataLayer
  *

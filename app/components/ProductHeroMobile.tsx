@@ -197,83 +197,83 @@ export function ProductHeroMobile({
                                 </p>
                             )}
                             <div className="flex flex-wrap gap-3">
-                            {option.optionValues.map(value => {
-                                const {
-                                    name,
-                                    handle,
-                                    variantUriQuery,
-                                    selected,
-                                    available,
-                                    exists,
-                                    isDifferentProduct,
-                                    swatch
-                                } = value;
+                                {option.optionValues.map(value => {
+                                    const {
+                                        name,
+                                        handle,
+                                        variantUriQuery,
+                                        selected,
+                                        available,
+                                        exists,
+                                        isDifferentProduct,
+                                        swatch
+                                    } = value;
 
-                                // Check if this option has a color/image swatch
-                                const hasSwatchData = hasSwatch(swatch);
+                                    // Check if this option has a color/image swatch
+                                    const hasSwatchData = hasSwatch(swatch);
 
-                                // Pill button styling - consistent for mobile hero (white on coral)
-                                // Selected: foreground bg, primary text
-                                // Unselected: transparent bg, white border, white text
-                                const pillClasses = cn(
-                                    "inline-flex min-h-12 select-none items-center justify-center gap-2 rounded-full px-4 py-2 text-lg font-medium sleek",
-                                    "active:scale-95",
-                                    selected
-                                        ? "bg-primary-foreground text-primary"
-                                        : "bg-transparent border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10",
-                                    exists && available ? "cursor-pointer" : "opacity-50 cursor-not-allowed"
-                                );
+                                    // Pill button styling - consistent for mobile hero (white on coral)
+                                    // Selected: foreground bg, primary text
+                                    // Unselected: transparent bg, white border, white text
+                                    const pillClasses = cn(
+                                        "inline-flex min-h-12 select-none items-center justify-center gap-2 rounded-full px-4 py-2 text-lg font-medium sleek",
+                                        "active:scale-95",
+                                        selected
+                                            ? "bg-primary-foreground text-primary"
+                                            : "bg-transparent border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10",
+                                        exists && available ? "cursor-pointer" : "opacity-50 cursor-not-allowed"
+                                    );
 
-                                // Button content: swatch circle + name, or just name
-                                const optionContent = hasSwatchData ? (
-                                    <span className="inline-flex items-center gap-2">
-                                        <ColorSwatch
-                                            swatch={swatch}
-                                            name={name}
-                                            size="sm"
-                                            selected={selected}
-                                            onPrimaryBackground={true}
-                                        />
+                                    // Button content: swatch circle + name, or just name
+                                    const optionContent = hasSwatchData ? (
+                                        <span className="inline-flex items-center gap-2">
+                                            <ColorSwatch
+                                                swatch={swatch}
+                                                name={name}
+                                                size="sm"
+                                                selected={selected}
+                                                onPrimaryBackground={true}
+                                            />
+                                            <span className="leading-none">{name}</span>
+                                        </span>
+                                    ) : (
                                         <span className="leading-none">{name}</span>
-                                    </span>
-                                ) : (
-                                    <span className="leading-none">{name}</span>
-                                );
+                                    );
 
-                                if (isDifferentProduct) {
+                                    if (isDifferentProduct) {
+                                        return (
+                                            <Link
+                                                key={option.name + name}
+                                                prefetch="viewport"
+                                                preventScrollReset
+                                                replace
+                                                to={`/products/${handle}?${variantUriQuery}`}
+                                                className={pillClasses}
+                                            >
+                                                {optionContent}
+                                            </Link>
+                                        );
+                                    }
+
                                     return (
-                                        <Link
+                                        <button
                                             key={option.name + name}
-                                            prefetch="viewport"
-                                            preventScrollReset
-                                            replace
-                                            to={`/products/${handle}?${variantUriQuery}`}
+                                            type="button"
+                                            disabled={!exists || !available}
                                             className={pillClasses}
+                                            onClick={() => {
+                                                if (!selected) {
+                                                    void navigate(`?${variantUriQuery}`, {
+                                                        replace: true,
+                                                        preventScrollReset: true
+                                                    });
+                                                }
+                                            }}
                                         >
                                             {optionContent}
-                                        </Link>
+                                        </button>
                                     );
-                                }
-
-                                return (
-                                    <button
-                                        key={option.name + name}
-                                        type="button"
-                                        disabled={!exists || !available}
-                                        className={pillClasses}
-                                        onClick={() => {
-                                            if (!selected) {
-                                                void navigate(`?${variantUriQuery}`, {
-                                                    replace: true,
-                                                    preventScrollReset: true
-                                                });
-                                            }
-                                        }}
-                                    >
-                                        {optionContent}
-                                    </button>
-                                );
-                            })}
+                                })}
                             </div>
                         </div>
                     ))}
@@ -301,7 +301,10 @@ export function ProductHeroMobile({
                         return (
                             <button
                                 type="submit"
-                                onClick={() => { setForceIdle(false); open("cart"); }}
+                                onClick={() => {
+                                    setForceIdle(false);
+                                    open("cart");
+                                }}
                                 disabled={isDisabled}
                                 className={cn(
                                     "w-full min-h-14 inline-flex select-none items-center justify-between gap-4 rounded-full bg-primary-foreground px-4 py-3 text-lg font-medium text-primary sleek",

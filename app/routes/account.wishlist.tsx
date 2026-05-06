@@ -177,7 +177,9 @@ function useWishlistSort(): [WishlistSortOption, (sort: WishlistSortOption) => v
 
     useEffect(() => {
         const stored = localStorage.getItem("wishlist-sort");
-        if (["date-newest", "date-oldest", "price-asc", "price-desc", "title-asc", "title-desc"].includes(stored ?? "")) {
+        if (
+            ["date-newest", "date-oldest", "price-asc", "price-desc", "title-asc", "title-desc"].includes(stored ?? "")
+        ) {
             setSort(stored as WishlistSortOption);
         }
     }, []);

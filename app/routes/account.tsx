@@ -292,13 +292,7 @@ export function ErrorBoundary() {
     );
 }
 
-function AccountErrorTracker({
-    statusCode,
-    errorType
-}: {
-    statusCode: number;
-    errorType: "route_error" | "js_error";
-}) {
+function AccountErrorTracker({statusCode, errorType}: {statusCode: number; errorType: "route_error" | "js_error"}) {
     useEffect(() => {
         trackErrorBoundary(statusCode, errorType, "account");
     }, [statusCode, errorType]);

@@ -190,7 +190,9 @@ function SubscriptionsEmpty() {
                         </Link>
                     </Button>
                     <Button asChild size="lg" variant="outline" className="motion-interactive">
-                        <Link to="/collections" viewTransition>Continue Shopping</Link>
+                        <Link to="/collections" viewTransition>
+                            Continue Shopping
+                        </Link>
                     </Button>
                 </div>
             </CardContent>

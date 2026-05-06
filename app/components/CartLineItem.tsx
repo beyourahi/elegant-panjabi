@@ -313,7 +313,12 @@ export function CartLineItem({layout, line}: {layout: CartLayout; line: CartLine
                         >
                             <ProductTitle title={product.title} variant="cart" />
                         </Link>
-                        <CartLineRemoveButton lineIds={[id]} disabled={!!line.isOptimistic || isMutating} compact isPage />
+                        <CartLineRemoveButton
+                            lineIds={[id]}
+                            disabled={!!line.isOptimistic || isMutating}
+                            compact
+                            isPage
+                        />
                     </div>
 
                     {/* Middle Row: Variant Options - tighter to title */}
@@ -394,7 +399,8 @@ function CartLineQuantity({line, isPage, productTitle}: {line: CartLine; isPage:
      * 2. Not mid-mutation (global cart operation in flight)
      * 3. Either inventory is not tracked (null) OR current quantity is below available
      */
-    const canIncrement = !isOptimistic && !isMutating && (quantityAvailable == null || displayQuantity < quantityAvailable);
+    const canIncrement =
+        !isOptimistic && !isMutating && (quantityAvailable == null || displayQuantity < quantityAvailable);
 
     // Compact quantity selector for aside
     // Touch targets: 44px minimum for mobile (size-11), 36px for desktop (sm:size-9)
@@ -463,7 +469,9 @@ function CartLineQuantity({line, isPage, productTitle}: {line: CartLine; isPage:
                     </button>
                 </CartLineUpdateButton>
 
-                <span className="w-9 sm:w-8 text-center text-sm font-medium text-primary tabular-nums">{displayQuantity}</span>
+                <span className="w-9 sm:w-8 text-center text-sm font-medium text-primary tabular-nums">
+                    {displayQuantity}
+                </span>
 
                 <CartLineUpdateButton lines={[{id: lineId, quantity: nextQuantity}]}>
                     <button
@@ -502,12 +510,7 @@ function CartLineRemoveButton({
     isPage?: boolean;
 }) {
     return (
-        <CartForm
-            fetcherKey={CART_FETCHER_KEY}
-            route="/cart"
-            action={CartForm.ACTIONS.LinesRemove}
-            inputs={{lineIds}}
-        >
+        <CartForm fetcherKey={CART_FETCHER_KEY} route="/cart" action={CartForm.ACTIONS.LinesRemove} inputs={{lineIds}}>
             <OptimisticInput id={lineIds[0]} data={{action: "remove"}} />
             {/* Touch target: 44px minimum for mobile (size-10), 36px for desktop (sm:size-9) */}
             <Button
@@ -533,15 +536,9 @@ function CartLineRemoveButton({
 
 function CartLineUpdateButton({children, lines}: {children: React.ReactNode; lines: CartLineUpdateInput[]}) {
     return (
-        <CartForm
-            fetcherKey={CART_FETCHER_KEY}
-            route="/cart"
-            action={CartForm.ACTIONS.LinesUpdate}
-            inputs={{lines}}
-        >
+        <CartForm fetcherKey={CART_FETCHER_KEY} route="/cart" action={CartForm.ACTIONS.LinesUpdate} inputs={{lines}}>
             <OptimisticInput id={lines[0].id} data={{action: "update", quantity: lines[0].quantity}} />
             {children}
         </CartForm>
     );
 }
-

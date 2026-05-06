@@ -282,8 +282,7 @@ export function QuickAddSheet({product, open, onOpenChange}: QuickAddSheetProps)
                         {/* Product thumbnail — video-first when product.media[0] is a Video.
                             Muted + playsInline guarantees autoplay on iOS / Android. */}
                         <div className="w-16 h-20 shrink-0 overflow-hidden rounded-lg bg-muted/50">
-                            {product.featuredImage?.url ||
-                            (product.media?.nodes && product.media.nodes.length > 0) ? (
+                            {product.featuredImage?.url || (product.media?.nodes && product.media.nodes.length > 0) ? (
                                 <ProductMediaThumb
                                     product={product}
                                     fallbackImage={product.featuredImage}
@@ -527,15 +526,15 @@ function QuickAddCartButton({
                     action: CartForm.ACTIONS.LinesAdd,
                     inputs: {
                         lines: [
-                                {
-                                    merchandiseId: variant.id,
-                                    quantity,
-                                    selectedVariant: {
-                                        ...variant,
-                                        product: {id: productId, title: productTitle, handle: productHandle}
-                                    }
+                            {
+                                merchandiseId: variant.id,
+                                quantity,
+                                selectedVariant: {
+                                    ...variant,
+                                    product: {id: productId, title: productTitle, handle: productHandle}
                                 }
-                            ]
+                            }
+                        ]
                     }
                 })
             },
@@ -563,8 +562,10 @@ function QuickAddCartButton({
             <span className="flex items-center gap-2">
                 {isLoading ? (
                     <Spinner className="size-5" />
+                ) : variant.availableForSale ? (
+                    buttonLabel
                 ) : (
-                    variant.availableForSale ? buttonLabel : OUT_OF_STOCK_LABEL
+                    OUT_OF_STOCK_LABEL
                 )}
             </span>
         </Button>

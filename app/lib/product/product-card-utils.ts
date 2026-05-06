@@ -193,8 +193,7 @@ export const transformProductToCardData = (product: ShopifyProduct): ProductCard
 
 const hasVariantDiscount = (variant: ShopifyProductVariant): boolean => {
     return Boolean(
-        variant.compareAtPrice?.amount &&
-        parseFloat(variant.compareAtPrice.amount) > parseFloat(variant.price.amount)
+        variant.compareAtPrice?.amount && parseFloat(variant.compareAtPrice.amount) > parseFloat(variant.price.amount)
     );
 };
 
@@ -305,7 +304,11 @@ export const isProductLowStock = (product: ShopifyProduct | ProductCardData): bo
     const variantNodes: Array<{availableForSale: boolean; quantityAvailable: number | null}> =
         p.variants?.nodes ?? p.variants?.edges?.map((e: any) => e.node) ?? [];
     return variantNodes.some(
-        v => v.availableForSale && v.quantityAvailable != null && v.quantityAvailable > 0 && v.quantityAvailable <= LOW_STOCK_THRESHOLD
+        v =>
+            v.availableForSale &&
+            v.quantityAvailable != null &&
+            v.quantityAvailable > 0 &&
+            v.quantityAvailable <= LOW_STOCK_THRESHOLD
     );
 };
 

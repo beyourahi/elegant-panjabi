@@ -23,10 +23,7 @@ import {redirect, type MetaFunction} from "react-router";
 import type {Route} from "./+types/account.addresses";
 
 export const meta: MetaFunction = () => {
-    return [
-        {title: "Redirecting..."},
-        {name: "robots", content: "noindex"}
-    ];
+    return [{title: "Redirecting..."}, {name: "robots", content: "noindex"}];
 };
 
 // =============================================================================

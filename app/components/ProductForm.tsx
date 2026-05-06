@@ -273,9 +273,7 @@ export function ProductForm({
                           merchandiseId: selectedVariant.id,
                           quantity,
                           selectedVariant,
-                          ...(isSubscriptionMode && selectedSellingPlan
-                              ? {sellingPlanId: selectedSellingPlan.id}
-                              : {})
+                          ...(isSubscriptionMode && selectedSellingPlan ? {sellingPlanId: selectedSellingPlan.id} : {})
                       }
                   ]
                 : [],
@@ -403,11 +401,7 @@ export function ProductForm({
                     </div>
                 )}
 
-                <ShoppingSummary
-                    product={product}
-                    selectedVariant={selectedVariant}
-                    quantity={quantity}
-                />
+                <ShoppingSummary product={product} selectedVariant={selectedVariant} quantity={quantity} />
 
                 {/* Add to Cart + Share + Wishlist button row */}
                 <div className="flex items-center gap-2 sm:gap-3">
@@ -448,93 +442,93 @@ export function ProductForm({
                                 </p>
                             )}
                             <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
-                            {option.optionValues.map(value => {
-                                const {
-                                    name,
-                                    handle,
-                                    variantUriQuery,
-                                    selected,
-                                    available,
-                                    exists,
-                                    isDifferentProduct,
-                                    swatch
-                                } = value;
+                                {option.optionValues.map(value => {
+                                    const {
+                                        name,
+                                        handle,
+                                        variantUriQuery,
+                                        selected,
+                                        available,
+                                        exists,
+                                        isDifferentProduct,
+                                        swatch
+                                    } = value;
 
-                                // Check if this option has a color/image swatch
-                                const hasSwatchData = hasSwatch(swatch);
+                                    // Check if this option has a color/image swatch
+                                    const hasSwatchData = hasSwatch(swatch);
 
-                                // Pill button styling — OOS variants shown with diagonal strike, no hover effects.
-                                // Muted but still visible: opacity-45 over opacity-50 gives slightly more presence
-                                // while still clearly signaling unavailability at a glance.
-                                const isOos = !available;
-                                const buttonClasses = cn(
-                                    "relative overflow-hidden inline-flex min-h-11 min-w-24 select-none items-center justify-center gap-1.5 sm:gap-2 rounded-full border-2 px-2.5 sm:px-4 py-1.5 text-sm sm:text-base lg:text-lg font-medium",
-                                    selected
-                                        ? "border-primary bg-primary text-primary-foreground"
-                                        : "border-primary text-primary",
-                                    exists && available
-                                        ? "sleek hover:bg-primary hover:text-primary-foreground hover:scale-[1.02] hover:shadow-md active:scale-[0.98] cursor-pointer"
-                                        : "opacity-45 cursor-not-allowed"
-                                );
+                                    // Pill button styling — OOS variants shown with diagonal strike, no hover effects.
+                                    // Muted but still visible: opacity-45 over opacity-50 gives slightly more presence
+                                    // while still clearly signaling unavailability at a glance.
+                                    const isOos = !available;
+                                    const buttonClasses = cn(
+                                        "relative overflow-hidden inline-flex min-h-11 min-w-24 select-none items-center justify-center gap-1.5 sm:gap-2 rounded-full border-2 px-2.5 sm:px-4 py-1.5 text-sm sm:text-base lg:text-lg font-medium",
+                                        selected
+                                            ? "border-primary bg-primary text-primary-foreground"
+                                            : "border-primary text-primary",
+                                        exists && available
+                                            ? "sleek hover:bg-primary hover:text-primary-foreground hover:scale-[1.02] hover:shadow-md active:scale-[0.98] cursor-pointer"
+                                            : "opacity-45 cursor-not-allowed"
+                                    );
 
-                                // Button content: swatch circle + name, or just name
-                                const optionContent = hasSwatchData ? (
-                                    <span className="inline-flex items-center gap-2">
-                                        <ColorSwatch swatch={swatch} name={name} size="sm" selected={selected} />
+                                    // Button content: swatch circle + name, or just name
+                                    const optionContent = hasSwatchData ? (
+                                        <span className="inline-flex items-center gap-2">
+                                            <ColorSwatch swatch={swatch} name={name} size="sm" selected={selected} />
+                                            <span className="leading-none">{name}</span>
+                                        </span>
+                                    ) : (
                                         <span className="leading-none">{name}</span>
-                                    </span>
-                                ) : (
-                                    <span className="leading-none">{name}</span>
-                                );
+                                    );
 
-                                // Diagonal strikethrough overlay rendered inside OOS buttons
-                                const oosOverlay = isOos ? (
-                                    <span
-                                        className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden rounded-full"
-                                        aria-hidden="true"
-                                    >
-                                        <span className="block h-[1.5px] w-[150%] rotate-[-28deg] bg-current opacity-30" />
-                                    </span>
-                                ) : null;
+                                    // Diagonal strikethrough overlay rendered inside OOS buttons
+                                    const oosOverlay = isOos ? (
+                                        <span
+                                            className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden rounded-full"
+                                            aria-hidden="true"
+                                        >
+                                            <span className="block h-[1.5px] w-[150%] rotate-[-28deg] bg-current opacity-30" />
+                                        </span>
+                                    ) : null;
 
-                                if (isDifferentProduct) {
+                                    if (isDifferentProduct) {
+                                        return (
+                                            <Link
+                                                key={option.name + name}
+                                                prefetch="viewport"
+                                                preventScrollReset
+                                                replace
+                                                to={`/products/${handle}?${variantUriQuery}`}
+                                                className={buttonClasses}
+                                                aria-label={isOos ? `${name}, sold out` : undefined}
+                                            >
+                                                {optionContent}
+                                                {oosOverlay}
+                                            </Link>
+                                        );
+                                    }
+
                                     return (
-                                        <Link
+                                        <button
                                             key={option.name + name}
-                                            prefetch="viewport"
-                                            preventScrollReset
-                                            replace
-                                            to={`/products/${handle}?${variantUriQuery}`}
+                                            type="button"
+                                            disabled={!exists || !available}
                                             className={buttonClasses}
                                             aria-label={isOos ? `${name}, sold out` : undefined}
+                                            onClick={() => {
+                                                if (!selected) {
+                                                    void navigate(`?${variantUriQuery}`, {
+                                                        replace: true,
+                                                        preventScrollReset: true
+                                                    });
+                                                }
+                                            }}
                                         >
                                             {optionContent}
                                             {oosOverlay}
-                                        </Link>
+                                        </button>
                                     );
-                                }
-
-                                return (
-                                    <button
-                                        key={option.name + name}
-                                        type="button"
-                                        disabled={!exists || !available}
-                                        className={buttonClasses}
-                                        aria-label={isOos ? `${name}, sold out` : undefined}
-                                        onClick={() => {
-                                            if (!selected) {
-                                                void navigate(`?${variantUriQuery}`, {
-                                                    replace: true,
-                                                    preventScrollReset: true
-                                                });
-                                            }
-                                        }}
-                                    >
-                                        {optionContent}
-                                        {oosOverlay}
-                                    </button>
-                                );
-                            })}
+                                })}
                             </div>
                         </div>
                     );
@@ -563,11 +557,7 @@ export function ProductForm({
                 </div>
             </div>
 
-            <ShoppingSummary
-                product={product}
-                selectedVariant={selectedVariant}
-                quantity={quantity}
-            />
+            <ShoppingSummary product={product} selectedVariant={selectedVariant} quantity={quantity} />
 
             {/* Add to Cart button - full width */}
             <div>{addToCartButton}</div>

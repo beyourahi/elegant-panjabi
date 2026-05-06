@@ -162,7 +162,6 @@ function GenericErrorUI({statusCode, title, message}: GenericErrorUIProps) {
                     <Link to="/">Back to Home</Link>
                 </Button>
             </div>
-
         </div>
     );
 }

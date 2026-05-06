@@ -61,7 +61,10 @@ export function truncateText(
 
     let cleanText = text;
     if (stripHtml) {
-        cleanText = text.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
+        cleanText = text
+            .replace(/<[^>]*>/g, "")
+            .replace(/\s+/g, " ")
+            .trim();
     }
 
     if (cleanText.length <= maxLength) {

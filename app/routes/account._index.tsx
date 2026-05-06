@@ -38,7 +38,15 @@
  */
 
 import {Image} from "@shopify/hydrogen";
-import {data as remixData, Form, Link, useLoaderData, useNavigation, useOutletContext, useRouteLoaderData} from "react-router";
+import {
+    data as remixData,
+    Form,
+    Link,
+    useLoaderData,
+    useNavigation,
+    useOutletContext,
+    useRouteLoaderData
+} from "react-router";
 import type {Route} from "./+types/account._index";
 import type {RootLoader} from "~/root";
 import type {CustomerFragment} from "customer-accountapi.generated";
@@ -298,7 +306,11 @@ export default function AccountDashboard() {
                     When disabled, storeCreditAccounts returns empty array from Customer Account API */}
             {isStoreCreditEnabled && (
                 <AnimatedSection animation="slide-up" threshold={0.1} delay={50}>
-                    <StoreCreditWidget balance={storeCreditBalance} accounts={storeCreditAccounts} currencyCode={shippingConfig?.currencyCode ?? "USD"} />
+                    <StoreCreditWidget
+                        balance={storeCreditBalance}
+                        accounts={storeCreditAccounts}
+                        currencyCode={shippingConfig?.currencyCode ?? "USD"}
+                    />
                 </AnimatedSection>
             )}
 
@@ -440,12 +452,7 @@ function WelcomeBanner({customer}: {customer: CustomerFragment}) {
 
                     {/* Right Side - Logout */}
                     <Form method="POST" action="/account/logout" className="hidden md:block shrink-0">
-                        <Button
-                            type="submit"
-                            variant="destructive"
-                            size="sm"
-                            disabled={isLoggingOut}
-                        >
+                        <Button type="submit" variant="destructive" size="sm" disabled={isLoggingOut}>
                             {accountContent.logoutButton}
                         </Button>
                     </Form>
@@ -453,13 +460,7 @@ function WelcomeBanner({customer}: {customer: CustomerFragment}) {
 
                 {/* Mobile logout button */}
                 <Form method="POST" action="/account/logout" className="relative mt-6 md:hidden">
-                    <Button
-                        type="submit"
-                        variant="destructive"
-                        size="sm"
-                        disabled={isLoggingOut}
-                        className="w-full"
-                    >
+                    <Button type="submit" variant="destructive" size="sm" disabled={isLoggingOut} className="w-full">
                         {accountContent.logoutButton}
                     </Button>
                 </Form>
@@ -618,9 +619,7 @@ function RecentOrdersSection({orders}: {orders: ReturnType<typeof useLoaderData<
                             )}
                         >
                             {accountContent.viewAllOrders}{" "}
-                            <ArrowRightIcon
-                                className={cn("size-4 sleek", canHover && "group-hover:translate-x-0.5")}
-                            />
+                            <ArrowRightIcon className={cn("size-4 sleek", canHover && "group-hover:translate-x-0.5")} />
                         </Link>
                     </Button>
                 )}
@@ -738,12 +737,7 @@ function OrderCard({order}: {order: OrderNode}) {
                         )}
                     >
                         <span>View Details</span>
-                        <ArrowRightIcon
-                            className={cn(
-                                "size-4 sleek",
-                                canHover && "group-hover:translate-x-0.5"
-                            )}
-                        />
+                        <ArrowRightIcon className={cn("size-4 sleek", canHover && "group-hover:translate-x-0.5")} />
                     </div>
                 </CardContent>
             </Card>
@@ -1144,8 +1138,7 @@ function RecommendedSection({products}: {products: CuratedProductFragment[]}) {
                         to="/collections/all-products"
                         className="flex items-center gap-1.5 group-hover:gap-2 motion-link hover:text-primary"
                     >
-                        Explore More{" "}
-                        <ArrowRightIcon className="size-4 sleek group-hover:translate-x-0.5" />
+                        Explore More <ArrowRightIcon className="size-4 sleek group-hover:translate-x-0.5" />
                     </Link>
                 </Button>
             </div>

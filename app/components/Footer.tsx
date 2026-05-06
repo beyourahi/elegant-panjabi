@@ -103,7 +103,9 @@ export function Footer({footer: footerPromise, header: _header}: FooterProps) {
                                  All other pages use 3.5rem — a safe buffer since the sticky bar
                                  is absent there. At md+ the button is hidden (md:hidden) so
                                  normal pb-6 is restored on all pages. */}
-                            <div className={`pt-4 sm:pt-6 ${isProductPage ? "pb-[calc(8.5rem+env(safe-area-inset-bottom,0px)+0.75rem)]" : "pb-[calc(3.5rem+env(safe-area-inset-bottom,0px)+0.75rem)]"} md:pb-6 px-container flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-2`}>
+                            <div
+                                className={`pt-4 sm:pt-6 ${isProductPage ? "pb-[calc(8.5rem+env(safe-area-inset-bottom,0px)+0.75rem)]" : "pb-[calc(3.5rem+env(safe-area-inset-bottom,0px)+0.75rem)]"} md:pb-6 px-container flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-2`}
+                            >
                                 <Copyright shopName={brandName || "Store"} />
                                 {/* Developer credit — pill badge using primary-foreground surface tokens.
                                      rounded-full matches the site-wide button pill shape (the primary

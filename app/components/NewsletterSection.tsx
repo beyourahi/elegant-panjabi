@@ -28,10 +28,7 @@ import {NewsletterForm} from "~/components/NewsletterForm";
  */
 export function NewsletterSection() {
     return (
-        <section
-            className="mx-auto max-w-xl text-center"
-            aria-label="Newsletter signup"
-        >
+        <section className="mx-auto max-w-xl text-center" aria-label="Newsletter signup">
             <NewsletterForm variant="standalone" />
 
             {/* Login CTA - Secondary action */}

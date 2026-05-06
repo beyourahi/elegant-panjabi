@@ -45,7 +45,13 @@ import type {Route} from "./+types/faq";
 import {getSeoMeta} from "@shopify/hydrogen";
 import {AnimatedSection} from "~/components/AnimatedSection";
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "~/components/ui/accordion";
-import {buildCanonicalUrl, getBrandNameFromMatches, getSiteUrlFromMatches, generateFAQPageSchema, generateBreadcrumbListSchema} from "~/lib/seo";
+import {
+    buildCanonicalUrl,
+    getBrandNameFromMatches,
+    getSiteUrlFromMatches,
+    generateFAQPageSchema,
+    generateBreadcrumbListSchema
+} from "~/lib/seo";
 import {useFaqItems} from "~/lib/site-content-context";
 import {PageHeading} from "~/components/PageHeading";
 
@@ -62,10 +68,13 @@ export const meta: Route.MetaFunction = ({matches}) => {
     const faqItems = rootData?.siteContent?.siteSettings?.faqItems;
     const faqSchema = faqItems?.length ? generateFAQPageSchema(faqItems) : undefined;
 
-    const breadcrumbSchema = generateBreadcrumbListSchema([
-        {name: "Home", url: "/"},
-        {name: "FAQ", url: "/faq"}
-    ], siteUrl);
+    const breadcrumbSchema = generateBreadcrumbListSchema(
+        [
+            {name: "Home", url: "/"},
+            {name: "FAQ", url: "/faq"}
+        ],
+        siteUrl
+    );
 
     return [
         ...(getSeoMeta({
@@ -89,55 +98,61 @@ export default function FAQ() {
     return (
         <div className="min-h-dvh bg-primary">
             <AnimatedSection animation="fade" threshold={0.08}>
-            <section className="pt-32 sm:pt-36 md:pt-44 lg:pt-52 xl:pt-64 pb-12 sm:pb-16 md:pb-24 lg:pb-32">
-                <div className="px-4 sm:px-6 lg:px-8">
-                    <div>
-                        <div className="grid gap-8 sm:gap-12 lg:grid-cols-[2fr_3fr] lg:gap-16">
-                            {/* Sticky FAQ Heading */}
-                            <div className="lg:sticky lg:top-32 lg:self-start">
-                                <PageHeading
-                                    variant="dark"
-                                    title={<>Frequently Asked{" "}<br />Questions</>}
-                                    description="Find answers to common questions about orders, shipping, returns, and more."
-                                />
-                                <p className="mt-4 text-sm text-primary-foreground/50">{faqItems.length} questions</p>
-                            </div>
+                <section className="pt-32 sm:pt-36 md:pt-44 lg:pt-52 xl:pt-64 pb-12 sm:pb-16 md:pb-24 lg:pb-32">
+                    <div className="px-4 sm:px-6 lg:px-8">
+                        <div>
+                            <div className="grid gap-8 sm:gap-12 lg:grid-cols-[2fr_3fr] lg:gap-16">
+                                {/* Sticky FAQ Heading */}
+                                <div className="lg:sticky lg:top-32 lg:self-start">
+                                    <PageHeading
+                                        variant="dark"
+                                        title={
+                                            <>
+                                                Frequently Asked <br />
+                                                Questions
+                                            </>
+                                        }
+                                        description="Find answers to common questions about orders, shipping, returns, and more."
+                                    />
+                                    <p className="mt-4 text-sm text-primary-foreground/50">
+                                        {faqItems.length} questions
+                                    </p>
+                                </div>
 
-                            {/* FAQ Items - All Open by Default */}
-                            <div>
-                                <Accordion
-                                    type="multiple"
-                                    defaultValue={faqItems.map((_, index) => `faq-${index}`)}
-                                    className="w-full"
-                                >
-                                    {faqItems.map((item, index) => {
-                                        const itemId = `faq-${index}`;
-                                        return (
-                                            <AccordionItem
-                                                key={itemId}
-                                                value={itemId}
-                                                className="border-primary-foreground/20"
-                                            >
-                                                <AccordionTrigger className="min-h-14 sm:min-h-16 py-4 sm:py-5 gap-3 sm:gap-4 text-left text-base sm:text-lg font-medium text-primary-foreground hover:text-primary-foreground/80 hover:no-underline [&>svg]:hidden">
-                                                    <span className="flex items-start gap-3">
-                                                        <span className="shrink-0 mt-2 size-2 rounded-full bg-primary-foreground/60" />
-                                                        {item.question}
-                                                    </span>
-                                                </AccordionTrigger>
-                                                <AccordionContent className="text-base sm:text-lg leading-relaxed text-primary-foreground! pb-5 sm:pb-6">
-                                                    {item.answer}
-                                                </AccordionContent>
-                                            </AccordionItem>
-                                        );
-                                    })}
-                                </Accordion>
+                                {/* FAQ Items - All Open by Default */}
+                                <div>
+                                    <Accordion
+                                        type="multiple"
+                                        defaultValue={faqItems.map((_, index) => `faq-${index}`)}
+                                        className="w-full"
+                                    >
+                                        {faqItems.map((item, index) => {
+                                            const itemId = `faq-${index}`;
+                                            return (
+                                                <AccordionItem
+                                                    key={itemId}
+                                                    value={itemId}
+                                                    className="border-primary-foreground/20"
+                                                >
+                                                    <AccordionTrigger className="min-h-14 sm:min-h-16 py-4 sm:py-5 gap-3 sm:gap-4 text-left text-base sm:text-lg font-medium text-primary-foreground hover:text-primary-foreground/80 hover:no-underline [&>svg]:hidden">
+                                                        <span className="flex items-start gap-3">
+                                                            <span className="shrink-0 mt-2 size-2 rounded-full bg-primary-foreground/60" />
+                                                            {item.question}
+                                                        </span>
+                                                    </AccordionTrigger>
+                                                    <AccordionContent className="text-base sm:text-lg leading-relaxed text-primary-foreground! pb-5 sm:pb-6">
+                                                        {item.answer}
+                                                    </AccordionContent>
+                                                </AccordionItem>
+                                            );
+                                        })}
+                                    </Accordion>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
             </AnimatedSection>
-
         </div>
     );
 }

@@ -283,7 +283,12 @@ export function InfiniteScrollGrid<T extends {id: string}>({
                 {error && !isLoading && (
                     <div className="flex flex-col items-center gap-3 text-center px-4">
                         <span className="text-sm text-destructive">{error}</span>
-                        <Button variant="outline" size="sm" onClick={retry} className="min-w-[120px] motion-interactive motion-press">
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={retry}
+                            className="min-w-[120px] motion-interactive motion-press"
+                        >
                             Try again
                         </Button>
                     </div>

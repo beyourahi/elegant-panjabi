@@ -114,7 +114,8 @@ function normalizeSlides(media: RawMediaNode[] | null | undefined, images: Produ
             if (!node) return;
             const typename = node.__typename;
             if (typename === "Video") {
-                const rawSources = (node as {sources?: Array<{url?: string | null; mimeType?: string | null} | null>}).sources;
+                const rawSources = (node as {sources?: Array<{url?: string | null; mimeType?: string | null} | null>})
+                    .sources;
                 const sources = (rawSources ?? [])
                     .filter((s): s is {url: string; mimeType: string} => Boolean(s?.url && s?.mimeType))
                     .map(s => ({url: s.url, mimeType: s.mimeType}));
@@ -136,11 +137,14 @@ function normalizeSlides(media: RawMediaNode[] | null | undefined, images: Produ
     // Fallback: static images only.
     return images
         .filter(img => img?.url)
-        .map((img, index) => ({
-            type: "image",
-            key: img.id ?? `image-${index}`,
-            image: img
-        } as SlideItem));
+        .map(
+            (img, index) =>
+                ({
+                    type: "image",
+                    key: img.id ?? `image-${index}`,
+                    image: img
+                }) as SlideItem
+        );
 }
 
 // =============================================================================
@@ -187,7 +191,9 @@ function VideoSlide({
     return (
         // Grayscale + opacity wrapper for OOS — placed here so the isReady opacity
         // transition on the <video> element isn't overridden by a conflicting utility.
-        <div className={cn("relative h-full w-full overflow-hidden rounded-lg", isOutOfStock && "grayscale opacity-60")}>
+        <div
+            className={cn("relative h-full w-full overflow-hidden rounded-lg", isOutOfStock && "grayscale opacity-60")}
+        >
             {/* Poster layer — holds its aspect until the video can paint. */}
             {posterUrl && !isReady && (
                 <Image
@@ -338,7 +344,10 @@ export function ProductImageCarousel({
             return <ProductImagePlaceholder aspectRatio="4/5" className={cn("rounded-lg", className)} />;
         }
         return (
-            <div ref={containerRef} className={cn("relative w-full overflow-hidden rounded-lg aspect-[4/5]", className)}>
+            <div
+                ref={containerRef}
+                className={cn("relative w-full overflow-hidden rounded-lg aspect-[4/5]", className)}
+            >
                 {slide.type === "video" ? (
                     <VideoSlide
                         slide={slide}
@@ -369,7 +378,10 @@ export function ProductImageCarousel({
     if (slides.length === 1) {
         const slide = slides[0];
         return (
-            <div ref={containerRef} className={cn("relative w-full overflow-hidden rounded-lg aspect-[4/5]", className)}>
+            <div
+                ref={containerRef}
+                className={cn("relative w-full overflow-hidden rounded-lg aspect-[4/5]", className)}
+            >
                 {slide.type === "video" ? (
                     <VideoSlide
                         slide={slide}
@@ -401,7 +413,7 @@ export function ProductImageCarousel({
                     loop: true,
                     skipSnaps: false,
                     containScroll: "trimSnaps",
-                    dragFree: false,
+                    dragFree: false
                 }}
                 className="w-full rounded-lg"
             >
@@ -490,9 +502,7 @@ export function ProductImageCarousel({
             <div
                 className={cn(
                     "pointer-events-none absolute left-1/2 z-30 flex -translate-x-1/2 items-center gap-1 rounded-full bg-background/75 px-1.5 py-1 backdrop-blur-md transition-[bottom] duration-200 ease-out",
-                    hasBottomAction
-                        ? "bottom-14 sm:bottom-16 md:bottom-2 md:group-hover:bottom-[4.5rem]"
-                        : "bottom-2"
+                    hasBottomAction ? "bottom-14 sm:bottom-16 md:bottom-2 md:group-hover:bottom-[4.5rem]" : "bottom-2"
                 )}
                 aria-hidden="true"
             >

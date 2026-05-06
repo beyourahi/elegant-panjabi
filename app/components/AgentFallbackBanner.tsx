@@ -58,9 +58,7 @@ export function AgentFallbackBanner({
 
                 {/* Description */}
                 <section className="mb-8">
-                    <h3 className="mb-3 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                        Guidance
-                    </h3>
+                    <h3 className="mb-3 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Guidance</h3>
                     <p className="border-y border-border py-3 text-xs leading-relaxed text-muted-foreground">
                         {copy.subtitle}
                     </p>

@@ -78,12 +78,7 @@ export function BuyNowButton({
     }, []);
 
     return (
-        <CartForm
-            fetcherKey="buy-now"
-            route="/cart"
-            inputs={{lines}}
-            action={CartForm.ACTIONS.LinesAdd}
-        >
+        <CartForm fetcherKey="buy-now" route="/cart" inputs={{lines}} action={CartForm.ACTIONS.LinesAdd}>
             {(fetcher: FetcherWithComponents<any>) => {
                 const isLoading = !forceIdle && fetcher.state !== "idle";
                 const isDisabled = disabled || isLoading;
@@ -109,9 +104,7 @@ export function BuyNowButton({
                                     </s>
                                 )}
                             </span>
-                            <span className="whitespace-nowrap">
-                                {label}
-                            </span>
+                            <span className="whitespace-nowrap">{label}</span>
                         </Button>
                     </>
                 );

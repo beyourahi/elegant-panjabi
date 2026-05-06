@@ -33,9 +33,9 @@ Backend behavior, data flow, and Hydrogen conventions **must remain consistent**
 
 ### Dual Deployment Targets
 
-| Target                             | Purpose                         | Data Source                               |
-| ---------------------------------- | ------------------------------- | ----------------------------------------- |
-| **Shopify Oxygen**                 | Client production deployments   | Client's own Shopify store (no fallback)  |
+| Target                             | Purpose                         | Data Source                                               |
+| ---------------------------------- | ------------------------------- | --------------------------------------------------------- |
+| **Shopify Oxygen**                 | Client production deployments   | Client's own Shopify store (no fallback)                  |
 | **Cloudflare Workers + local dev** | Portfolio showcase + dev server | Demo Shopify store credentials + in-repo content defaults |
 
 - On **Oxygen**: use the client's Shopify credentials only
@@ -44,30 +44,30 @@ Backend behavior, data flow, and Hydrogen conventions **must remain consistent**
 
 ## Tech Stack
 
-| Category      | Tech             | Version    | Notes                               |
-| ------------- | ---------------- | ---------- | ----------------------------------- |
-| **Framework** | React            | 18.3.1     |                                     |
-|               | React Router     | 7.12.0     | Hydrogen preset, file-based routing |
-|               | Shopify Hydrogen | 2026.4.1   | Storefront + Customer Account APIs  |
-|               | Storefront API   | 2026-04    | GraphQL API version                 |
-|               | TypeScript       | 5.9        | Strict mode, ES2022 target          |
-|               | Vite             | 6          | Build tooling                       |
-| **UI**        | Tailwind CSS     | v4         | CSS-first config via `@import`      |
-|               | shadcn/ui        | -          | 27 Radix UI components              |
-|               | Lucide React     | -          | Icons                               |
-|               | OKLCH colors     | -          | WCAG 2.1 AA compliant               |
-|               | schema-dts       | ^1.1       | JSON-LD structured data types       |
-| **Features**  | Lenis            | 1.3.16     | GPU-accelerated smooth scroll       |
-|               | Workbox          | 7.0.0      | Service worker, offline support     |
-|               | Embla Carousel   | 8.6.x      | Auto-scroll, wheel gestures         |
-|               | colorjs.io       | -          | Color manipulation                  |
-|               | Sonner           | 2.x        | Toast notifications                 |
-|               | tw-animate-css   | 1.x        | CSS animation utilities             |
-|               | react-intersection-observer | 10.x | Viewport detection / infinite scroll |
-| **Dev**       | ESLint           | 9          | TypeScript, React, a11y             |
-|               | npm              | Latest     | Package manager + scripts           |
-|               | Prettier         | 3          | Shopify config                      |
-|               | Node.js          | >= 20.19.0 | **Strict requirement**              |
+| Category      | Tech                        | Version    | Notes                                |
+| ------------- | --------------------------- | ---------- | ------------------------------------ |
+| **Framework** | React                       | 18.3.1     |                                      |
+|               | React Router                | 7.12.0     | Hydrogen preset, file-based routing  |
+|               | Shopify Hydrogen            | 2026.4.1   | Storefront + Customer Account APIs   |
+|               | Storefront API              | 2026-04    | GraphQL API version                  |
+|               | TypeScript                  | 5.9        | Strict mode, ES2022 target           |
+|               | Vite                        | 6          | Build tooling                        |
+| **UI**        | Tailwind CSS                | v4         | CSS-first config via `@import`       |
+|               | shadcn/ui                   | -          | 27 Radix UI components               |
+|               | Lucide React                | -          | Icons                                |
+|               | OKLCH colors                | -          | WCAG 2.1 AA compliant                |
+|               | schema-dts                  | ^1.1       | JSON-LD structured data types        |
+| **Features**  | Lenis                       | 1.3.16     | GPU-accelerated smooth scroll        |
+|               | Workbox                     | 7.0.0      | Service worker, offline support      |
+|               | Embla Carousel              | 8.6.x      | Auto-scroll, wheel gestures          |
+|               | colorjs.io                  | -          | Color manipulation                   |
+|               | Sonner                      | 2.x        | Toast notifications                  |
+|               | tw-animate-css              | 1.x        | CSS animation utilities              |
+|               | react-intersection-observer | 10.x       | Viewport detection / infinite scroll |
+| **Dev**       | ESLint                      | 9          | TypeScript, React, a11y              |
+|               | npm                         | Latest     | Package manager + scripts            |
+|               | Prettier                    | 3          | Shopify config                       |
+|               | Node.js                     | >= 20.19.0 | **Strict requirement**               |
 
 **GraphQL**: Dual-project (Storefront API + Customer Account API)
 **Path Alias**: `~/` → `app/`
@@ -156,17 +156,17 @@ Always use MCP tools over web search for official docs. Validate GraphQL after A
 
 ## Cart Actions Reference (`app/routes/cart.tsx`)
 
-| Action                                 | Method                          | Notes                                  |
-| -------------------------------------- | ------------------------------- | -------------------------------------- |
-| `CartForm.ACTIONS.LinesAdd`            | `cart.addLines()`               | Add line items                         |
-| `CartForm.ACTIONS.LinesUpdate`         | `cart.updateLines()`            | Update quantities / attributes         |
-| `CartForm.ACTIONS.LinesRemove`         | `cart.removeLines()`            | Remove line items                      |
-| `CartForm.ACTIONS.DiscountCodesUpdate` | `cart.updateDiscountCodes()`    | Replace all discount codes             |
-| `CartForm.ACTIONS.GiftCardCodesUpdate` | `cart.updateGiftCardCodes()`    | Replace all gift card codes            |
-| `CartForm.ACTIONS.GiftCardCodesAdd`    | `cart.addGiftCardCodes()`       | Append gift card codes (2026.1.0+)     |
-| `CartForm.ACTIONS.GiftCardCodesRemove` | `cart.removeGiftCardCodes()`    | Remove applied gift card codes         |
-| `CartForm.ACTIONS.NoteUpdate`          | `cart.updateNote()`             | Update cart note                       |
-| `CartForm.ACTIONS.BuyerIdentityUpdate` | `cart.updateBuyerIdentity()`    | Update buyer country / customer        |
+| Action                                 | Method                       | Notes                              |
+| -------------------------------------- | ---------------------------- | ---------------------------------- |
+| `CartForm.ACTIONS.LinesAdd`            | `cart.addLines()`            | Add line items                     |
+| `CartForm.ACTIONS.LinesUpdate`         | `cart.updateLines()`         | Update quantities / attributes     |
+| `CartForm.ACTIONS.LinesRemove`         | `cart.removeLines()`         | Remove line items                  |
+| `CartForm.ACTIONS.DiscountCodesUpdate` | `cart.updateDiscountCodes()` | Replace all discount codes         |
+| `CartForm.ACTIONS.GiftCardCodesUpdate` | `cart.updateGiftCardCodes()` | Replace all gift card codes        |
+| `CartForm.ACTIONS.GiftCardCodesAdd`    | `cart.addGiftCardCodes()`    | Append gift card codes (2026.1.0+) |
+| `CartForm.ACTIONS.GiftCardCodesRemove` | `cart.removeGiftCardCodes()` | Remove applied gift card codes     |
+| `CartForm.ACTIONS.NoteUpdate`          | `cart.updateNote()`          | Update cart note                   |
+| `CartForm.ACTIONS.BuyerIdentityUpdate` | `cart.updateBuyerIdentity()` | Update buyer country / customer    |
 
 ## Repository
 
@@ -417,6 +417,7 @@ Read all comments before editing. Update when changing code. Add for complex log
 **Policies Index**: `/policies` — listing page linking to all store policies (privacy, shipping, refund, terms). `routes/policies._index.tsx`. Individual policy pages remain at `/policies/:handle` via the existing `routes/policies.$handle.tsx`.
 
 **Agentic Layer**: AI-native commerce infrastructure for autonomous agent access to the storefront.
+
 - **Public MCP** (`POST /api/mcp`): Policy & FAQs search, no auth required. `routes/api.mcp.tsx` + `lib/agentic/mcp-tools/policies/`
 - **Authenticated MCP** (`POST /api/ucp/mcp`): Catalog, cart, checkout — Bearer JWT required. `routes/api.ucp.mcp.tsx` + `lib/agentic/mcp-tools/storefront/` (tools: `search_catalog`, `get_product`, `lookup_catalog`, `list_sort_options`, `search_suggest`)
 - **UCP Discovery** (`GET /.well-known/ucp`): Machine-readable capability manifest. `routes/[.]well-known.ucp.tsx`
@@ -503,6 +504,7 @@ take screenshot → tmp_screenshots/homepage-after-fix.png
 Every meaningful commit — one that adds a feature, improves the shopping experience, or fixes something users would notice — **MUST** include a corresponding entry in `app/lib/changelog-data.ts`.
 
 **Rules:**
+
 - Add the entry in the **same commit** that ships the change (never as a follow-up)
 - Place the new entry at the **top** of `CHANGELOG_ENTRIES` (newest first)
 - Write in plain English for shoppers — no SHAs, file paths, variable names, branch names, or technical jargon

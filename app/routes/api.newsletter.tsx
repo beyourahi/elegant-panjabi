@@ -120,7 +120,7 @@ function generateSecurePassword(): string {
 export async function loader() {
     return new Response("Method not allowed", {
         status: 405,
-        headers: {"Allow": "POST"}
+        headers: {Allow: "POST"}
     });
 }
 

@@ -22,14 +22,12 @@ import {getJwks} from "./jwks-cache";
  * On failure, `reason` is a short enum-style string (never free-text input)
  * suitable for observability logging and debugging.
  */
-export type AgentBearerResult =
-    | {ok: true; claims: AgentJwtClaims}
-    | {ok: false; reason: string};
+export type AgentBearerResult = {ok: true; claims: AgentJwtClaims} | {ok: false; reason: string};
 
 /** Decode a base64url-encoded segment into a raw byte array. */
 function base64urlDecode(input: string): Uint8Array {
     const base64 = input.replace(/-/g, "+").replace(/_/g, "/");
-    const padded = base64.padEnd(base64.length + (4 - base64.length % 4) % 4, "=");
+    const padded = base64.padEnd(base64.length + ((4 - (base64.length % 4)) % 4), "=");
     const binary = atob(padded);
     const bytes = new Uint8Array(binary.length);
     for (let i = 0; i < binary.length; i++) {
@@ -96,8 +94,7 @@ export async function verifyAgentBearer(
     if (opts.expectedAudience !== "") {
         const aud = payload.aud;
         const audMatch =
-            aud === opts.expectedAudience ||
-            (Array.isArray(aud) && (aud as unknown[]).includes(opts.expectedAudience));
+            aud === opts.expectedAudience || (Array.isArray(aud) && (aud as unknown[]).includes(opts.expectedAudience));
         if (!audMatch) {
             return {ok: false, reason: "audience_mismatch"};
         }
@@ -121,9 +118,7 @@ export async function verifyAgentBearer(
     }
 
     const kid = typeof header.kid === "string" ? header.kid : undefined;
-    const matchedKey = kid
-        ? jwks.keys.find(k => k.kid === kid)
-        : jwks.keys[0];
+    const matchedKey = kid ? jwks.keys.find(k => k.kid === kid) : jwks.keys[0];
 
     if (!matchedKey) {
         return {ok: false, reason: "key_not_found"};
@@ -138,13 +133,7 @@ export async function verifyAgentBearer(
 
     let cryptoKey: CryptoKey;
     try {
-        cryptoKey = await crypto.subtle.importKey(
-            "jwk",
-            matchedKey as JsonWebKey,
-            algorithm,
-            false,
-            ["verify"]
-        );
+        cryptoKey = await crypto.subtle.importKey("jwk", matchedKey as JsonWebKey, algorithm, false, ["verify"]);
     } catch (err) {
         return {ok: false, reason: `key_import_error: ${String(err)}`};
     }

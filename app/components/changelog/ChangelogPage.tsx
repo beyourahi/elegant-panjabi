@@ -14,14 +14,7 @@ import {formatAbsoluteDate, formatRelativeDayLabel} from "~/lib/date-formatters"
 import type {ChangelogCategory, ChangelogEntry as ChangelogEntryType, ChangelogLoaderData} from "~/lib/types/changelog";
 import {PageHeading} from "~/components/PageHeading";
 
-const ALL_CATEGORIES: ChangelogCategory[] = [
-    "New Feature",
-    "Improvement",
-    "Fix",
-    "Performance",
-    "Design"
-];
-
+const ALL_CATEGORIES: ChangelogCategory[] = ["New Feature", "Improvement", "Fix", "Performance", "Design"];
 
 interface DateGroup {
     date: string;
@@ -45,7 +38,6 @@ function groupEntriesByDate(entries: ChangelogEntryType[]): DateGroup[] {
 export function ChangelogPage({entries}: ChangelogLoaderData) {
     const {filteredEntries, setCategory, activeCategory, isEmpty} = useChangelogFilter(entries);
 
-
     return (
         <div className="bg-[var(--surface-canvas)] px-4 sm:px-6 lg:px-8">
             {/* ───── Hero ───── */}
@@ -60,11 +52,7 @@ export function ChangelogPage({entries}: ChangelogLoaderData) {
 
             {/* ───── Filter chips ───── */}
             <section className="pb-8 sm:pb-10">
-                <div
-                    className="flex flex-wrap justify-center gap-2"
-                    role="radiogroup"
-                    aria-label="Filter by category"
-                >
+                <div className="flex flex-wrap justify-center gap-2" role="radiogroup" aria-label="Filter by category">
                     {/* All chip */}
                     <button
                         type="button"
@@ -106,9 +94,7 @@ export function ChangelogPage({entries}: ChangelogLoaderData) {
                         <Empty className="border-[var(--border-subtle)] mt-4">
                             <EmptyHeader>
                                 <EmptyTitle>No updates found</EmptyTitle>
-                                <EmptyDescription>
-                                    Try clearing the category filter.
-                                </EmptyDescription>
+                                <EmptyDescription>Try clearing the category filter.</EmptyDescription>
                             </EmptyHeader>
                         </Empty>
                     ) : (
@@ -120,59 +106,65 @@ export function ChangelogPage({entries}: ChangelogLoaderData) {
                                 <div>
                                     {groupEntriesByDate(filteredEntries).map(group => {
                                         return (
-                                        <div key={group.date} className="mb-10 sm:mb-12 lg:flex">
-                                            {/* Mobile sticky date header — full-bleed, hidden on desktop */}
-                                            <div className="sticky top-[var(--total-header-height)] z-20 -mx-4 sm:-mx-6 bg-[var(--surface-canvas)] px-4 sm:px-6 py-2 lg:hidden">
-                                                <div className="flex items-center justify-between gap-2">
-                                                    <span className="text-xs text-[var(--text-secondary)]">
-                                                        <time dateTime={group.date}>{formatAbsoluteDate(group.date)}</time>
-                                                        {" · "}
+                                            <div key={group.date} className="mb-10 sm:mb-12 lg:flex">
+                                                {/* Mobile sticky date header — full-bleed, hidden on desktop */}
+                                                <div className="sticky top-[var(--total-header-height)] z-20 -mx-4 sm:-mx-6 bg-[var(--surface-canvas)] px-4 sm:px-6 py-2 lg:hidden">
+                                                    <div className="flex items-center justify-between gap-2">
+                                                        <span className="text-xs text-[var(--text-secondary)]">
+                                                            <time dateTime={group.date}>
+                                                                {formatAbsoluteDate(group.date)}
+                                                            </time>
+                                                            {" · "}
+                                                            {formatRelativeDayLabel(group.date)}
+                                                        </span>
+                                                        <span className="shrink-0 inline-flex items-center rounded-full border border-[var(--border-subtle)] bg-[var(--surface-raised)] px-2 py-0.5 text-[10px] font-medium text-[var(--text-subtle)] tabular-nums">
+                                                            {group.entries.length}{" "}
+                                                            {group.entries.length === 1 ? "update" : "updates"}
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                {/* Desktop date column — sticky, right-aligned, hidden on mobile */}
+                                                <div className="hidden lg:flex lg:w-44 lg:shrink-0 lg:flex-col lg:items-end lg:pr-8 lg:pt-1.5 lg:sticky lg:top-[var(--total-header-height)] lg:self-start lg:z-20">
+                                                    <time
+                                                        dateTime={group.date}
+                                                        className="text-right text-xs font-mono font-medium leading-tight text-[var(--text-primary)]"
+                                                    >
+                                                        {formatAbsoluteDate(group.date)}
+                                                    </time>
+                                                    <span className="mt-0.5 text-right text-xs text-[var(--text-subtle)]">
                                                         {formatRelativeDayLabel(group.date)}
                                                     </span>
-                                                    <span className="shrink-0 inline-flex items-center rounded-full border border-[var(--border-subtle)] bg-[var(--surface-raised)] px-2 py-0.5 text-[10px] font-medium text-[var(--text-subtle)] tabular-nums">
-                                                        {group.entries.length} {group.entries.length === 1 ? "update" : "updates"}
+                                                    <span className="mt-2 inline-flex items-center rounded-full border border-[var(--border-subtle)] bg-[var(--surface-raised)] px-2 py-0.5 text-[10px] font-medium text-[var(--text-subtle)] tabular-nums">
+                                                        {group.entries.length}{" "}
+                                                        {group.entries.length === 1 ? "update" : "updates"}
                                                     </span>
                                                 </div>
-                                            </div>
 
-                                            {/* Desktop date column — sticky, right-aligned, hidden on mobile */}
-                                            <div className="hidden lg:flex lg:w-44 lg:shrink-0 lg:flex-col lg:items-end lg:pr-8 lg:pt-1.5 lg:sticky lg:top-[var(--total-header-height)] lg:self-start lg:z-20">
-                                                <time dateTime={group.date} className="text-right text-xs font-mono font-medium leading-tight text-[var(--text-primary)]">
-                                                    {formatAbsoluteDate(group.date)}
-                                                </time>
-                                                <span className="mt-0.5 text-right text-xs text-[var(--text-subtle)]">
-                                                    {formatRelativeDayLabel(group.date)}
-                                                </span>
-                                                <span className="mt-2 inline-flex items-center rounded-full border border-[var(--border-subtle)] bg-[var(--surface-raised)] px-2 py-0.5 text-[10px] font-medium text-[var(--text-subtle)] tabular-nums">
-                                                    {group.entries.length} {group.entries.length === 1 ? "update" : "updates"}
-                                                </span>
-                                            </div>
-
-                                            {/* Vertical rail + dot + entries */}
-                                            <div className="relative flex-1 lg:border-l-2 lg:border-[var(--border-subtle)] lg:pl-8">
-                                                {/* Timeline dot — one per group, only on desktop */}
-                                                <div
-                                                    className="hidden lg:block absolute -left-[7px] top-4 h-3 w-3 rounded-full bg-[var(--brand-primary)] ring-4 ring-[var(--surface-canvas)]"
-                                                    aria-hidden="true"
-                                                />
-                                                <div className="space-y-5 lg:space-y-6">
-                                                    {group.entries.map(entry => (
-                                                        <ChangelogEntryCard
-                                                            key={`${entry.date}-${entry.headline}`}
-                                                            entry={entry}
-                                                            index={globalStaggerIndex++}
-                                                        />
-                                                    ))}
+                                                {/* Vertical rail + dot + entries */}
+                                                <div className="relative flex-1 lg:border-l-2 lg:border-[var(--border-subtle)] lg:pl-8">
+                                                    {/* Timeline dot — one per group, only on desktop */}
+                                                    <div
+                                                        className="hidden lg:block absolute -left-[7px] top-4 h-3 w-3 rounded-full bg-[var(--brand-primary)] ring-4 ring-[var(--surface-canvas)]"
+                                                        aria-hidden="true"
+                                                    />
+                                                    <div className="space-y-5 lg:space-y-6">
+                                                        {group.entries.map(entry => (
+                                                            <ChangelogEntryCard
+                                                                key={`${entry.date}-${entry.headline}`}
+                                                                entry={entry}
+                                                                index={globalStaggerIndex++}
+                                                            />
+                                                        ))}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
                                         );
                                     })}
                                 </div>
                             );
                         })()
                     )}
-
                 </div>
             </section>
         </div>

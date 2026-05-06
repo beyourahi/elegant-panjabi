@@ -51,7 +51,12 @@ import {AnimatedSection} from "~/components/AnimatedSection";
 import {GalleryGrid} from "~/components/gallery/GalleryGrid";
 import {transformToGalleryImages} from "~/lib/gallery";
 import type {GalleryImageData, GalleryPageInfo} from "~/lib/gallery";
-import {buildCanonicalUrl, getBrandNameFromMatches, getSiteUrlFromMatches, generateBreadcrumbListSchema} from "~/lib/seo";
+import {
+    buildCanonicalUrl,
+    getBrandNameFromMatches,
+    getSiteUrlFromMatches,
+    generateBreadcrumbListSchema
+} from "~/lib/seo";
 import {useSiteSettings} from "~/lib/site-content-context";
 import {PageHeading} from "~/components/PageHeading";
 
@@ -68,10 +73,13 @@ export const meta: Route.MetaFunction = ({matches}) => {
         rootData?.siteContent?.siteSettings?.galleryPageDescription ||
         "A curated visual journey through our handcrafted pieces.";
 
-    const breadcrumbSchema = generateBreadcrumbListSchema([
-        {name: "Home", url: "/"},
-        {name: "Gallery", url: "/gallery"}
-    ], siteUrl);
+    const breadcrumbSchema = generateBreadcrumbListSchema(
+        [
+            {name: "Home", url: "/"},
+            {name: "Gallery", url: "/gallery"}
+        ],
+        siteUrl
+    );
 
     return [
         ...(getSeoMeta({
@@ -129,7 +137,11 @@ export default function Gallery() {
                  pt-(--page-breathing-room): Breathing room from fixed header (24px → 64px) */}
             <AnimatedSection animation="fade" threshold={0.08}>
                 <header className="pt-(--page-breathing-room) mb-6 md:mb-10 lg:mb-12">
-                    <PageHeading title={galleryPageHeading} description={galleryPageDescription} descriptionClassName="mx-0" />
+                    <PageHeading
+                        title={galleryPageHeading}
+                        description={galleryPageDescription}
+                        descriptionClassName="mx-0"
+                    />
                 </header>
             </AnimatedSection>
 

@@ -86,9 +86,7 @@ export async function action({request, context}: Route.ActionArgs) {
         }
 
         const GID_PATTERN = /^gid:\/\/shopify\/Product\/\d+$/;
-        const validIds = ids.filter(
-            (id): id is string => typeof id === "string" && GID_PATTERN.test(id)
-        );
+        const validIds = ids.filter((id): id is string => typeof id === "string" && GID_PATTERN.test(id));
 
         if (validIds.length === 0) {
             return Response.json({products: [], error: null});

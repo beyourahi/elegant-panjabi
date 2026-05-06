@@ -47,7 +47,13 @@ import {redirectIfHandleIsLocalized} from "~/lib/redirect";
 import {ArticleCard, type ArticleCardData} from "~/components/blog/ArticleCard";
 import {ArticleHero} from "~/components/blog/ArticleHero";
 import {TagList} from "~/components/blog/TagBadge";
-import {buildCanonicalUrl, truncateDescription, getBrandNameFromMatches, getSiteUrlFromMatches, generateBreadcrumbListSchema} from "~/lib/seo";
+import {
+    buildCanonicalUrl,
+    truncateDescription,
+    getBrandNameFromMatches,
+    getSiteUrlFromMatches,
+    generateBreadcrumbListSchema
+} from "~/lib/seo";
 import {PageHeading} from "~/components/PageHeading";
 
 export const meta: Route.MetaFunction = ({data, matches}) => {
@@ -61,11 +67,14 @@ export const meta: Route.MetaFunction = ({data, matches}) => {
     const title = blog.seo?.title || `${blog.title} | Blog`;
     const description = blog.seo?.description || truncateDescription(`Explore articles from ${blog.title}.`);
 
-    const breadcrumbSchema = generateBreadcrumbListSchema([
-        {name: "Home", url: "/"},
-        {name: "Blog", url: "/blogs"},
-        {name: blog.title, url: `/blogs/${blog.handle}`}
-    ], siteUrl);
+    const breadcrumbSchema = generateBreadcrumbListSchema(
+        [
+            {name: "Home", url: "/"},
+            {name: "Blog", url: "/blogs"},
+            {name: blog.title, url: `/blogs/${blog.handle}`}
+        ],
+        siteUrl
+    );
 
     return [
         ...(getSeoMeta({

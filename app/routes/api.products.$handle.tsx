@@ -83,9 +83,7 @@ export const loader = async ({request, params, context}: Route.LoaderArgs) => {
  * is empty so at least one image is always present.
  */
 function normalizeQuickAddProduct(product: any): ShopifyProduct {
-    const imageNodes = Array.isArray(product?.images?.nodes)
-        ? product.images.nodes.filter(Boolean)
-        : [];
+    const imageNodes = Array.isArray(product?.images?.nodes) ? product.images.nodes.filter(Boolean) : [];
 
     if (imageNodes.length === 0 && product?.featuredImage?.url) {
         imageNodes.push(product.featuredImage);
@@ -146,7 +144,8 @@ function normalizeQuickAddProduct(product: any): ShopifyProduct {
                                         id: String(variant.image.id ?? ""),
                                         url: String(variant.image.url),
                                         altText: variant.image.altText ?? null,
-                                        width: typeof variant.image.width === "number" ? variant.image.width : undefined,
+                                        width:
+                                            typeof variant.image.width === "number" ? variant.image.width : undefined,
                                         height:
                                             typeof variant.image.height === "number" ? variant.image.height : undefined
                                     }
@@ -172,7 +171,9 @@ function normalizeQuickAddProduct(product: any): ShopifyProduct {
                 currencyCode: String(product?.priceRange?.minVariantPrice?.currencyCode ?? "USD")
             },
             maxVariantPrice: {
-                amount: String(product?.priceRange?.maxVariantPrice?.amount ?? product?.priceRange?.minVariantPrice?.amount ?? "0"),
+                amount: String(
+                    product?.priceRange?.maxVariantPrice?.amount ?? product?.priceRange?.minVariantPrice?.amount ?? "0"
+                ),
                 currencyCode: String(
                     product?.priceRange?.maxVariantPrice?.currencyCode ??
                         product?.priceRange?.minVariantPrice?.currencyCode ??

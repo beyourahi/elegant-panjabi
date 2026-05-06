@@ -1151,8 +1151,13 @@ body {
         @apply border-border;
     }
     /* Focus-visible-only strategy — WCAG 2.4.7 */
-    :focus { outline: none; }
-    :focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+    :focus {
+        outline: none;
+    }
+    :focus-visible {
+        outline: 2px solid var(--focus-ring);
+        outline-offset: 2px;
+    }
     body {
         @apply bg-background text-foreground;
     }
@@ -1185,7 +1190,8 @@ body {
     }
 
     .motion-interactive-strong {
-        transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, flex-grow;
+        transition-property:
+            background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, flex-grow;
         transition-duration: var(--motion-duration-slow);
         transition-timing-function: var(--motion-ease-emphasized);
     }

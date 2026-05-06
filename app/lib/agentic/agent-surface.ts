@@ -44,9 +44,7 @@ export function deriveAgentSurface(opts: {
     if (hasAgentSession) {
         const profileShape = agentProfile
             ? {
-                  fields: Object.keys(agentProfile).filter(
-                      k => agentProfile[k as keyof AgentProfile] !== undefined
-                  ),
+                  fields: Object.keys(agentProfile).filter(k => agentProfile[k as keyof AgentProfile] !== undefined),
                   capabilities: agentProfile.capabilities
               }
             : undefined;

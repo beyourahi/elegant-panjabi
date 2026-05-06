@@ -124,7 +124,10 @@ export const meta: Route.MetaFunction = ({data, matches}) => {
         isGiftCard: product.isGiftCard,
         collections: product.collections?.nodes?.map((c: any) => ({handle: c.handle, title: c.title})),
         requiresShipping: variant?.requiresShipping,
-        sellingPlans: variant?.sellingPlanAllocations?.nodes?.map((a: any) => ({name: a.sellingPlan?.name ?? "Subscription", recurringDeliveries: a.sellingPlan?.recurringDeliveries ?? false}))
+        sellingPlans: variant?.sellingPlanAllocations?.nodes?.map((a: any) => ({
+            name: a.sellingPlan?.name ?? "Subscription",
+            recurringDeliveries: a.sellingPlan?.recurringDeliveries ?? false
+        }))
     };
 
     // Normalized attributes for 6th arg
@@ -140,7 +143,9 @@ export const meta: Route.MetaFunction = ({data, matches}) => {
     const sceMeta = getCatalogExtensionMeta({
         isGiftCard: product.isGiftCard,
         requiresShipping: variant?.requiresShipping,
-        sellingPlans: variant?.sellingPlanAllocations?.nodes?.map((a: any) => ({name: a.sellingPlan?.name ?? "Subscription"})),
+        sellingPlans: variant?.sellingPlanAllocations?.nodes?.map((a: any) => ({
+            name: a.sellingPlan?.name ?? "Subscription"
+        })),
         collections: product.collections?.nodes?.map((c: any) => ({handle: c.handle, title: c.title})),
         quantityAvailable: variant?.quantityAvailable,
         currentlyNotInStock: variant?.currentlyNotInStock
@@ -267,12 +272,10 @@ function loadDeferredData({context}: Route.LoaderArgs, productId: string) {
         .catch(() => [] as ReviewNode[]);
 
     const sidebarData = withTimeoutAndFallback(
-        dataAdapter
-            .query(SIDEBAR_COLLECTIONS_QUERY, {cache: dataAdapter.CacheLong()})
-            .catch((error: unknown) => {
-                console.error("Failed to load sidebar collections:", error);
-                return null;
-            }),
+        dataAdapter.query(SIDEBAR_COLLECTIONS_QUERY, {cache: dataAdapter.CacheLong()}).catch((error: unknown) => {
+            console.error("Failed to load sidebar collections:", error);
+            return null;
+        }),
         null,
         TIMEOUT_DEFAULTS.API
     );
@@ -295,14 +298,8 @@ const SidebarSkeleton = () => (
 );
 
 export default function Product() {
-    const {
-        product,
-        recommendations,
-        reviews,
-        sidebarData,
-        activeCollectionHandle,
-        selectedSellingPlan
-    } = useLoaderData<typeof loader>();
+    const {product, recommendations, reviews, sidebarData, activeCollectionHandle, selectedSellingPlan} =
+        useLoaderData<typeof loader>();
     const {addProduct} = useRecentlyViewed();
 
     // Track scroll state for sticky sidebar positioning
@@ -363,11 +360,7 @@ export default function Product() {
     // Agent path: spec-first dense view — no image gallery, no carousels.
     if (agentSurface.isAgent) {
         return (
-            <AgentProductBrief
-                product={product}
-                selectedVariant={selectedVariant}
-                productOptions={productOptions}
-            />
+            <AgentProductBrief product={product} selectedVariant={selectedVariant} productOptions={productOptions} />
         );
     }
 
@@ -402,7 +395,11 @@ export default function Product() {
                                 aria-label="Out of stock"
                             >
                                 <span className="flex items-center justify-center rounded-[var(--radius)] bg-destructive/80 p-1">
-                                    <Ban size={12} className="pointer-events-none text-destructive-foreground" aria-hidden="true" />
+                                    <Ban
+                                        size={12}
+                                        className="pointer-events-none text-destructive-foreground"
+                                        aria-hidden="true"
+                                    />
                                 </span>
                                 <span className="text-[12px] sm:text-sm font-medium uppercase tracking-wide text-destructive-foreground">
                                     {OUT_OF_STOCK_LABEL}
@@ -418,7 +415,10 @@ export default function Product() {
                     <CatalogExtensionDisplay
                         isGiftCard={product.isGiftCard}
                         requiresShipping={selectedVariant?.requiresShipping}
-                        sellingPlans={selectedVariant?.sellingPlanAllocations?.nodes?.map((a: any) => ({name: a.sellingPlan?.name ?? "Subscription", recurringDeliveries: a.sellingPlan?.recurringDeliveries ?? false}))}
+                        sellingPlans={selectedVariant?.sellingPlanAllocations?.nodes?.map((a: any) => ({
+                            name: a.sellingPlan?.name ?? "Subscription",
+                            recurringDeliveries: a.sellingPlan?.recurringDeliveries ?? false
+                        }))}
                         collections={product.collections?.nodes?.map((c: any) => ({handle: c.handle, title: c.title}))}
                         className="pt-3"
                     />
@@ -440,9 +440,7 @@ export default function Product() {
                                 variant="primary-outline"
                             />
                         }
-                        shareButton={
-                            <ProductShareButton product={product} selectedVariant={selectedVariant} />
-                        }
+                        shareButton={<ProductShareButton product={product} selectedVariant={selectedVariant} />}
                     />
                 </div>
             </div>
@@ -532,64 +530,74 @@ export default function Product() {
                                     )}
                                     style={{animationDelay: "100ms"}}
                                 >
-                                {/* Product Tag Badges - desktop only, hidden on mobile */}
-                                {badgeTypes.length > 0 && (
-                                    <div className="hidden items-center gap-2 lg:flex">
-                                        <ProductBadgeStack types={badgeTypes} />
-                                    </div>
-                                )}
-                                {/* Product Tags + Title + Discount Badge
+                                    {/* Product Tag Badges - desktop only, hidden on mobile */}
+                                    {badgeTypes.length > 0 && (
+                                        <div className="hidden items-center gap-2 lg:flex">
+                                            <ProductBadgeStack types={badgeTypes} />
+                                        </div>
+                                    )}
+                                    {/* Product Tags + Title + Discount Badge
                                          Tags render directly above the title for consistent visual
                                          hierarchy across the PDP, QuickAddSheet, and QuickAddDialog.
                                          Title scales progressively: 30px → 36px → 44px → 48px. */}
-                                <div className="space-y-3 mb-12 lg:mb-16 xl:mb-20 2xl:mb-24">
-                                    <ProductTagList tags={product.tags} />
-                                    <ProductTitle title={title} variant="pdp" />
-                                    <div className="flex flex-wrap items-center gap-2">
-                                        <ProductDiscountBadge selectedVariant={selectedVariant} product={product} />
-                                        {!selectedVariant?.availableForSale && (
-                                            <span
-                                                className="inline-flex items-center gap-1.5 rounded-[var(--radius)] bg-destructive px-0.5 pr-1 py-0.5 shadow-md"
-                                                role="status"
-                                                aria-label="Out of stock"
-                                            >
-                                                <span className="flex items-center justify-center rounded-[var(--radius)] bg-destructive/80 p-1">
-                                                    <Ban size={12} className="pointer-events-none text-destructive-foreground" aria-hidden="true" />
+                                    <div className="space-y-3 mb-12 lg:mb-16 xl:mb-20 2xl:mb-24">
+                                        <ProductTagList tags={product.tags} />
+                                        <ProductTitle title={title} variant="pdp" />
+                                        <div className="flex flex-wrap items-center gap-2">
+                                            <ProductDiscountBadge selectedVariant={selectedVariant} product={product} />
+                                            {!selectedVariant?.availableForSale && (
+                                                <span
+                                                    className="inline-flex items-center gap-1.5 rounded-[var(--radius)] bg-destructive px-0.5 pr-1 py-0.5 shadow-md"
+                                                    role="status"
+                                                    aria-label="Out of stock"
+                                                >
+                                                    <span className="flex items-center justify-center rounded-[var(--radius)] bg-destructive/80 p-1">
+                                                        <Ban
+                                                            size={12}
+                                                            className="pointer-events-none text-destructive-foreground"
+                                                            aria-hidden="true"
+                                                        />
+                                                    </span>
+                                                    <span className="text-[12px] sm:text-sm font-medium uppercase tracking-wide text-destructive-foreground">
+                                                        {OUT_OF_STOCK_LABEL}
+                                                    </span>
                                                 </span>
-                                                <span className="text-[12px] sm:text-sm font-medium uppercase tracking-wide text-destructive-foreground">
-                                                    {OUT_OF_STOCK_LABEL}
-                                                </span>
-                                            </span>
-                                        )}
+                                            )}
+                                        </div>
                                     </div>
-                                </div>
-                                <ProductForm
-                                    product={product}
-                                    productOptions={productOptions}
-                                    selectedVariant={selectedVariant}
-                                    sellingPlanGroups={product.sellingPlanGroups}
-                                    selectedSellingPlan={selectedSellingPlan}
-                                    tags={product.tags}
-                                    wishlistButton={
-                                        <WishlistButton
-                                            productId={product.id}
-                                            productTitle={product.title}
-                                            variant="primary-outline"
-                                        />
-                                    }
-                                    shareButton={
-                                        <ProductShareButton product={product} selectedVariant={selectedVariant} />
-                                    }
-                                />
-                                {/* Product Description - Comprehensive prose typography for desktop */}
-                                <ProductDescription html={descriptionHtml} size="base" className="pt-12" />
-                                <CatalogExtensionDisplay
-                                    isGiftCard={product.isGiftCard}
-                                    requiresShipping={selectedVariant?.requiresShipping}
-                                    sellingPlans={selectedVariant?.sellingPlanAllocations?.nodes?.map((a: any) => ({name: a.sellingPlan?.name ?? "Subscription", recurringDeliveries: a.sellingPlan?.recurringDeliveries ?? false}))}
-                                    collections={product.collections?.nodes?.map((c: any) => ({handle: c.handle, title: c.title}))}
-                                    className="pt-4"
-                                />
+                                    <ProductForm
+                                        product={product}
+                                        productOptions={productOptions}
+                                        selectedVariant={selectedVariant}
+                                        sellingPlanGroups={product.sellingPlanGroups}
+                                        selectedSellingPlan={selectedSellingPlan}
+                                        tags={product.tags}
+                                        wishlistButton={
+                                            <WishlistButton
+                                                productId={product.id}
+                                                productTitle={product.title}
+                                                variant="primary-outline"
+                                            />
+                                        }
+                                        shareButton={
+                                            <ProductShareButton product={product} selectedVariant={selectedVariant} />
+                                        }
+                                    />
+                                    {/* Product Description - Comprehensive prose typography for desktop */}
+                                    <ProductDescription html={descriptionHtml} size="base" className="pt-12" />
+                                    <CatalogExtensionDisplay
+                                        isGiftCard={product.isGiftCard}
+                                        requiresShipping={selectedVariant?.requiresShipping}
+                                        sellingPlans={selectedVariant?.sellingPlanAllocations?.nodes?.map((a: any) => ({
+                                            name: a.sellingPlan?.name ?? "Subscription",
+                                            recurringDeliveries: a.sellingPlan?.recurringDeliveries ?? false
+                                        }))}
+                                        collections={product.collections?.nodes?.map((c: any) => ({
+                                            handle: c.handle,
+                                            title: c.title
+                                        }))}
+                                        className="pt-4"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -598,9 +606,7 @@ export default function Product() {
             </div>
 
             <Suspense fallback={null}>
-                <Await resolve={reviews}>
-                    {resolvedReviews => <ProductReviews reviews={resolvedReviews ?? []} />}
-                </Await>
+                <Await resolve={reviews}>{resolvedReviews => <ProductReviews reviews={resolvedReviews ?? []} />}</Await>
             </Suspense>
 
             <RelatedProducts products={recommendations} />
@@ -903,8 +909,6 @@ const PRODUCT_QUERY = `#graphql
   }
   ${PRODUCT_FRAGMENT}
 ` as const;
-
-
 
 // Fragment for recommended products
 const RECOMMENDED_PRODUCT_FRAGMENT = `#graphql

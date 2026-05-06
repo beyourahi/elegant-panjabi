@@ -49,7 +49,14 @@ import type {Route} from "./+types/policies.$handle";
 import {getSeoMeta} from "@shopify/hydrogen";
 import {type Shop} from "@shopify/hydrogen/storefront-api-types";
 import {AnimatedSection} from "~/components/AnimatedSection";
-import {buildCanonicalUrl, getBrandNameFromMatches, getSiteUrlFromMatches, generateBreadcrumbListSchema, generateWebPageSchema, generateFAQPageSchema} from "~/lib/seo";
+import {
+    buildCanonicalUrl,
+    getBrandNameFromMatches,
+    getSiteUrlFromMatches,
+    generateBreadcrumbListSchema,
+    generateWebPageSchema,
+    generateFAQPageSchema
+} from "~/lib/seo";
 import {useSiteSettings} from "~/lib/site-content-context";
 import {PageHeading} from "~/components/PageHeading";
 
@@ -92,25 +99,35 @@ export const meta: Route.MetaFunction = ({data, matches}) => {
     const description = getPolicyDescription(policy.handle, brandName);
     const policyUrl = buildCanonicalUrl(`/policies/${policy.handle}`, siteUrl);
 
-    const breadcrumbSchema = generateBreadcrumbListSchema([
-        {name: "Home", url: "/"},
-        {name: "Policies", url: "/policies"},
-        {name: policy.title, url: `/policies/${policy.handle}`}
-    ], siteUrl);
+    const breadcrumbSchema = generateBreadcrumbListSchema(
+        [
+            {name: "Home", url: "/"},
+            {name: "Policies", url: "/policies"},
+            {name: policy.title, url: `/policies/${policy.handle}`}
+        ],
+        siteUrl
+    );
 
     const webPageSchema = generateWebPageSchema(policy.title, policyUrl);
 
     // FAQPage schema from policyExtension entries in site_settings
     const rootData = (
         matches.find(m => m?.id === "root") as
-            | {data?: {siteContent?: {siteSettings?: {policyExtension?: Array<{key: string; value: string; context?: string}>}}}}
+            | {
+                  data?: {
+                      siteContent?: {
+                          siteSettings?: {policyExtension?: Array<{key: string; value: string; context?: string}>};
+                      };
+                  };
+              }
             | undefined
     )?.data;
     const policyExtensions = rootData?.siteContent?.siteSettings?.policyExtension ?? [];
     const matchingExtensions = policyExtensions.filter(ext => !ext.context || ext.context === policy.handle);
-    const faqSchema = matchingExtensions.length > 0
-        ? generateFAQPageSchema(matchingExtensions.map(ext => ({question: ext.key, answer: ext.value})))
-        : undefined;
+    const faqSchema =
+        matchingExtensions.length > 0
+            ? generateFAQPageSchema(matchingExtensions.map(ext => ({question: ext.key, answer: ext.value})))
+            : undefined;
 
     return [
         ...(getSeoMeta({
@@ -170,7 +187,13 @@ export default function Policy() {
                                 <div className="lg:sticky lg:top-24 lg:self-start">
                                     <PageHeading
                                         variant="dark"
-                                        title={<>{policy.title.split(" ").slice(0, -1).join(" ")}<br />{policy.title.split(" ").slice(-1)[0]}</>}
+                                        title={
+                                            <>
+                                                {policy.title.split(" ").slice(0, -1).join(" ")}
+                                                <br />
+                                                {policy.title.split(" ").slice(-1)[0]}
+                                            </>
+                                        }
                                     />
                                     <p className="mt-4 sm:mt-6 text-base sm:text-lg text-primary-foreground/70 leading-relaxed max-w-sm">
                                         {getPolicyDescription(policy.handle, brandName) ||
@@ -203,7 +226,9 @@ export default function Policy() {
                                     {/* Quick Answers: policyExtension Q&A entries for this policy */}
                                     {quickAnswers.length > 0 && (
                                         <div className="mb-8 sm:mb-10">
-                                            <p className="text-xs uppercase tracking-widest text-primary-foreground/40 mb-3">Quick Answers</p>
+                                            <p className="text-xs uppercase tracking-widest text-primary-foreground/40 mb-3">
+                                                Quick Answers
+                                            </p>
                                             <div className="border-t border-primary-foreground/20">
                                                 {quickAnswers.map(qa => (
                                                     <details
@@ -211,11 +236,17 @@ export default function Policy() {
                                                         className="group border-b border-primary-foreground/10"
                                                     >
                                                         <summary className="flex cursor-pointer items-start gap-3 py-3 text-sm text-primary-foreground/80 hover:text-primary-foreground [&::-webkit-details-marker]:hidden list-none">
-                                                            <span className="text-primary-foreground/40 group-open:hidden shrink-0 mt-0.5 select-none">+</span>
-                                                            <span className="text-primary-foreground/40 hidden group-open:inline shrink-0 mt-0.5 select-none">−</span>
+                                                            <span className="text-primary-foreground/40 group-open:hidden shrink-0 mt-0.5 select-none">
+                                                                +
+                                                            </span>
+                                                            <span className="text-primary-foreground/40 hidden group-open:inline shrink-0 mt-0.5 select-none">
+                                                                −
+                                                            </span>
                                                             <span>{qa.key}</span>
                                                         </summary>
-                                                        <p className="pb-3 pl-6 text-sm text-primary-foreground/60 leading-relaxed">{qa.value}</p>
+                                                        <p className="pb-3 pl-6 text-sm text-primary-foreground/60 leading-relaxed">
+                                                            {qa.value}
+                                                        </p>
                                                     </details>
                                                 ))}
                                             </div>
@@ -231,7 +262,6 @@ export default function Policy() {
                     </div>
                 </section>
             </AnimatedSection>
-
         </div>
     );
 }

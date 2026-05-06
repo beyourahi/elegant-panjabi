@@ -27,7 +27,13 @@
 import {Link, useLoaderData} from "react-router";
 import type {Route} from "./+types/policies._index";
 import {getSeoMeta} from "@shopify/hydrogen";
-import {generateBreadcrumbListSchema, getBrandNameFromMatches, getRequiredSocialMeta, buildCanonicalUrl, getSiteUrlFromMatches} from "~/lib/seo";
+import {
+    generateBreadcrumbListSchema,
+    getBrandNameFromMatches,
+    getRequiredSocialMeta,
+    buildCanonicalUrl,
+    getSiteUrlFromMatches
+} from "~/lib/seo";
 import {generateFAQPageSchema} from "~/lib/agentic/structured-data";
 import {AnimatedSection} from "~/components/AnimatedSection";
 import {PageHeading} from "~/components/PageHeading";
@@ -43,17 +49,21 @@ const POLICY_ITEMS = [
 export const meta: Route.MetaFunction = ({matches}) => {
     const brandName = getBrandNameFromMatches(matches);
     const siteUrl = getSiteUrlFromMatches(matches);
-    const breadcrumbSchema = generateBreadcrumbListSchema([
-        {name: "Home", url: "/"},
-        {name: "Policies", url: "/policies"}
-    ], siteUrl);
+    const breadcrumbSchema = generateBreadcrumbListSchema(
+        [
+            {name: "Home", url: "/"},
+            {name: "Policies", url: "/policies"}
+        ],
+        siteUrl
+    );
 
     const rootData = (matches.find(m => m?.id === "root") as any)?.data;
     const policyExtensions: Array<{key: string; value: string}> =
         rootData?.siteContent?.siteSettings?.policyExtension ?? [];
-    const faqSchema = policyExtensions.length > 0
-        ? generateFAQPageSchema(policyExtensions.map(ext => ({question: ext.key, answer: ext.value})))
-        : null;
+    const faqSchema =
+        policyExtensions.length > 0
+            ? generateFAQPageSchema(policyExtensions.map(ext => ({question: ext.key, answer: ext.value})))
+            : null;
 
     return [
         ...(getSeoMeta({
@@ -78,7 +88,11 @@ export async function loader({context}: Route.LoaderArgs) {
 
     for (const item of POLICY_ITEMS) {
         try {
-            const policyKey = item.handle.replace(/-([a-z])/g, (_: string, m: string) => m.toUpperCase()) as "privacyPolicy" | "shippingPolicy" | "refundPolicy" | "termsOfService";
+            const policyKey = item.handle.replace(/-([a-z])/g, (_: string, m: string) => m.toUpperCase()) as
+                | "privacyPolicy"
+                | "shippingPolicy"
+                | "refundPolicy"
+                | "termsOfService";
             const data = await context.dataAdapter.query(POLICY_CONTENT_QUERY, {
                 variables: {
                     privacyPolicy: false,
@@ -89,7 +103,7 @@ export async function loader({context}: Route.LoaderArgs) {
                 },
                 cache: context.dataAdapter.CacheLong()
             });
-            const exists = !!(data?.shop?.[policyKey]);
+            const exists = !!data?.shop?.[policyKey];
             policies.push({...item, exists});
         } catch {
             policies.push({...item, exists: false});
@@ -120,21 +134,21 @@ export default function PoliciesIndex() {
                 <section className="pb-16 sm:pb-24 lg:pb-32">
                     <div className="px-4 sm:px-6 lg:px-8 max-w-2xl">
                         <div className="flex flex-col gap-3">
-                            {policies.filter(p => p.exists).map((policy) => (
-                                <Link
-                                    key={policy.handle}
-                                    to={`/policies/${policy.handle}`}
-                                    prefetch="viewport"
-                                    className="group flex flex-col gap-1 rounded-xl border border-primary-foreground/20 p-6 transition-colors hover:border-primary-foreground/40 hover:bg-primary-foreground/5"
-                                >
-                                    <span className="font-serif text-lg font-semibold text-primary-foreground group-hover:text-primary-foreground transition-colors">
-                                        {policy.label}
-                                    </span>
-                                    <span className="text-sm text-primary-foreground/60">
-                                        {policy.description}
-                                    </span>
-                                </Link>
-                            ))}
+                            {policies
+                                .filter(p => p.exists)
+                                .map(policy => (
+                                    <Link
+                                        key={policy.handle}
+                                        to={`/policies/${policy.handle}`}
+                                        prefetch="viewport"
+                                        className="group flex flex-col gap-1 rounded-xl border border-primary-foreground/20 p-6 transition-colors hover:border-primary-foreground/40 hover:bg-primary-foreground/5"
+                                    >
+                                        <span className="font-serif text-lg font-semibold text-primary-foreground group-hover:text-primary-foreground transition-colors">
+                                            {policy.label}
+                                        </span>
+                                        <span className="text-sm text-primary-foreground/60">{policy.description}</span>
+                                    </Link>
+                                ))}
                             <Link
                                 to="/faq"
                                 prefetch="viewport"

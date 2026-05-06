@@ -99,7 +99,10 @@ export function InstagramSection({media}: InstagramSectionProps) {
                     loop: true,
                     dragFree: true
                 }}
-                plugins={[AutoScroll({speed: 1, stopOnInteraction: false, stopOnMouseEnter: true}), WheelGesturesPlugin({forceWheelAxis: "x"})]}
+                plugins={[
+                    AutoScroll({speed: 1, stopOnInteraction: false, stopOnMouseEnter: true}),
+                    WheelGesturesPlugin({forceWheelAxis: "x"})
+                ]}
                 className="w-full"
             >
                 <CarouselContent className="ml-0">
@@ -108,7 +111,12 @@ export function InstagramSection({media}: InstagramSectionProps) {
                             key={item.id}
                             className="pl-0 basis-[80%] sm:basis-[45%] lg:basis-[32%] xl:basis-[27%] 2xl:basis-[22%]"
                         >
-                            <InstagramMediaCard media={item} index={index} instagramUrl={instagramUrl} hasRealProfile={hasRealProfile} />
+                            <InstagramMediaCard
+                                media={item}
+                                index={index}
+                                instagramUrl={instagramUrl}
+                                hasRealProfile={hasRealProfile}
+                            />
                         </CarouselItem>
                     ))}
                 </CarouselContent>
@@ -186,11 +194,7 @@ function InstagramMediaCard({
     );
 
     if (!hasRealProfile) {
-        return (
-            <div className="group relative block aspect-square overflow-hidden">
-                {mediaContent}
-            </div>
-        );
+        return <div className="group relative block aspect-square overflow-hidden">{mediaContent}</div>;
     }
 
     return (

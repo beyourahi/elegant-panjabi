@@ -136,7 +136,12 @@ function normaliseMediaItem(raw: ProductMediaItem): ProductMediaItem {
  * Gallery and lightbox both use the same `galleryMedia` array so indices always align.
  * Falls back to converting the `images` array when no `media` prop is supplied.
  */
-export function ProductImageGallery({images, selectedVariantImage, media, isAvailableForSale = true}: ProductImageGalleryProps) {
+export function ProductImageGallery({
+    images,
+    selectedVariantImage,
+    media,
+    isAvailableForSale = true
+}: ProductImageGalleryProps) {
     const {canHover} = usePointerCapabilities();
 
     // =============================================================================
@@ -252,7 +257,11 @@ export function ProductImageGallery({images, selectedVariantImage, media, isAvai
 
     // L-09: Clicking an image opens the lightbox rather than navigating.
     // This is intentional luxury e-commerce UX: large hero images → fullscreen detail.
-    const renderImageItem = (item: ProductMediaItem & {__typename: "MediaImage"}, index: number, forCarousel = false) => {
+    const renderImageItem = (
+        item: ProductMediaItem & {__typename: "MediaImage"},
+        index: number,
+        forCarousel = false
+    ) => {
         const isLoaded = loadedImages.has(item.id);
         const imageId = item.image?.id ?? item.id;
 
@@ -312,10 +321,7 @@ export function ProductImageGallery({images, selectedVariantImage, media, isAvai
         const source = item.sources.find(s => s.mimeType === "video/mp4") ?? item.sources[0];
 
         return (
-            <div
-                key={item.id}
-                className="relative w-full overflow-hidden rounded-lg group"
-            >
+            <div key={item.id} className="relative w-full overflow-hidden rounded-lg group">
                 {/*
                  * Natural video dimensions — no fixed aspect ratio wrapper.
                  * `w-full h-auto` lets the video element render at whatever aspect ratio
@@ -395,7 +401,10 @@ export function ProductImageGallery({images, selectedVariantImage, media, isAvai
                         <Image
                             src={item.previewImage.url}
                             alt={item.alt || `Video thumbnail ${index + 1}`}
-                            className={cn("w-full h-full object-cover sleek", isAvailableForSale ? "group-hover:scale-105" : "grayscale opacity-60")}
+                            className={cn(
+                                "w-full h-full object-cover sleek",
+                                isAvailableForSale ? "group-hover:scale-105" : "grayscale opacity-60"
+                            )}
                             loading={index === 0 ? "eager" : "lazy"}
                             width={800}
                             height={800}
@@ -405,9 +414,20 @@ export function ProductImageGallery({images, selectedVariantImage, media, isAvai
                     )}
 
                     {/* Centred play circle — pure SVG */}
-                    <div className={cn("absolute inset-0 flex items-center justify-center bg-dark/20 sleek pointer-events-none", isAvailableForSale && "group-hover:bg-dark/35")}>
+                    <div
+                        className={cn(
+                            "absolute inset-0 flex items-center justify-center bg-dark/20 sleek pointer-events-none",
+                            isAvailableForSale && "group-hover:bg-dark/35"
+                        )}
+                    >
                         <div className="size-16 rounded-full bg-dark/70 flex items-center justify-center">
-                            <svg width="20" height="24" viewBox="0 0 20 24" aria-hidden="true" className="text-light ml-1.5">
+                            <svg
+                                width="20"
+                                height="24"
+                                viewBox="0 0 20 24"
+                                aria-hidden="true"
+                                className="text-light ml-1.5"
+                            >
                                 <path d="M0 0L20 12L0 24V0Z" fill="currentColor" />
                             </svg>
                         </div>
@@ -452,7 +472,10 @@ export function ProductImageGallery({images, selectedVariantImage, media, isAvai
                         <Image
                             src={item.previewImage.url}
                             alt={item.alt || `3D model ${index + 1}`}
-                            className={cn("w-full h-full object-cover sleek", isAvailableForSale ? "group-hover:scale-105" : "grayscale opacity-60")}
+                            className={cn(
+                                "w-full h-full object-cover sleek",
+                                isAvailableForSale ? "group-hover:scale-105" : "grayscale opacity-60"
+                            )}
                             loading={index === 0 ? "eager" : "lazy"}
                             width={800}
                             height={800}
@@ -463,7 +486,15 @@ export function ProductImageGallery({images, selectedVariantImage, media, isAvai
 
                     {/* 3D badge — hexagon SVG icon */}
                     <div className="absolute top-2 left-2 z-10 flex items-center gap-1.5 rounded-full px-2.5 py-1 bg-dark/75 text-light text-xs font-medium pointer-events-none select-none">
-                        <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1">
+                        <svg
+                            width="12"
+                            height="12"
+                            viewBox="0 0 12 12"
+                            aria-hidden="true"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1"
+                        >
                             <path d="M6 0.5L11 3.25V8.75L6 11.5L1 8.75V3.25L6 0.5Z" />
                             <path d="M6 0.5V6M6 6L11 3.25M6 6L1 3.25M6 6V11.5" strokeWidth="0.75" />
                         </svg>

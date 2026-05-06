@@ -403,10 +403,7 @@ export function ProductDescription({html, size = "sm", className}: ProductDescri
                         aria-expanded={isExpanded}
                     >
                         <span>{isExpanded ? "See less" : "See more"}</span>
-                        <ChevronDown
-                            className={cn("size-5 sleek", isExpanded && "rotate-180")}
-                            aria-hidden="true"
-                        />
+                        <ChevronDown className={cn("size-5 sleek", isExpanded && "rotate-180")} aria-hidden="true" />
                     </Button>
                 </div>
             )}

@@ -221,9 +221,7 @@ export function StickyMobileGetNow({
             >
                 {/* Light zone — CTA label + optional sale badge */}
                 <div className="flex-1 flex items-center gap-3 pl-4 pr-3">
-                    <span className="text-[17px] font-semibold tracking-[-0.015em] leading-none">
-                        {displayText}
-                    </span>
+                    <span className="text-[17px] font-semibold tracking-[-0.015em] leading-none">{displayText}</span>
                     {hasDiscount && (
                         <span className="rounded-[var(--radius)] bg-sale-text text-light text-[9px] font-bold tracking-wide px-[5px] py-[3px] leading-none shrink-0">
                             −{discountPct}%

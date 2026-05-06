@@ -129,7 +129,14 @@ export function RecentlyViewedSection({products, allProducts = [], loading = fal
         }
 
         return [];
-    }, [historyCleared, recentlyViewed.isHydrated, recentlyViewed.products, recentlyViewed.productIds, allProducts, products]);
+    }, [
+        historyCleared,
+        recentlyViewed.isHydrated,
+        recentlyViewed.products,
+        recentlyViewed.productIds,
+        allProducts,
+        products
+    ]);
 
     // Determine if section should show
     // Don't hide until we've checked localStorage (wait for hydration)
@@ -171,9 +178,7 @@ export function RecentlyViewedSection({products, allProducts = [], loading = fal
                                 )}
                             </div>
                             <p className="mt-1 text-base text-muted-foreground md:text-lg">
-                                {isLoading
-                                    ? "Loading your history..."
-                                    : "Products you've recently browsed"}
+                                {isLoading ? "Loading your history..." : "Products you've recently browsed"}
                             </p>
                         </div>
                         {/* Clear History Button - Desktop (pill style matching Instagram handle) */}
@@ -238,9 +243,7 @@ export function RecentlyViewedSection({products, allProducts = [], loading = fal
             <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
                 <DialogContent className="rounded-2xl border-0 p-8 sm:max-w-md" showCloseButton={false}>
                     <DialogHeader className="space-y-3 pr-0 sm:pr-0">
-                        <DialogTitle className="font-serif text-lg font-medium text-primary">
-                            Clear History
-                        </DialogTitle>
+                        <DialogTitle className="font-serif text-lg font-medium text-primary">Clear History</DialogTitle>
                         <DialogDescription className="text-base text-muted-foreground">
                             Remove all {displayProducts.length} recently viewed{" "}
                             {displayProducts.length === 1 ? "product" : "products"} from your browsing history?

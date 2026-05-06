@@ -25,10 +25,7 @@ export type ScoredProduct<T extends {id: string}> = T & {_affinityScore: number}
  * @param signals - Purchase history signals derived from customer order lines
  * @returns New array sorted by affinity score descending
  */
-export function scoreProducts<T extends {id: string}>(
-    products: T[],
-    signals: AffinitySignal[]
-): ScoredProduct<T>[] {
+export function scoreProducts<T extends {id: string}>(products: T[], signals: AffinitySignal[]): ScoredProduct<T>[] {
     const signalMap = new Map<string, AffinitySignal>(signals.map(s => [s.productId, s]));
 
     return products
@@ -64,7 +61,7 @@ export function extractAffinitySignals(
             byProduct.set(line.productId, {
                 productId: line.productId,
                 purchaseCount: line.quantity,
-                lastPurchasedAt: line.processedAt,
+                lastPurchasedAt: line.processedAt
             });
         }
     }

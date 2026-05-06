@@ -61,9 +61,7 @@ interface ProductMediaThumbProps {
 
 function pickSource(sources: Array<{url: string; mimeType: string}>): {url: string; mimeType: string} | undefined {
     return (
-        sources.find(s => s.mimeType === "video/mp4") ??
-        sources.find(s => s.mimeType === "video/webm") ??
-        sources[0]
+        sources.find(s => s.mimeType === "video/mp4") ?? sources.find(s => s.mimeType === "video/webm") ?? sources[0]
     );
 }
 

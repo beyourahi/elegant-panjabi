@@ -65,9 +65,7 @@ interface ProductCardVideoProps {
  */
 function pickSource(sources: ProductCardVideoSource[]): ProductCardVideoSource | undefined {
     return (
-        sources.find(s => s.mimeType === "video/mp4") ??
-        sources.find(s => s.mimeType === "video/webm") ??
-        sources[0]
+        sources.find(s => s.mimeType === "video/mp4") ?? sources.find(s => s.mimeType === "video/webm") ?? sources[0]
     );
 }
 
@@ -114,13 +112,7 @@ export function ProductCardVideo({
         : null;
 
     return (
-        <div
-            ref={ref}
-            className={cn(
-                "relative w-full overflow-hidden rounded-lg bg-muted/50 aspect-[4/5]",
-                className
-            )}
-        >
+        <div ref={ref} className={cn("relative w-full overflow-hidden rounded-lg bg-muted/50 aspect-[4/5]", className)}>
             {/* Placeholder — always rendered for instant paint + CLS prevention. */}
             {posterData ? (
                 <Image

@@ -51,7 +51,12 @@ import {Button} from "~/components/ui/button";
 import {WheelGesturesPlugin} from "embla-carousel-wheel-gestures";
 import {Carousel, CarouselContent, CarouselItem} from "~/components/ui/carousel";
 import {cn} from "~/lib/utils";
-import {buildCanonicalUrl, getBrandNameFromMatches, getSiteUrlFromMatches, generateBreadcrumbListSchema} from "~/lib/seo";
+import {
+    buildCanonicalUrl,
+    getBrandNameFromMatches,
+    getSiteUrlFromMatches,
+    generateBreadcrumbListSchema
+} from "~/lib/seo";
 import {useSiteSettings} from "~/lib/site-content-context";
 import {PageHeading} from "~/components/PageHeading";
 
@@ -82,10 +87,13 @@ export const meta: Route.MetaFunction = ({data, matches}) => {
         rootData?.siteContent?.siteSettings?.blogPageDescription ||
         "Explore stories, inspiration, and ideas to help you discover joy in everyday moments.";
 
-    const breadcrumbSchema = generateBreadcrumbListSchema([
-        {name: "Home", url: "/"},
-        {name: "Blog", url: "/blogs"}
-    ], siteUrl);
+    const breadcrumbSchema = generateBreadcrumbListSchema(
+        [
+            {name: "Home", url: "/"},
+            {name: "Blog", url: "/blogs"}
+        ],
+        siteUrl
+    );
 
     return [
         ...(getSeoMeta({
@@ -104,7 +112,13 @@ export const meta: Route.MetaFunction = ({data, matches}) => {
                 : undefined
         }) ?? []),
         {"script:ld+json": breadcrumbSchema as any},
-        {tagName: "link" as const, rel: "alternate", type: "application/rss+xml", title: `${pageTitle} RSS Feed`, href: "/blogs/feed.xml"}
+        {
+            tagName: "link" as const,
+            rel: "alternate",
+            type: "application/rss+xml",
+            title: `${pageTitle} RSS Feed`,
+            href: "/blogs/feed.xml"
+        }
     ];
 };
 
@@ -150,7 +164,10 @@ async function loadCriticalData({context, request}: Route.LoaderArgs) {
 
     if (!hasRealContent) {
         return {
-            blogs: {nodes: [], pageInfo: {hasNextPage: false, hasPreviousPage: false, startCursor: null, endCursor: null}},
+            blogs: {
+                nodes: [],
+                pageInfo: {hasNextPage: false, hasPreviousPage: false, startCursor: null, endCursor: null}
+            },
             featuredArticle: null
         };
     }
@@ -195,10 +212,7 @@ export default function Blogs({loaderData}: Route.ComponentProps) {
     // article list section should render at all. When a store has only one
     // article published we hide the redundant list and let the featured hero
     // carry the full weight of the page.
-    const totalArticleCount = blogNodes.reduce(
-        (sum, blog) => sum + (blog.articles?.nodes?.length || 0),
-        0
-    );
+    const totalArticleCount = blogNodes.reduce((sum, blog) => sum + (blog.articles?.nodes?.length || 0), 0);
     const shouldRenderArticleList = totalArticleCount > 1 && allArticles.length > 0;
 
     return (
@@ -273,11 +287,13 @@ export default function Blogs({loaderData}: Route.ComponentProps) {
             {/* Empty State */}
             {!featuredArticle && allArticles.length === 0 && (
                 <div className="text-center py-12 sm:py-16 space-y-4">
-                    <p className="text-base sm:text-lg text-muted-foreground">
-                        Our journal is coming soon.
-                    </p>
+                    <p className="text-base sm:text-lg text-muted-foreground">Our journal is coming soon.</p>
                     <p className="text-sm text-muted-foreground">
-                        In the meantime, explore our <Link to="/collections/all-products" className="text-primary underline underline-offset-2">latest products</Link>.
+                        In the meantime, explore our{" "}
+                        <Link to="/collections/all-products" className="text-primary underline underline-offset-2">
+                            latest products
+                        </Link>
+                        .
                     </p>
                 </div>
             )}

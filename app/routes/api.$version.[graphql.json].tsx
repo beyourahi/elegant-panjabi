@@ -77,19 +77,19 @@ const MAX_BODY_SIZE = 100_000; // 100KB
 export async function action({params, context, request}: Route.ActionArgs) {
     // Validate API version parameter (YYYY-MM or "unstable")
     if (!params.version || !VALID_VERSION_PATTERN.test(params.version)) {
-        return new Response(
-            JSON.stringify({error: "Invalid API version"}),
-            {status: 400, headers: {"Content-Type": "application/json"}}
-        );
+        return new Response(JSON.stringify({error: "Invalid API version"}), {
+            status: 400,
+            headers: {"Content-Type": "application/json"}
+        });
     }
 
     // Reject oversized request bodies
     const contentLength = request.headers.get("content-length");
     if (contentLength && parseInt(contentLength, 10) > MAX_BODY_SIZE) {
-        return new Response(
-            JSON.stringify({error: "Request too large"}),
-            {status: 413, headers: {"Content-Type": "application/json"}}
-        );
+        return new Response(JSON.stringify({error: "Request too large"}), {
+            status: 413,
+            headers: {"Content-Type": "application/json"}
+        });
     }
 
     // Forward only allowlisted headers to Shopify (strip cookies, auth, ambient headers)

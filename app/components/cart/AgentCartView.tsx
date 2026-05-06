@@ -63,32 +63,32 @@ function useCartJsonLd(lines: CartLine[], checkoutUrl?: string) {
         const jsonLd = {
             "@context": "https://schema.org",
             "@type": "ItemList",
-            "name": "Cart",
+            name: "Cart",
             ...(checkoutUrl ? {url: checkoutUrl} : {}),
-            "numberOfItems": lines.length,
-            "itemListElement": lines.map((line, i) => ({
+            numberOfItems: lines.length,
+            itemListElement: lines.map((line, i) => ({
                 "@type": "ListItem",
-                "position": i + 1,
-                "item": {
+                position: i + 1,
+                item: {
                     "@type": "Product",
-                    "name": line.merchandise.product.title,
-                    "url": `/products/${line.merchandise.product.handle}`,
+                    name: line.merchandise.product.title,
+                    url: `/products/${line.merchandise.product.handle}`,
                     ...(line.merchandise.image?.url ? {image: line.merchandise.image.url} : {}),
-                    "offers": {
+                    offers: {
                         "@type": "Offer",
-                        "price": line.cost.amountPerQuantity.amount,
-                        "priceCurrency": line.cost.amountPerQuantity.currencyCode,
-                        "availability": line.merchandise.availableForSale
+                        price: line.cost.amountPerQuantity.amount,
+                        priceCurrency: line.cost.amountPerQuantity.currencyCode,
+                        availability: line.merchandise.availableForSale
                             ? "https://schema.org/InStock"
                             : "https://schema.org/OutOfStock"
                     },
-                    "additionalProperty": line.merchandise.selectedOptions.map(o => ({
+                    additionalProperty: line.merchandise.selectedOptions.map(o => ({
                         "@type": "PropertyValue",
-                        "name": o.name,
-                        "value": o.value
+                        name: o.name,
+                        value: o.value
                     }))
                 },
-                "quantity": line.quantity
+                quantity: line.quantity
             }))
         };
 
@@ -105,8 +105,8 @@ function useCartJsonLd(lines: CartLine[], checkoutUrl?: string) {
         return () => {
             scriptRef.current?.remove();
         };
-    // Stable dep — re-inject when cart size or checkout URL changes.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // Stable dep — re-inject when cart size or checkout URL changes.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [lines.length, checkoutUrl]);
 }
 
@@ -140,17 +140,13 @@ export function AgentCartView({cart}: {cart: AgentCart}) {
 
                 {/* Line items */}
                 <section className="mb-8">
-                    <h3 className="mb-3 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                        Items
-                    </h3>
+                    <h3 className="mb-3 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Items</h3>
                     <div className="divide-y divide-border border-y border-border">
                         {lines.map(line => {
                             const variantLabel =
                                 line.merchandise.title !== "Default Title"
                                     ? line.merchandise.title
-                                    : line.merchandise.selectedOptions
-                                          .map(o => o.value)
-                                          .join(" / ");
+                                    : line.merchandise.selectedOptions.map(o => o.value).join(" / ");
                             return (
                                 <div key={line.id} className="py-3">
                                     <div className="flex items-start justify-between gap-4">
@@ -181,9 +177,7 @@ export function AgentCartView({cart}: {cart: AgentCart}) {
 
                 {/* Summary */}
                 <section className="mb-8">
-                    <h3 className="mb-3 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                        Summary
-                    </h3>
+                    <h3 className="mb-3 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Summary</h3>
                     <div className="space-y-1.5 border border-border p-3">
                         <div className="flex items-center justify-between">
                             <span className="text-xs text-muted-foreground">Subtotal</span>
@@ -201,9 +195,7 @@ export function AgentCartView({cart}: {cart: AgentCart}) {
                 {/* Checkout */}
                 {checkoutUrl && (
                     <section>
-                        <h3 className="mb-3 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                            Checkout
-                        </h3>
+                        <h3 className="mb-3 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Checkout</h3>
                         <CheckoutKitEmbed
                             checkoutUrl={checkoutUrl}
                             disabled={isMutating}

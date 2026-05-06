@@ -80,7 +80,9 @@ export function CartSummary({cart, layout, isLoggedIn, hasStoreCredit, shippingC
         return (
             <div className="shrink-0 px-3 sm:px-5 py-2.5 sm:py-3 space-y-2 border-t border-primary-foreground/10">
                 {/* Free Shipping Progress - compact version */}
-                {shippingConfig?.freeShippingMinimumOrder && <FreeShippingProgress cart={cart} shippingConfig={shippingConfig} isPage={isPage} />}
+                {shippingConfig?.freeShippingMinimumOrder && (
+                    <FreeShippingProgress cart={cart} shippingConfig={shippingConfig} isPage={isPage} />
+                )}
 
                 {/* Order Note Section - compact */}
                 <CartOrderNote note={cart?.note} isPage={false} />
@@ -107,7 +109,9 @@ export function CartSummary({cart, layout, isLoggedIn, hasStoreCredit, shippingC
     return (
         <div className="space-y-2.5 sm:space-y-3 rounded-xl border bg-card p-3 sm:p-4 shadow-sm">
             {/* Free Shipping Progress */}
-            {shippingConfig?.freeShippingMinimumOrder && <FreeShippingProgress cart={cart} shippingConfig={shippingConfig} isPage={isPage} />}
+            {shippingConfig?.freeShippingMinimumOrder && (
+                <FreeShippingProgress cart={cart} shippingConfig={shippingConfig} isPage={isPage} />
+            )}
 
             {/* Order Note Section */}
             <CartOrderNote note={cart?.note} isPage={true} />
@@ -264,7 +268,10 @@ function FreeShippingProgress({cart, shippingConfig, isPage = true}: FreeShippin
                                 isPage ? "text-muted-foreground" : "text-primary-foreground/70"
                             )}
                         >
-                            {cartContent.freeShippingAwayTemplate.replace("{amount}", formatPrice(remaining, shippingConfig.currencyCode))}
+                            {cartContent.freeShippingAwayTemplate.replace(
+                                "{amount}",
+                                formatPrice(remaining, shippingConfig.currencyCode)
+                            )}
                         </span>
                     )}
                 </div>
@@ -381,7 +388,9 @@ function CartCheckoutActions({
     // accent-subtle on primary (drawer bg) = ~5.5:1 contrast (WCAG AA) ✓
     const baseStyles = cn(
         "motion-interactive motion-press w-full inline-flex min-h-11 select-none items-center justify-between rounded-[var(--radius-pill-raw)] border-2 px-3 text-base font-medium active:scale-[var(--motion-press-scale)] sm:px-4 sm:text-lg",
-        isPage ? "border-primary bg-primary text-primary-foreground py-3" : "border-accent bg-accent text-accent-foreground py-2.5"
+        isPage
+            ? "border-primary bg-primary text-primary-foreground py-3"
+            : "border-accent bg-accent text-accent-foreground py-2.5"
     );
 
     // When offline: Show disabled button with warning

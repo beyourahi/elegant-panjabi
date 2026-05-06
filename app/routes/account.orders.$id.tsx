@@ -145,7 +145,9 @@ const OrderDetailPage = () => {
                                         </>
                                     );
                                 })()}
-                                {item.variantTitle && <p className="text-muted-foreground text-sm">{item.variantTitle}</p>}
+                                {item.variantTitle && (
+                                    <p className="text-muted-foreground text-sm">{item.variantTitle}</p>
+                                )}
                                 <p className="text-muted-foreground text-sm">Qty: {item.quantity}</p>
                             </div>
                             {item.price && (

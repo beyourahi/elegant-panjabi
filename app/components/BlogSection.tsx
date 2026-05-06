@@ -118,7 +118,12 @@ function SingleArticleLayout({article}: {article: HomepageArticle}) {
     const authorName = article.author?.name;
 
     return (
-        <Link to={articleUrl} prefetch="viewport" viewTransition className="group block no-underline animate-product-fade-in">
+        <Link
+            to={articleUrl}
+            prefetch="viewport"
+            viewTransition
+            className="group block no-underline animate-product-fade-in"
+        >
             <article
                 className={cn(
                     "grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-responsive-lg",
@@ -226,7 +231,12 @@ function FeaturedArticleCard({article}: {article: HomepageArticle}) {
     const publishedDate = formatArticleDateShort(article.publishedAt);
 
     return (
-        <Link to={articleUrl} prefetch="viewport" viewTransition className="group block no-underline h-full animate-product-fade-in">
+        <Link
+            to={articleUrl}
+            prefetch="viewport"
+            viewTransition
+            className="group block no-underline h-full animate-product-fade-in"
+        >
             <article className="relative h-full min-h-[380px] lg:min-h-[420px] xl:min-h-[480px] 2xl:min-h-[520px] overflow-hidden rounded-xl lg:rounded-2xl xl:rounded-3xl">
                 {/* Full-bleed image */}
                 {article.image && (

@@ -80,12 +80,8 @@ export function ShopLocation() {
     const isMulti = pairs.length > 1;
 
     return (
-        <section
-            aria-label="Shop locations"
-            className="w-full bg-[--text-primary] py-16 md:py-20 lg:py-24"
-        >
+        <section aria-label="Shop locations" className="w-full bg-[--text-primary] py-16 md:py-20 lg:py-24">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
                 {/* ── Desktop layout ─────────────────────────────────────────
                     Single location: heading left / map right (side-by-side)
                     Multiple locations: centred stacked with tab switcher
@@ -198,10 +194,7 @@ function MultiLocationLayout({
 /** Small-caps overline label */
 function LocationOverline() {
     return (
-        <span
-            className="text-xs font-semibold uppercase tracking-[0.2em] text-[--text-subtle]"
-            aria-hidden="true"
-        >
+        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[--text-subtle]" aria-hidden="true">
             Our Locations
         </span>
     );

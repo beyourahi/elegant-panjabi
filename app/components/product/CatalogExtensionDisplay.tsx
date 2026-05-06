@@ -53,10 +53,7 @@ export const CatalogExtensionDisplay = ({
     if (!hasContent) return null;
 
     return (
-        <ul
-            className={cn("flex flex-col gap-1.5 text-xs", className)}
-            aria-label="Product details"
-        >
+        <ul className={cn("flex flex-col gap-1.5 text-xs", className)} aria-label="Product details">
             {isGiftCard && (
                 <li className="flex items-center gap-2">
                     <span className="inline-block h-1 w-1 rounded-full bg-foreground/40 shrink-0" aria-hidden="true" />

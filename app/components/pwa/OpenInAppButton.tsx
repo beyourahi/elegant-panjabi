@@ -32,9 +32,18 @@ export function OpenInAppButton({variant = "menu-item"}: OpenInAppButtonProps) {
     const [showAlreadyInstalled, setShowAlreadyInstalled] = useState(false);
 
     const handleClick = async () => {
-        if (isIOS) { setShowIosInstructions(true); return; }
-        if (canInstall) { await triggerInstall(); return; }
-        if (isAppDetectedAsInstalled) { setShowAlreadyInstalled(true); return; }
+        if (isIOS) {
+            setShowIosInstructions(true);
+            return;
+        }
+        if (canInstall) {
+            await triggerInstall();
+            return;
+        }
+        if (isAppDetectedAsInstalled) {
+            setShowAlreadyInstalled(true);
+            return;
+        }
     };
 
     // Hidden when already running as installed PWA — no install prompt needed inside the app.
@@ -53,10 +62,7 @@ export function OpenInAppButton({variant = "menu-item"}: OpenInAppButtonProps) {
                     // Fixed variant: hidden on mobile (use menu-item via FullScreenMenu instead),
                     // visible on large screens only. Positioning is handled by the parent
                     // FloatingButtonStack container in root.tsx — no fixed/z-index needed here.
-                    isFixed && [
-                        "hidden lg:flex",
-                        "animate-slide-up-fade opacity-0"
-                    ],
+                    isFixed && ["hidden lg:flex", "animate-slide-up-fade opacity-0"],
                     // Menu item variant: full width on mobile, auto on desktop
                     isMenuItem && [
                         "w-full lg:w-auto",

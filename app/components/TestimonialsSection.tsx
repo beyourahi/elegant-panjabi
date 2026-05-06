@@ -160,7 +160,10 @@ export function TestimonialsSection({testimonials}: TestimonialsSectionProps) {
                     loop: true,
                     dragFree: true
                 }}
-                plugins={[AutoScroll({speed: 2, stopOnInteraction: false, stopOnMouseEnter: true}), WheelGesturesPlugin({forceWheelAxis: "x"})]}
+                plugins={[
+                    AutoScroll({speed: 2, stopOnInteraction: false, stopOnMouseEnter: true}),
+                    WheelGesturesPlugin({forceWheelAxis: "x"})
+                ]}
                 className="w-full"
             >
                 <CarouselContent className="-ml-3 sm:-ml-4 md:-ml-6">

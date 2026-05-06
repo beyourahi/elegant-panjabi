@@ -49,8 +49,19 @@ import {ProductItem} from "~/components/ProductItem";
 import {CollectionPageLayout, useGridColumns, useLayoutMode, getGridClassName} from "~/components/CollectionPageLayout";
 import {AnimatedSection} from "~/components/AnimatedSection";
 import {CollectionSidebar, type CollectionWithCount} from "~/components/CollectionSidebar";
-import {filterAndSortDiscountedProducts, countDiscountedProducts, type DiscountedProduct, type RawDiscountProduct, type LightweightProduct} from "~/lib/discounts";
-import {buildCanonicalUrl, getBrandNameFromMatches, getSiteUrlFromMatches, generateBreadcrumbListSchema} from "~/lib/seo";
+import {
+    filterAndSortDiscountedProducts,
+    countDiscountedProducts,
+    type DiscountedProduct,
+    type RawDiscountProduct,
+    type LightweightProduct
+} from "~/lib/discounts";
+import {
+    buildCanonicalUrl,
+    getBrandNameFromMatches,
+    getSiteUrlFromMatches,
+    generateBreadcrumbListSchema
+} from "~/lib/seo";
 import {withTimeoutAndFallback, TIMEOUT_DEFAULTS} from "~/lib/promise-utils";
 import {SIDEBAR_COLLECTIONS_QUERY} from "~/lib/fragments";
 
@@ -65,10 +76,13 @@ export const meta: Route.MetaFunction = ({data, matches}) => {
             ? `Discover discounted items with savings up to ${maxDiscount}% off.`
             : "Check back soon for sale items and amazing deals.";
 
-    const breadcrumbSchema = generateBreadcrumbListSchema([
-        {name: "Home", url: "/"},
-        {name: "Sale", url: "/sale"}
-    ], siteUrl);
+    const breadcrumbSchema = generateBreadcrumbListSchema(
+        [
+            {name: "Home", url: "/"},
+            {name: "Sale", url: "/sale"}
+        ],
+        siteUrl
+    );
 
     return [
         ...(getSeoMeta({
@@ -86,12 +100,10 @@ function loadDeferredData({context}: Route.LoaderArgs) {
 
     // Sidebar collections - deferred so it doesn't block sale page above-fold rendering
     const sidebarData = withTimeoutAndFallback(
-        dataAdapter
-            .query(SIDEBAR_COLLECTIONS_QUERY, {cache: dataAdapter.CacheLong()})
-            .catch((error: unknown) => {
-                console.error("Failed to load sidebar collections:", error);
-                return null;
-            }),
+        dataAdapter.query(SIDEBAR_COLLECTIONS_QUERY, {cache: dataAdapter.CacheLong()}).catch((error: unknown) => {
+            console.error("Failed to load sidebar collections:", error);
+            return null;
+        }),
         null,
         TIMEOUT_DEFAULTS.API
     );

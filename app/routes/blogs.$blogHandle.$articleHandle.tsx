@@ -113,7 +113,12 @@ export const meta: Route.MetaFunction = ({data, matches}) => {
     const breadcrumbSchema = generateBreadcrumbListSchema(
         deriveArticleBreadcrumbs(
             blogHandle || "news",
-            blogHandle ? blogHandle.split("-").map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") : "Blog",
+            blogHandle
+                ? blogHandle
+                      .split("-")
+                      .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))
+                      .join(" ")
+                : "Blog",
             article.handle,
             article.title
         ),
@@ -345,13 +350,7 @@ export default function Article({loaderData}: Route.ComponentProps) {
  * and to keep the sanitized-HTML injection isolated to a single small component.
  * contentHtml comes from Shopify's Storefront API and is already sanitized.
  */
-function ArticleContent({
-    contentHtml,
-    contentRef
-}: {
-    contentHtml: string;
-    contentRef: React.RefObject<HTMLDivElement>;
-}) {
+function ArticleContent({contentHtml, contentRef}: {contentHtml: string; contentRef: React.RefObject<HTMLDivElement>}) {
     return (
         <div
             ref={contentRef}

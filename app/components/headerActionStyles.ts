@@ -15,7 +15,10 @@ export function getHeaderActionToneClassName({isScrolled, useLightText}: HeaderA
     return isScrolled || useLightText ? "text-light" : "text-primary";
 }
 
-export function getHeaderTextActionClassName(state: HeaderActionState, ...classNames: Array<string | false | null | undefined>) {
+export function getHeaderTextActionClassName(
+    state: HeaderActionState,
+    ...classNames: Array<string | false | null | undefined>
+) {
     return cn(
         HEADER_ACTION_BASE_CLASSNAME,
         HEADER_TEXT_ACTION_SIZE_CLASSNAME,

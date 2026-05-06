@@ -155,7 +155,11 @@ export function buildCollectionTabsWithDirectHits<T extends CollectionNode>(
         .map(([cat]) => cat);
 
     const fallbackMatches = new Map<CollectionCategory, T>();
-    const usedFallbackIds = new Set(Object.values(directHits).filter(Boolean).map(c => c!.id));
+    const usedFallbackIds = new Set(
+        Object.values(directHits)
+            .filter(Boolean)
+            .map(c => c!.id)
+    );
 
     for (const col of input.fallbacks) {
         if (usedFallbackIds.has(col.id) || col.products.nodes.length === 0) continue;

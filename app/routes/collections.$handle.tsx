@@ -109,10 +109,7 @@ export const meta: Route.MetaFunction = ({data, matches}) => {
             jsonLd: generateCollectionSchema(collection, products, siteUrl) as any
         }) ?? [];
 
-    const breadcrumbSchema = generateBreadcrumbListSchema(
-        deriveCollectionBreadcrumbs(collection),
-        siteUrl
-    );
+    const breadcrumbSchema = generateBreadcrumbListSchema(deriveCollectionBreadcrumbs(collection), siteUrl);
 
     const withBreadcrumb = [...seoMeta, {"script:ld+json": breadcrumbSchema as any}];
     const preloadHref = collection.products?.nodes?.[0]?.featuredImage?.url;
@@ -191,20 +188,22 @@ async function loadCriticalData({context, params, request}: Route.LoaderArgs) {
         const isAuthenticated = await customerAccount.isLoggedIn();
 
         if (isAuthenticated) {
-            const ordersResponse = await customerAccount.query(CUSTOMER_AFFINITY_ORDERS_QUERY, {
+            const ordersResponse = (await customerAccount.query(CUSTOMER_AFFINITY_ORDERS_QUERY, {
                 variables: {first: 10}
-            }) as any;
+            })) as any;
 
             const orderNodes: any[] = ordersResponse?.data?.customer?.orders?.nodes ?? [];
 
             // Flatten all order line items into AffinitySignal-compatible objects
-            const orderLines = orderNodes.flatMap((order: any) =>
-                (order.lineItems?.nodes ?? []).map((line: any) => ({
-                    productId: line.variant?.product?.id ?? "",
-                    quantity: line.quantity as number,
-                    processedAt: order.processedAt as string
-                }))
-            ).filter((line: any) => line.productId !== "");
+            const orderLines = orderNodes
+                .flatMap((order: any) =>
+                    (order.lineItems?.nodes ?? []).map((line: any) => ({
+                        productId: line.variant?.product?.id ?? "",
+                        quantity: line.quantity as number,
+                        processedAt: order.processedAt as string
+                    }))
+                )
+                .filter((line: any) => line.productId !== "");
 
             if (orderLines.length > 0) {
                 const signals = extractAffinitySignals(orderLines);
@@ -237,12 +236,10 @@ function loadDeferredData({context}: Route.LoaderArgs) {
 
     // Sidebar collections - deferred so it doesn't block collection above-fold rendering
     const sidebarData = withTimeoutAndFallback(
-        dataAdapter
-            .query(SIDEBAR_COLLECTIONS_QUERY, {cache: dataAdapter.CacheLong()})
-            .catch((error: unknown) => {
-                console.error("Failed to load sidebar collections:", error);
-                return null;
-            }),
+        dataAdapter.query(SIDEBAR_COLLECTIONS_QUERY, {cache: dataAdapter.CacheLong()}).catch((error: unknown) => {
+            console.error("Failed to load sidebar collections:", error);
+            return null;
+        }),
         null,
         TIMEOUT_DEFAULTS.API
     );
@@ -559,8 +556,6 @@ const COLLECTION_QUERY = `#graphql
     }
   }
 ` as const;
-
-
 
 // Minimal Customer Account API query for affinity signal extraction.
 // Fetches only the fields needed to build AffinitySignal[]: product IDs, quantities,

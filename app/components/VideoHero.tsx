@@ -51,7 +51,7 @@ const SEARCH_LABELS = [
     "Find something new",
     "Search the collection",
     "Explore what's here",
-    "Discover something great",
+    "Discover something great"
 ];
 
 /**
@@ -64,7 +64,7 @@ const SEARCH_LABELS_MOBILE = [
     "Find something new",
     "Browse the store",
     "Explore products",
-    "Find your thing",
+    "Find your thing"
 ];
 
 /** Milliseconds between label changes */
@@ -85,7 +85,7 @@ type SearchLabelState = {
 const INITIAL_SEARCH_LABEL_STATE: SearchLabelState = {
     currentIndex: 0,
     prevIndex: null,
-    tickKey: 0,
+    tickKey: 0
 };
 
 // ============================================================================
@@ -246,7 +246,7 @@ export function VideoHero({randomCollection}: {randomCollection?: HeroCollection
         (state: SearchLabelState, _action: "advance"): SearchLabelState => ({
             currentIndex: (state.currentIndex + 1) % SEARCH_LABELS.length,
             prevIndex: state.currentIndex,
-            tickKey: state.tickKey + 1,
+            tickKey: state.tickKey + 1
         }),
         INITIAL_SEARCH_LABEL_STATE
     );
@@ -370,7 +370,10 @@ export function VideoHero({randomCollection}: {randomCollection?: HeroCollection
                              Allow text wrapping on mobile (no whitespace-nowrap)
                              whitespace-nowrap applied at sm+ where there's enough space
                              Extended breakpoints for large desktop (2xl) and ultrawide (3xl) */}
-                        <h1 className="font-serif text-light font-medium leading-[1.1] sm:leading-tight my-3 sm:my-4 md:my-6 sm:whitespace-nowrap" style={{fontSize: "clamp(2rem, 4.5vw, 5.5rem)"}}>
+                        <h1
+                            className="font-serif text-light font-medium leading-[1.1] sm:leading-tight my-3 sm:my-4 md:my-6 sm:whitespace-nowrap"
+                            style={{fontSize: "clamp(2rem, 4.5vw, 5.5rem)"}}
+                        >
                             {heroHeading}
                         </h1>
 

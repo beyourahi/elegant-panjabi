@@ -186,25 +186,29 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
         date: "2026-05-05",
         category: "Fix",
         headline: "Add to Bag button is now visible on mobile and tablet",
-        summary: "The purchase button was previously hidden on smaller screens, replaced by a separate mobile-only section with different button text. It now appears consistently across all screen sizes using the same form, so you can add items to your bag from any device without confusion."
+        summary:
+            "The purchase button was previously hidden on smaller screens, replaced by a separate mobile-only section with different button text. It now appears consistently across all screen sizes using the same form, so you can add items to your bag from any device without confusion."
     },
     {
         date: "2026-04-29",
         category: "Design",
         headline: "Cart suggestions are now smaller and easier to scroll past",
-        summary: "Product recommendation cards in the cart drawer are now more compact — smaller images, tighter spacing — so they clearly sit below your actual cart items without competing for your attention."
+        summary:
+            "Product recommendation cards in the cart drawer are now more compact — smaller images, tighter spacing — so they clearly sit below your actual cart items without competing for your attention."
     },
     {
         date: "2026-04-29",
         category: "New Feature",
         headline: "The store now publishes an AI-readable capability profile at /llms.txt",
-        summary: "Following the llmstxt.org convention, the store publishes a plain-text file at /llms.txt that summarises what the store sells, how to interact with it, and what capabilities are available to AI systems. AI assistants can read this file to understand the store before making requests, leading to more accurate and relevant responses."
+        summary:
+            "Following the llmstxt.org convention, the store publishes a plain-text file at /llms.txt that summarises what the store sells, how to interact with it, and what capabilities are available to AI systems. AI assistants can read this file to understand the store before making requests, leading to more accurate and relevant responses."
     },
     {
         date: "2026-04-29",
         category: "Improvement",
         headline: "Size guide removed from product pages",
-        summary: "The size guide button and dialog have been removed from product pages. Sizing information is still available through product descriptions and any size-related content set up by the store."
+        summary:
+            "The size guide button and dialog have been removed from product pages. Sizing information is still available through product descriptions and any size-related content set up by the store."
     },
     {
         date: "2026-04-30",
@@ -216,110 +220,128 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
     {
         date: "2026-04-28",
         category: "New Feature",
-        headline: "\"Get it now\" — skip the bag and go straight to checkout",
-        summary: "Every product page, Quick Add dialog, and Quick Add sheet now has a \"Get it now\" button alongside the primary Add to Bag button. Tapping it adds the selected variant and quantity to your cart then takes you directly to checkout, with no extra steps."
+        headline: '"Get it now" — skip the bag and go straight to checkout',
+        summary:
+            'Every product page, Quick Add dialog, and Quick Add sheet now has a "Get it now" button alongside the primary Add to Bag button. Tapping it adds the selected variant and quantity to your cart then takes you directly to checkout, with no extra steps.'
     },
     {
         date: "2026-04-28",
         category: "New Feature",
         headline: "AI shopping agents can now build carts for you",
-        summary: "AI shopping assistants can now create a ready-to-checkout cart on your behalf and send you a direct link. When you arrive via an agent link, a banner lets you review the items before proceeding — nothing goes to checkout without your confirmation."
+        summary:
+            "AI shopping assistants can now create a ready-to-checkout cart on your behalf and send you a direct link. When you arrive via an agent link, a banner lets you review the items before proceeding — nothing goes to checkout without your confirmation."
     },
     {
         date: "2026-04-28",
         category: "Improvement",
         headline: "Cart and checkout always load fresh, never cached",
-        summary: "Cart and checkout pages now bypass browser and CDN caches on every visit, so the item count, prices, and availability you see are always accurate and up to date."
+        summary:
+            "Cart and checkout pages now bypass browser and CDN caches on every visit, so the item count, prices, and availability you see are always accurate and up to date."
     },
     {
         date: "2026-04-28",
         category: "Improvement",
         headline: "Product cards no longer scale during scrolling",
-        summary: "Tapping a product card used to show a scale-down effect even when you were just scrolling past it. That feedback now only appears when you deliberately tap or click a card — scrolling through the grid stays smooth and distraction-free."
+        summary:
+            "Tapping a product card used to show a scale-down effect even when you were just scrolling past it. That feedback now only appears when you deliberately tap or click a card — scrolling through the grid stays smooth and distraction-free."
     },
     {
         date: "2026-04-28",
         category: "Fix",
         headline: "Quick Add no longer accidentally navigates to the product page",
-        summary: "Tapping the backdrop to dismiss a Quick Add sheet or dialog would occasionally open the full product page instead. All Quick Add interactions — variant selection, adding to cart, and closing — are now fully isolated from the product card's navigation."
+        summary:
+            "Tapping the backdrop to dismiss a Quick Add sheet or dialog would occasionally open the full product page instead. All Quick Add interactions — variant selection, adding to cart, and closing — are now fully isolated from the product card's navigation."
     },
     {
         date: "2026-04-28",
         category: "Improvement",
         headline: "Smoother browsing in product carousels",
-        summary: "Product cards inside horizontal carousels (New Arrivals, You May Also Like, Recently Viewed, Cart Suggestions) now scroll cleanly without triggering the card's own media switcher. Cards displayed in the main grid still support swiping through all product photos."
+        summary:
+            "Product cards inside horizontal carousels (New Arrivals, You May Also Like, Recently Viewed, Cart Suggestions) now scroll cleanly without triggering the card's own media switcher. Cards displayed in the main grid still support swiping through all product photos."
     },
     {
         date: "2026-04-28",
         category: "New Feature",
         headline: "Smart policy search for AI shopping agents",
-        summary: "AI assistants can now search shipping, return, and privacy policies along with FAQs to answer customer questions in natural language. Uses BM25-ranked search across all policy documents and FAQ content."
+        summary:
+            "AI assistants can now search shipping, return, and privacy policies along with FAQs to answer customer questions in natural language. Uses BM25-ranked search across all policy documents and FAQ content."
     },
     {
         date: "2026-04-28",
         category: "Improvement",
         headline: "Richer breadcrumb navigation in search results",
-        summary: "Product, collection, and blog pages now include structured breadcrumb data, making them eligible for breadcrumb-enhanced Google search results. Added BreadcrumbList structured data (Schema.org) to every page that displays visual breadcrumbs."
+        summary:
+            "Product, collection, and blog pages now include structured breadcrumb data, making them eligible for breadcrumb-enhanced Google search results. Added BreadcrumbList structured data (Schema.org) to every page that displays visual breadcrumbs."
     },
     {
         date: "2026-04-28",
         category: "Improvement",
         headline: "Enhanced product information for AI agents",
-        summary: "Gift card badges, digital product indicators, and subscription plan chips now appear on product pages when applicable. Product pages now surface extended catalog fields: gift card detection, digital-product shipping status, available subscription plans, and collection membership."
+        summary:
+            "Gift card badges, digital product indicators, and subscription plan chips now appear on product pages when applicable. Product pages now surface extended catalog fields: gift card detection, digital-product shipping status, available subscription plans, and collection membership."
     },
     {
         date: "2026-04-26",
         category: "New Feature",
         headline: "AI assistants can now browse and shop the store in natural language",
-        summary: "The store now supports Shopify's Storefront MCP — the open agentic commerce protocol rolling out across Shopify's entire merchant network. AI assistants like ChatGPT, Claude, and Perplexity can search the product catalog, ask about store policies, and build a cart through natural conversation, with no manual configuration required. The store also publishes a Universal Commerce Protocol profile at a standard discovery address, so any UCP-compliant AI agent can find and interact with it automatically."
+        summary:
+            "The store now supports Shopify's Storefront MCP — the open agentic commerce protocol rolling out across Shopify's entire merchant network. AI assistants like ChatGPT, Claude, and Perplexity can search the product catalog, ask about store policies, and build a cart through natural conversation, with no manual configuration required. The store also publishes a Universal Commerce Protocol profile at a standard discovery address, so any UCP-compliant AI agent can find and interact with it automatically."
     },
     {
         date: "2026-04-26",
         category: "New Feature",
         headline: "Revenue from AI referrals is now tracked per source",
-        summary: "When a shopper arrives from an AI assistant — ChatGPT, Claude, Perplexity, Google AI Mode, Bing Copilot, and others — their checkout session is automatically tagged with the referring source. Every AI-referred sale shows up in your analytics under its own channel, so you can see exactly which AI assistants are driving orders and by how much."
+        summary:
+            "When a shopper arrives from an AI assistant — ChatGPT, Claude, Perplexity, Google AI Mode, Bing Copilot, and others — their checkout session is automatically tagged with the referring source. Every AI-referred sale shows up in your analytics under its own channel, so you can see exactly which AI assistants are driving orders and by how much."
     },
     {
         date: "2026-04-26",
         category: "Improvement",
         headline: "Products now publish precision data that AI agents can act on",
-        summary: "Product pages now include a richer set of machine-readable structured data: precise availability status (in stock, running low, backordered, or sold out), barcodes and GTINs, original versus current pricing, publish dates, tags, and category. AI shopping agents use this to make accurate recommendations and build carts with confidence — reducing the chance of suggesting an out-of-stock item or quoting the wrong price."
+        summary:
+            "Product pages now include a richer set of machine-readable structured data: precise availability status (in stock, running low, backordered, or sold out), barcodes and GTINs, original versus current pricing, publish dates, tags, and category. AI shopping agents use this to make accurate recommendations and build carts with confidence — reducing the chance of suggesting an out-of-stock item or quoting the wrong price."
     },
     {
         date: "2026-04-26",
         category: "Fix",
         headline: "Cart updates instantly after Quick Add",
-        summary: "Products added via the Quick Add panel (both the pop-up on desktop and the bottom sheet on mobile) now appear in your cart drawer immediately — no page refresh needed."
+        summary:
+            "Products added via the Quick Add panel (both the pop-up on desktop and the bottom sheet on mobile) now appear in your cart drawer immediately — no page refresh needed."
     },
     {
         date: "2026-04-25",
         category: "Improvement",
         headline: "Smoother swiping on all carousels",
-        summary: "Every carousel across the store — products, reviews, blog articles, collections, and more — now stops exactly where you release your finger or cursor, giving browsing a more natural, fluid feel."
+        summary:
+            "Every carousel across the store — products, reviews, blog articles, collections, and more — now stops exactly where you release your finger or cursor, giving browsing a more natural, fluid feel."
     },
     {
         date: "2026-04-25",
         category: "Improvement",
         headline: "Product images stay in view while you read product details",
-        summary: "On desktop, the product media panel — including images and videos — now stays fixed on screen while you scroll through the product description, variants, and purchase options. Once you've scrolled past all the product information, the media naturally scrolls away. This makes it easier to reference product visuals while reading copy without having to scroll back up."
+        summary:
+            "On desktop, the product media panel — including images and videos — now stays fixed on screen while you scroll through the product description, variants, and purchase options. Once you've scrolled past all the product information, the media naturally scrolls away. This makes it easier to reference product visuals while reading copy without having to scroll back up."
     },
     {
         date: "2026-04-25",
         category: "Fix",
         headline: "Brand colors now display correctly across the entire store",
-        summary: "The store's custom color theme — set through the brand settings — was being overridden by a default blue color scheme on every page. This affected text, buttons, backgrounds, and all branded UI elements. The issue has been corrected, so the colors you configure in your brand settings now appear exactly as intended for every visitor."
+        summary:
+            "The store's custom color theme — set through the brand settings — was being overridden by a default blue color scheme on every page. This affected text, buttons, backgrounds, and all branded UI elements. The issue has been corrected, so the colors you configure in your brand settings now appear exactly as intended for every visitor."
     },
     {
         date: "2026-04-25",
         category: "New Feature",
         headline: "Search can now be filtered to show only in-stock products",
-        summary: "A new 'In Stock' toggle has been added to the full-screen search overlay. Switch it on to hide products that are currently unavailable, so every result you see is something you can order right now. The filter carries through when you navigate from the overlay to the main search results page. Quick Add has also been corrected to ensure the variant you select is the one that actually goes into your cart."
+        summary:
+            "A new 'In Stock' toggle has been added to the full-screen search overlay. Switch it on to hide products that are currently unavailable, so every result you see is something you can order right now. The filter carries through when you navigate from the overlay to the main search results page. Quick Add has also been corrected to ensure the variant you select is the one that actually goes into your cart."
     },
     {
         date: "2026-04-25",
         category: "Fix",
         headline: "Homepage, product pages, and collection pages load reliably again",
-        summary: "A recent update accidentally broke three of the most important pages in the store — the homepage, individual product pages, and every collection page would all crash with a server error instead of showing content. This has been corrected. All pages load normally again, including the collection sidebar which was also causing a flicker during page transitions."
+        summary:
+            "A recent update accidentally broke three of the most important pages in the store — the homepage, individual product pages, and every collection page would all crash with a server error instead of showing content. This has been corrected. All pages load normally again, including the collection sidebar which was also causing a flicker during page transitions."
     },
     {
         date: "2026-04-24",
@@ -332,253 +354,295 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
         date: "2026-04-24",
         category: "Performance",
         headline: "Faster browsing with leaner product queries and CDN image optimisation",
-        summary: "Product reviews now load separately from product details so the buy button and images appear sooner. The homepage, cart, and search now request fewer product variants, reducing data on every page load. Images use Shopify's CDN transforms for the right size on any screen. Page transitions between products use smooth native browser animations."
+        summary:
+            "Product reviews now load separately from product details so the buy button and images appear sooner. The homepage, cart, and search now request fewer product variants, reducing data on every page load. Images use Shopify's CDN transforms for the right size on any screen. Page transitions between products use smooth native browser animations."
     },
     {
         date: "2026-04-24",
         category: "Performance",
         headline: "Faster page loads with smarter Shopify API caching",
-        summary: "The homepage and gallery now cache their Shopify data instead of fetching it fresh on every visit. Collections, blog articles, and product lists are held in a long-lived cache so repeat visits load almost instantly. Recently viewed products and gallery pages use a shorter cache so they stay up to date without hitting the API every time. Navigation links on error pages now prefetch their destination the moment you hover, so the next page feels instant when you click."
+        summary:
+            "The homepage and gallery now cache their Shopify data instead of fetching it fresh on every visit. Collections, blog articles, and product lists are held in a long-lived cache so repeat visits load almost instantly. Recently viewed products and gallery pages use a shorter cache so they stay up to date without hitting the API every time. Navigation links on error pages now prefetch their destination the moment you hover, so the next page feels instant when you click."
     },
     {
         date: "2026-04-24",
         category: "New Feature",
         headline: "Gift card codes can now be applied directly in your cart",
-        summary: "The cart now fully supports gift card redemption — enter a gift card code in the dedicated field to apply your balance before reaching checkout. You can replace or clear a code at any time while your bag is open. Previously, the gift card field was visible but applying a code had no effect."
+        summary:
+            "The cart now fully supports gift card redemption — enter a gift card code in the dedicated field to apply your balance before reaching checkout. You can replace or clear a code at any time while your bag is open. Previously, the gift card field was visible but applying a code had no effect."
     },
     {
         date: "2026-04-24",
         category: "Improvement",
         headline: "Collection pages now include a sidebar for easier browsing",
-        summary: "A sidebar now sits alongside the product grid on collection and catalogue pages, making it easier to navigate categories and apply filters without losing your place in the results. On smaller screens the sidebar stays tucked away and slides in when you need it."
+        summary:
+            "A sidebar now sits alongside the product grid on collection and catalogue pages, making it easier to navigate categories and apply filters without losing your place in the results. On smaller screens the sidebar stays tucked away and slides in when you need it."
     },
     {
         date: "2026-04-24",
         category: "Design",
         headline: "Out-of-stock product cards no longer show a diagonal strikethrough overlay",
-        summary: "The semi-transparent diagonal stripe that used to appear over the product photo when an item was unavailable has been removed. The out-of-stock state is now communicated through the badge label and a subtle desaturated tint on the card image, keeping the photography fully visible and unobscured."
+        summary:
+            "The semi-transparent diagonal stripe that used to appear over the product photo when an item was unavailable has been removed. The out-of-stock state is now communicated through the badge label and a subtle desaturated tint on the card image, keeping the photography fully visible and unobscured."
     },
     {
         date: "2026-04-24",
         category: "Fix",
         headline: "App offline features now work without depending on Google's CDN",
-        summary: "The service worker that powers offline browsing and PWA installation previously loaded its core libraries from an external Google CDN. If that CDN was slow, blocked, or unreachable, the offline layer would fail silently. Those libraries are now bundled with the app itself so offline support stays reliable under any network conditions."
+        summary:
+            "The service worker that powers offline browsing and PWA installation previously loaded its core libraries from an external Google CDN. If that CDN was slow, blocked, or unreachable, the offline layer would fail silently. Those libraries are now bundled with the app itself so offline support stays reliable under any network conditions."
     },
     {
         date: "2026-04-23",
         category: "Improvement",
         headline: "Search links now keep their chosen price order",
-        summary: "If you open a search link that asks for Price: Low to High or Price: High to Low, the product results now load in that order right away instead of quietly falling back to relevance. The store also keeps its backup social links ready when a merchant has not filled them in yet, so the footer still shows a complete set of brand channels on lightly configured shops."
+        summary:
+            "If you open a search link that asks for Price: Low to High or Price: High to Low, the product results now load in that order right away instead of quietly falling back to relevance. The store also keeps its backup social links ready when a merchant has not filled them in yet, so the footer still shows a complete set of brand channels on lightly configured shops."
     },
     {
         date: "2026-04-23",
         category: "Improvement",
         headline: "Wrong-URL pages now open a browsable carousel of collections instead of a dead end",
-        summary: "Typing a link that doesn't exist — or landing on an old URL that's been removed — used to show a plain error screen with a single Return Home button. The 404 page now shows a drag-to-scroll carousel of the store's collections directly below the heading, with the same card style used on the homepage: a tall photo tile, the collection name at the bottom, and a soft gradient for readability. You can sweep through them with a swipe, a mouse wheel, or the arrow keys and jump straight into the aisle you were probably looking for. The same upgrade touches smaller error screens scattered across the store (account sub-pages, order detail pages, policies that have been renamed): each now shows a proper status, a clearer message, and a Try Again button alongside Return Home, instead of a bare link."
+        summary:
+            "Typing a link that doesn't exist — or landing on an old URL that's been removed — used to show a plain error screen with a single Return Home button. The 404 page now shows a drag-to-scroll carousel of the store's collections directly below the heading, with the same card style used on the homepage: a tall photo tile, the collection name at the bottom, and a soft gradient for readability. You can sweep through them with a swipe, a mouse wheel, or the arrow keys and jump straight into the aisle you were probably looking for. The same upgrade touches smaller error screens scattered across the store (account sub-pages, order detail pages, policies that have been renamed): each now shows a proper status, a clearer message, and a Try Again button alongside Return Home, instead of a bare link."
     },
     {
         date: "2026-04-23",
         category: "Improvement",
         headline: "Contact section removed — reach support through the live chat button instead",
-        summary: "The dedicated contact card on the homepage and the email and phone strip in the footer have been retired to keep the layout cleaner and more focused. The floating Messenger and WhatsApp chat button is still available on every page, giving you a faster and more direct way to reach support from wherever you are in the store."
+        summary:
+            "The dedicated contact card on the homepage and the email and phone strip in the footer have been retired to keep the layout cleaner and more focused. The floating Messenger and WhatsApp chat button is still available on every page, giving you a faster and more direct way to reach support from wherever you are in the store."
     },
     {
         date: "2026-04-22",
         category: "Improvement",
         headline: "Product videos now play everywhere a product appears, not just on cards",
-        summary: "When a product's lead media is a video, it now plays consistently across the whole store — in the cart drawer and cart page, in the quick add panel on desktop, in the mobile variant sheet, and in the featured product spotlight on the homepage. Before, those surfaces always showed a still image even when the merchant had set a video as the first media. The switch between video and photo happens automatically based on what the merchant uploaded, so whatever you see on a product card is what you'll see everywhere else. Videos stay muted, loop quietly, and only start loading when they scroll into view — on both mobile and desktop."
+        summary:
+            "When a product's lead media is a video, it now plays consistently across the whole store — in the cart drawer and cart page, in the quick add panel on desktop, in the mobile variant sheet, and in the featured product spotlight on the homepage. Before, those surfaces always showed a still image even when the merchant had set a video as the first media. The switch between video and photo happens automatically based on what the merchant uploaded, so whatever you see on a product card is what you'll see everywhere else. Videos stay muted, loop quietly, and only start loading when they scroll into view — on both mobile and desktop."
     },
     {
         date: "2026-04-22",
         category: "Fix",
         headline: "Photo dots on product cards no longer overlap the Quick Add button",
-        summary: "On product cards with more than one photo or video, the little row of dots that shows which slide you're on used to sit right on top of the Quick Add button on mobile — and slide underneath it on desktop when you hovered. The dots now lift clear of the button automatically: always visible on phones, and rising up to meet the button as it fades in on desktop. Nothing gets hidden behind anything else anymore."
+        summary:
+            "On product cards with more than one photo or video, the little row of dots that shows which slide you're on used to sit right on top of the Quick Add button on mobile — and slide underneath it on desktop when you hovered. The dots now lift clear of the button automatically: always visible on phones, and rising up to meet the button as it fades in on desktop. Nothing gets hidden behind anything else anymore."
     },
     {
         date: "2026-04-22",
         category: "Design",
         headline: "Gallery photos on mobile now show without the dark gradient overlay",
-        summary: "On phones, every gallery photo used to sit behind a permanent dark gradient at the bottom of the card. The overlay has been removed on small screens so the photography itself takes centre stage — the image fills the card cleanly with nothing obscuring the lower edge. Tablets and desktops keep the overlay behaviour they had, including the hover reveal on pointer devices."
+        summary:
+            "On phones, every gallery photo used to sit behind a permanent dark gradient at the bottom of the card. The overlay has been removed on small screens so the photography itself takes centre stage — the image fills the card cleanly with nothing obscuring the lower edge. Tablets and desktops keep the overlay behaviour they had, including the hover reveal on pointer devices."
     },
     {
         date: "2026-04-22",
         category: "Improvement",
         headline: "Product cards now browse photos and videos in one carousel",
-        summary: "Product cards used to show either a video or a stack of photos. Now every photo and video appears together in a single carousel, so you can flip between the hero video and the detail shots without leaving the card. Videos only start loading when the card is near the screen and pause when you scroll past, keeping browsing smooth even on pages with lots of products."
+        summary:
+            "Product cards used to show either a video or a stack of photos. Now every photo and video appears together in a single carousel, so you can flip between the hero video and the detail shots without leaving the card. Videos only start loading when the card is near the screen and pause when you scroll past, keeping browsing smooth even on pages with lots of products."
     },
     {
         date: "2026-04-22",
         category: "New Feature",
         headline: "Product cards now play a short video when the first media asset is a video",
-        summary: "If a product's first media asset is a video, shoppers now see that video playing silently on the product card — across collections, search results, related products, cart suggestions, and every other place cards appear. Videos autoplay muted with a poster placeholder that keeps the layout stable, and they only start loading once the card is close to the screen so pages with many products stay fast. Products without a video continue to use the existing image carousel unchanged."
+        summary:
+            "If a product's first media asset is a video, shoppers now see that video playing silently on the product card — across collections, search results, related products, cart suggestions, and every other place cards appear. Videos autoplay muted with a poster placeholder that keeps the layout stable, and they only start loading once the card is close to the screen so pages with many products stay fast. Products without a video continue to use the existing image carousel unchanged."
     },
     {
         date: "2026-04-22",
         category: "Performance",
         headline: "Gallery photos now load in the most efficient format, sized to your screen",
-        summary: "The gallery used to serve the full-resolution original of every product photo regardless of whether you were on a phone or a desktop. Every image is now delivered in AVIF at a width that matches your screen, with a subtle shimmer placeholder while it loads. Gallery pages feel dramatically lighter on mobile networks and the first row of photos is prioritised for faster initial paint."
+        summary:
+            "The gallery used to serve the full-resolution original of every product photo regardless of whether you were on a phone or a desktop. Every image is now delivered in AVIF at a width that matches your screen, with a subtle shimmer placeholder while it loads. Gallery pages feel dramatically lighter on mobile networks and the first row of photos is prioritised for faster initial paint."
     },
     {
         date: "2026-04-21",
         category: "New Feature",
         headline: "Product pages now surface the full set of product tags as pill badges",
-        summary: "Every product detail page now lists the product's categorization tags as compact, muted pill badges below the description. Shoppers can see at a glance what categories, themes, or attributes a product belongs to — without cluttering the page or competing with promotional badges like New, Premium, or Pre-Order."
+        summary:
+            "Every product detail page now lists the product's categorization tags as compact, muted pill badges below the description. Shoppers can see at a glance what categories, themes, or attributes a product belongs to — without cluttering the page or competing with promotional badges like New, Premium, or Pre-Order."
     },
     {
         date: "2026-04-21",
         category: "Design",
         headline: "More breathing room between the footer and the sticky buy button on product pages",
-        summary: "On mobile product pages, the footer now sits further above the sticky Get it Now bar. The copyright row and designer credit are no longer crowded against the button — there's a clear gap so the two feel like distinct layers of the page."
+        summary:
+            "On mobile product pages, the footer now sits further above the sticky Get it Now bar. The copyright row and designer credit are no longer crowded against the button — there's a clear gap so the two feel like distinct layers of the page."
     },
     {
         date: "2026-04-21",
         category: "Performance",
         headline: "Article pages now render instantly instead of fading section-by-section",
-        summary: "Entrance animations on the article body, share row, author bio, back button, and related articles have been removed. All sections are visible the moment the page loads — the reading experience feels faster and nothing scrolls into view as you read."
+        summary:
+            "Entrance animations on the article body, share row, author bio, back button, and related articles have been removed. All sections are visible the moment the page loads — the reading experience feels faster and nothing scrolls into view as you read."
     },
     {
         date: "2026-04-21",
         category: "Design",
         headline: "Share buttons on articles refreshed with stronger presence",
-        summary: "The share row at the bottom of each article has been redesigned — a bolder serif heading with a decorative rule, larger pill buttons with bigger icons, a subtle lift on hover, and tap targets that comfortably exceed accessibility minimums on every screen size."
+        summary:
+            "The share row at the bottom of each article has been redesigned — a bolder serif heading with a decorative rule, larger pill buttons with bigger icons, a subtle lift on hover, and tap targets that comfortably exceed accessibility minimums on every screen size."
     },
     {
         date: "2026-04-21",
         category: "Improvement",
         headline: "Featured blog card is now fully tappable on the blog index",
-        summary: "Tapping anywhere on the featured article card at the top of the blog page now opens the article — not just the Read Article button. The card is also taller on phones so the image and headline carry more weight as the entry point to reading."
+        summary:
+            "Tapping anywhere on the featured article card at the top of the blog page now opens the article — not just the Read Article button. The card is also taller on phones so the image and headline carry more weight as the entry point to reading."
     },
     {
         date: "2026-04-21",
         category: "Fix",
         headline: "Blog index no longer repeats a lone article twice",
-        summary: "When a store has only a single published article, the blog page now shows the featured hero on its own without repeating the same article in a list directly below it."
+        summary:
+            "When a store has only a single published article, the blog page now shows the featured hero on its own without repeating the same article in a list directly below it."
     },
     {
         date: "2026-04-21",
         category: "Improvement",
         headline: "Recent searches now show a thumbnail of the product you last tapped",
-        summary: "When you search and tap a product result, that search term is saved alongside the product's thumbnail. The next time you open search, your recent search chips show a small image next to each term — making it much faster to recognise and return to things you were looking at."
+        summary:
+            "When you search and tap a product result, that search term is saved alongside the product's thumbnail. The next time you open search, your recent search chips show a small image next to each term — making it much faster to recognise and return to things you were looking at."
     },
     {
         date: "2026-04-21",
         category: "New Feature",
         headline: "Blog articles now available as an RSS feed",
-        summary: "All published blog posts are now syndicated at /blogs/feed.xml in RSS 2.0 format. Subscribe in any RSS reader to get new articles automatically, or share the feed link with newsletter tools and content aggregators."
+        summary:
+            "All published blog posts are now syndicated at /blogs/feed.xml in RSS 2.0 format. Subscribe in any RSS reader to get new articles automatically, or share the feed link with newsletter tools and content aggregators."
     },
     {
         date: "2026-04-21",
         category: "Design",
         headline: "Quick-add sheet polished to match the site's visual style",
-        summary: "The variant-selection sheet that slides up on mobile when you tap a product's quick-add button has been refined throughout — title weight and colour now match the rest of the site, option group labels (Size, Bundle, etc.) are shown above each set of pills, and all interactive buttons now share the same animation and focus behaviour as the rest of the store."
+        summary:
+            "The variant-selection sheet that slides up on mobile when you tap a product's quick-add button has been refined throughout — title weight and colour now match the rest of the site, option group labels (Size, Bundle, etc.) are shown above each set of pills, and all interactive buttons now share the same animation and focus behaviour as the rest of the store."
     },
     {
         date: "2026-04-21",
         category: "Fix",
         headline: "Trackpad scroll now works on cart suggestions carousel",
-        summary: "Two-finger horizontal trackpad scroll through product suggestions in the cart drawer is fully working. Touch swipe on mobile also restored. Mouse drag-to-scroll remains off."
+        summary:
+            "Two-finger horizontal trackpad scroll through product suggestions in the cart drawer is fully working. Touch swipe on mobile also restored. Mouse drag-to-scroll remains off."
     },
     {
         date: "2026-04-21",
         category: "Fix",
-        headline: "\"Get Now\" in cart suggestions now opens the size/colour picker",
-        summary: "Tapping \"Get Now\" on a product in the suggested items carousel inside your bag now correctly opens the variant selector so you can choose your size, colour, or style before adding — instead of silently adding the default option."
+        headline: '"Get Now" in cart suggestions now opens the size/colour picker',
+        summary:
+            'Tapping "Get Now" on a product in the suggested items carousel inside your bag now correctly opens the variant selector so you can choose your size, colour, or style before adding — instead of silently adding the default option.'
     },
     {
         date: "2026-04-21",
         category: "Design",
         headline: "Featured product action buttons are now full-width on small screens",
-        summary: "On phones with narrow screens, the call-to-action buttons in the homepage featured product section now span the full available width, making them easier to tap. The newsletter section on mobile also shows a more compact layout to keep the page clean."
+        summary:
+            "On phones with narrow screens, the call-to-action buttons in the homepage featured product section now span the full available width, making them easier to tap. The newsletter section on mobile also shows a more compact layout to keep the page clean."
     },
     {
         date: "2026-04-21",
         category: "Improvement",
         headline: "Wishlist can now be sorted alphabetically by product name",
-        summary: "Two new sort options — A to Z and Z to A — have been added to the wishlist controls, making it easy to find a specific saved item by name when your list is long. The sort and view controls have also been reorganised into a cleaner layout on all screen sizes."
+        summary:
+            "Two new sort options — A to Z and Z to A — have been added to the wishlist controls, making it easy to find a specific saved item by name when your list is long. The sort and view controls have also been reorganised into a cleaner layout on all screen sizes."
     },
     {
         date: "2026-04-20",
         category: "Improvement",
         headline: "Only the updated item's price animates during cart changes",
-        summary: "When you change the quantity of one item, only that item's price shows the loading shimmer — all other items in your bag remain fully visible and static. The checkout total still updates to reflect any change."
+        summary:
+            "When you change the quantity of one item, only that item's price shows the loading shimmer — all other items in your bag remain fully visible and static. The checkout total still updates to reflect any change."
     },
     {
         date: "2026-04-20",
         category: "Design",
         headline: "Prices animate gracefully while your cart is updating",
-        summary: "Instead of showing a spinner or going blank, prices in your bag and in the checkout button now display a soft shimmer while a cart change is in progress. The Checkout label and its icon stay visible at all times — only the price itself animates until the updated total arrives."
+        summary:
+            "Instead of showing a spinner or going blank, prices in your bag and in the checkout button now display a soft shimmer while a cart change is in progress. The Checkout label and its icon stay visible at all times — only the price itself animates until the updated total arrives."
     },
     {
         date: "2026-04-20",
         category: "Improvement",
         headline: "Cart removals and quantity changes reflect instantly in your bag",
-        summary: "Removing an item now hides it immediately — no waiting for the server to confirm. Changing a quantity shows the new number right away. Both changes still sync with Shopify in the background, so your cart is always accurate."
+        summary:
+            "Removing an item now hides it immediately — no waiting for the server to confirm. Changing a quantity shows the new number right away. Both changes still sync with Shopify in the background, so your cart is always accurate."
     },
     {
         date: "2026-04-20",
         category: "Improvement",
         headline: "Cart controls freeze instantly while your cart is updating",
-        summary: "Quantity buttons, remove buttons, and quick-add buttons now lock the moment a cart action starts and unlock as soon as it completes. Prices in your bag fade slightly to show they're being recalculated. This prevents double-submissions and makes it immediately obvious that your change is on its way."
+        summary:
+            "Quantity buttons, remove buttons, and quick-add buttons now lock the moment a cart action starts and unlock as soon as it completes. Prices in your bag fade slightly to show they're being recalculated. This prevents double-submissions and makes it immediately obvious that your change is on its way."
     },
     {
         date: "2026-04-19",
         category: "Fix",
         headline: "Navigating back no longer crashes the page in some browsers",
-        summary: "On certain browsers, pressing the back button to return to a product or collection page could cause the page to go blank or throw a script error. The page now reloads cleanly in this situation, so browsing back through your history always works as expected."
+        summary:
+            "On certain browsers, pressing the back button to return to a product or collection page could cause the page to go blank or throw a script error. The page now reloads cleanly in this situation, so browsing back through your history always works as expected."
     },
     {
         date: "2026-04-19",
         category: "Fix",
         headline: "Quick Add now shows a clean placeholder for products with no images",
-        summary: "Opening Quick Add on a product that has no product images previously resulted in a broken layout. The variant selector now shows a clean placeholder instead, so you can still choose your size and add the item to your cart without any visual glitches."
+        summary:
+            "Opening Quick Add on a product that has no product images previously resulted in a broken layout. The variant selector now shows a clean placeholder instead, so you can still choose your size and add the item to your cart without any visual glitches."
     },
     {
         date: "2026-04-19",
         category: "Fix",
         headline: "Product page content no longer hides behind the sticky buy bar on mobile",
-        summary: "On mobile, the content near the bottom of a product page — including the footer — was occasionally tucked behind the sticky Add to Cart bar, making it unreachable. The page now has enough bottom spacing to keep all content accessible."
+        summary:
+            "On mobile, the content near the bottom of a product page — including the footer — was occasionally tucked behind the sticky Add to Cart bar, making it unreachable. The page now has enough bottom spacing to keep all content accessible."
     },
     {
         date: "2026-04-19",
         category: "Improvement",
         headline: "Cart suggestions heading rotates based on your cart",
-        summary: "The heading above the product recommendations carousel in your bag now adapts to whether your cart is empty or has items. Each time you open your bag, a fresh heading is picked from a curated set — so the experience feels a little more considered, and a little less repetitive."
+        summary:
+            "The heading above the product recommendations carousel in your bag now adapts to whether your cart is empty or has items. Each time you open your bag, a fresh heading is picked from a curated set — so the experience feels a little more considered, and a little less repetitive."
     },
     {
         date: "2026-04-19",
         category: "Design",
         headline: "Shopping Summary card refreshed to match the store's visual design",
-        summary: "The price breakdown card on product pages has been redesigned with a refined look — tighter spacing, cleaner typography, and styling consistent with the rest of the store. Savings badges now use the same emerald styling as free shipping indicators, and the current-cart row has a subtle pill treatment for better clarity."
+        summary:
+            "The price breakdown card on product pages has been redesigned with a refined look — tighter spacing, cleaner typography, and styling consistent with the rest of the store. Savings badges now use the same emerald styling as free shipping indicators, and the current-cart row has a subtle pill treatment for better clarity."
     },
     {
         date: "2026-04-19",
         category: "New Feature",
         headline: "Shopping Summary now shows your full price breakdown on product pages",
-        summary: "A Shopping Summary card now appears on every product page, showing the item price, any savings if it's on sale, and the updated cart total after adding the item — so you know exactly what you're committing to before you tap Add to Bag."
+        summary:
+            "A Shopping Summary card now appears on every product page, showing the item price, any savings if it's on sale, and the updated cart total after adding the item — so you know exactly what you're committing to before you tap Add to Bag."
     },
     {
         date: "2026-04-19",
         category: "Design",
         headline: "Cart suggestion cards are now more compact and balanced",
-        summary: "The product suggestions strip inside the cart now shows more cards at once across all screen sizes — giving you a better overview of what's available without needing to scroll as much."
+        summary:
+            "The product suggestions strip inside the cart now shows more cards at once across all screen sizes — giving you a better overview of what's available without needing to scroll as much."
     },
     {
         date: "2026-04-19",
         category: "New Feature",
         headline: "Product pages now show tag badges for special items",
-        summary: "Pre-Order, New, Premium, and Clearance products now display a badge above the product title on the product page so you can quickly identify what makes each item special before adding it to your cart."
+        summary:
+            "Pre-Order, New, Premium, and Clearance products now display a badge above the product title on the product page so you can quickly identify what makes each item special before adding it to your cart."
     },
     {
         date: "2026-04-19",
         category: "Fix",
         headline: "Brand name size is now consistent across the site",
-        summary: "The store name in the navigation bar, the scroll animation that brings it up from the hero, and the full-screen menu header all now render at the same size at every screen width. Previously, the scroll animation would settle at a slightly different size than the nav bar, creating a subtle but visible jump."
+        summary:
+            "The store name in the navigation bar, the scroll animation that brings it up from the hero, and the full-screen menu header all now render at the same size at every screen width. Previously, the scroll animation would settle at a slightly different size than the nav bar, creating a subtle but visible jump."
     },
     {
         date: "2026-04-19",
         category: "Improvement",
         headline: "Button loading states now show a clean spinner instead of loading text",
-        summary: "All action buttons (newsletter, address form, wishlist, return request) now display a consistent spinner during loading — no more text swapping between states. Button dimensions stay stable throughout."
+        summary:
+            "All action buttons (newsletter, address form, wishlist, return request) now display a consistent spinner during loading — no more text swapping between states. Button dimensions stay stable throughout."
     },
     {
         date: "2026-04-19",
@@ -612,7 +676,7 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
         date: "2026-04-19",
         headline: "Sticky buy button now matches your store's color theme",
         summary:
-            "The sticky \"Get it Now\" button that appears at the bottom of the screen on product pages now adapts to your store's color settings. On dark-themed stores it was previously showing as a plain white button — it now blends seamlessly with the rest of the page.",
+            'The sticky "Get it Now" button that appears at the bottom of the screen on product pages now adapts to your store\'s color settings. On dark-themed stores it was previously showing as a plain white button — it now blends seamlessly with the rest of the page.',
         category: "Design"
     },
     {
@@ -640,7 +704,8 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
         date: "2026-04-18",
         category: "Fix",
         headline: "Add to Bag button no longer gets stuck after returning from the checkout page",
-        summary: "If you tapped 'Add to Bag' and then navigated back from the Shopify checkout page, the button could become unresponsive for the rest of the session — requiring a page refresh to shop again. It now resets correctly when you return, so you can keep adding items without any interruption."
+        summary:
+            "If you tapped 'Add to Bag' and then navigated back from the Shopify checkout page, the button could become unresponsive for the rest of the session — requiring a page refresh to shop again. It now resets correctly when you return, so you can keep adding items without any interruption."
     },
     {
         date: "2026-04-18",
@@ -653,14 +718,14 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
         date: "2026-04-17",
         headline: "Option group labels now appear on mobile product pages",
         summary:
-            "When browsing a product with multiple option types — like Size and Color — the label above each group (e.g. \"Size\", \"Color\") was only showing on desktop. On mobile, you'd see the option buttons with no indication of what they were. Labels now appear on mobile too, so it's always clear what you're choosing.",
+            'When browsing a product with multiple option types — like Size and Color — the label above each group (e.g. "Size", "Color") was only showing on desktop. On mobile, you\'d see the option buttons with no indication of what they were. Labels now appear on mobile too, so it\'s always clear what you\'re choosing.',
         category: "Fix"
     },
     {
         date: "2026-04-17",
         headline: "Products with no variants no longer show a stray option label",
         summary:
-            "Some products don't have selectable options like size or color — but Shopify was still showing a placeholder label called \"Default Title\" on their product pages. That label is now hidden across all screen sizes, including the full-height mobile section, so single-variant products look clean and uncluttered without breaking add-to-cart.",
+            'Some products don\'t have selectable options like size or color — but Shopify was still showing a placeholder label called "Default Title" on their product pages. That label is now hidden across all screen sizes, including the full-height mobile section, so single-variant products look clean and uncluttered without breaking add-to-cart.',
         category: "Fix"
     },
     {
@@ -724,14 +789,15 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
         date: "2026-04-15",
         category: "Improvement",
         headline: "App updates now apply automatically without any action from you",
-        summary: "When the store app receives an update, the changes now take effect on your next visit — with no 'A new version is available' banner to dismiss or 'Refresh' prompt to acknowledge."
+        summary:
+            "When the store app receives an update, the changes now take effect on your next visit — with no 'A new version is available' banner to dismiss or 'Refresh' prompt to acknowledge."
     },
     {
         date: "2026-04-15",
         time: "6pm",
         headline: "Search button on the hero now shows a rotating label as you hover",
         summary:
-            "On desktop, hovering the search button in the hero section smoothly expands it to reveal a rotating prompt — cycling through phrases like \"What are you looking for?\" and \"Search the collection\". On mobile and tablet, the button fills the available row width and cycles through labels automatically. Respects reduced-motion preferences.",
+            'On desktop, hovering the search button in the hero section smoothly expands it to reveal a rotating prompt — cycling through phrases like "What are you looking for?" and "Search the collection". On mobile and tablet, the button fills the available row width and cycles through labels automatically. Respects reduced-motion preferences.',
         category: "Design"
     },
     {
@@ -747,7 +813,7 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
         time: "3pm",
         headline: "Changelog dates now show the time each update shipped",
         summary:
-            "Each date group on the updates page now shows the time of day alongside the date — like \"3pm\" or \"11am\" — so you can see not just which day an update landed, but roughly when during the day it was released.",
+            'Each date group on the updates page now shows the time of day alongside the date — like "3pm" or "11am" — so you can see not just which day an update landed, but roughly when during the day it was released.',
         category: "Design"
     },
     {
@@ -787,7 +853,7 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
         time: "11am",
         headline: "Changelog dates now show how long ago each update was",
         summary:
-            "Date group headers on the updates page now display a relative label alongside the calendar date — \"Today\", \"Yesterday\", \"3 days ago\", and so on. No need to do the mental arithmetic yourself.",
+            'Date group headers on the updates page now display a relative label alongside the calendar date — "Today", "Yesterday", "3 days ago", and so on. No need to do the mental arithmetic yourself.',
         category: "Improvement"
     },
     {
@@ -834,7 +900,8 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
         date: "2026-04-10",
         category: "Improvement",
         headline: "Installed app users are now prompted to open the app, not install it again",
-        summary: "If you have already added the store to your home screen, the install button now recognises this and shows a prompt to open the installed app directly — instead of offering to install something you already have."
+        summary:
+            "If you have already added the store to your home screen, the install button now recognises this and shows a prompt to open the installed app directly — instead of offering to install something you already have."
     },
     {
         date: "2026-04-10",
@@ -929,7 +996,7 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
         time: "10am",
         headline: "Featured product section has a cleaner, more balanced layout",
         summary:
-            "Resized the featured product title and repositioned the action buttons so the primary \"Add to Cart\" action is always the most prominent element. The layout now feels more editorial and less cluttered.",
+            'Resized the featured product title and repositioned the action buttons so the primary "Add to Cart" action is always the most prominent element. The layout now feels more editorial and less cluttered.',
         category: "Design"
     },
     {
@@ -1009,68 +1076,78 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
         time: "9am",
         headline: "All Products count in the menu is now accurate",
         summary:
-            "The number shown next to \"All Products\" in the full-screen navigation menu was sometimes displaying an incorrect total. It now always reflects the actual product count in the store.",
+            'The number shown next to "All Products" in the full-screen navigation menu was sometimes displaying an incorrect total. It now always reflects the actual product count in the store.',
         category: "Fix"
     },
     {
         date: "2026-04-05",
         category: "New Feature",
         headline: "Collections can now be sorted by best sellers",
-        summary: "A 'Best Selling' option has been added to the sort controls on all collection pages, so you can quickly see the most popular products in any category without having to guess which ones other shoppers prefer."
+        summary:
+            "A 'Best Selling' option has been added to the sort controls on all collection pages, so you can quickly see the most popular products in any category without having to guess which ones other shoppers prefer."
     },
     {
         date: "2026-04-04",
         category: "New Feature",
         headline: "Newsletter sign-up section added to the homepage",
-        summary: "A newsletter subscription block now appears on the homepage between the FAQ and the footer, making it easy for visitors to sign up for updates without navigating away from what they are browsing."
+        summary:
+            "A newsletter subscription block now appears on the homepage between the FAQ and the footer, making it easy for visitors to sign up for updates without navigating away from what they are browsing."
     },
     {
         date: "2026-04-02",
         category: "Design",
         headline: "Account pages have been refreshed with a consistent card-based layout",
-        summary: "Your order history, saved addresses, profile settings, and other account sections have been redesigned with a unified card layout and subtle entrance animations — making the account area feel more polished and easier to navigate."
+        summary:
+            "Your order history, saved addresses, profile settings, and other account sections have been redesigned with a unified card layout and subtle entrance animations — making the account area feel more polished and easier to navigate."
     },
     {
         date: "2026-04-01",
         category: "Fix",
         headline: "Homepage no longer shows a dark blank area when loading",
-        summary: "On certain devices and browsers, the top section of the homepage briefly appeared as a solid dark block before the hero image and content loaded in. The page now renders cleanly from the first frame, and the hero animation plays reliably every time."
+        summary:
+            "On certain devices and browsers, the top section of the homepage briefly appeared as a solid dark block before the hero image and content loaded in. The page now renders cleanly from the first frame, and the hero animation plays reliably every time."
     },
     {
         date: "2026-04-01",
         category: "Improvement",
         headline: "Blog page now shows a helpful message when no articles are published yet",
-        summary: "When the blog has no published articles, the page previously appeared blank. It now shows a friendly message along with a direct link to browse the shop, so visitors always have somewhere useful to go."
+        summary:
+            "When the blog has no published articles, the page previously appeared blank. It now shows a friendly message along with a direct link to browse the shop, so visitors always have somewhere useful to go."
     },
     {
         date: "2026-04-01",
         category: "Fix",
         headline: "Account navigation is now hidden for visitors who are not signed in",
-        summary: "When visiting account-related pages without being logged in, the account navigation sidebar was still showing. It now stays out of the way for signed-out visitors, keeping the page relevant to what you can actually do."
+        summary:
+            "When visiting account-related pages without being logged in, the account navigation sidebar was still showing. It now stays out of the way for signed-out visitors, keeping the page relevant to what you can actually do."
     },
     {
         date: "2026-04-01",
         category: "Fix",
         headline: "Page-not-found errors now show a clean, friendly message",
-        summary: "When you landed on a page that doesn't exist, the error screen used to display the full URL path in the message, which looked technical and confusing. It now shows a short, plain message instead."
+        summary:
+            "When you landed on a page that doesn't exist, the error screen used to display the full URL path in the message, which looked technical and confusing. It now shows a short, plain message instead."
     },
     {
         date: "2026-04-01",
         category: "Fix",
         headline: "Navigating directly to the cart address no longer shows an error",
-        summary: "Typing the cart URL directly into the browser or following an outdated bookmark to the cart page used to return a page-not-found error. It now redirects you to the homepage instead."
+        summary:
+            "Typing the cart URL directly into the browser or following an outdated bookmark to the cart page used to return a page-not-found error. It now redirects you to the homepage instead."
     },
     {
         date: "2026-04-01",
         category: "Improvement",
         headline: "Older product and collection links now redirect to the right page",
-        summary: "Links to products and collections using older URL formats — from previous store setups, social posts, or bookmarks — now automatically redirect to the correct page instead of landing on a 404 error."
+        summary:
+            "Links to products and collections using older URL formats — from previous store setups, social posts, or bookmarks — now automatically redirect to the correct page instead of landing on a 404 error."
     },
     {
         date: "2026-03-26",
         category: "Improvement",
         headline: "Log out and cancel subscription buttons now show a loading indicator",
-        summary: "Clicking 'Log out' or 'Cancel subscription' now immediately disables the button and shows a spinner while the action processes — preventing accidental double-taps and making it clear that your request is on its way."
+        summary:
+            "Clicking 'Log out' or 'Cancel subscription' now immediately disables the button and shows a spinner while the action processes — preventing accidental double-taps and making it clear that your request is on its way."
     },
     {
         date: "2026-03-25",
@@ -1083,7 +1160,8 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
         date: "2026-03-23",
         category: "Fix",
         headline: "Brand marquee no longer pauses when you hover over it",
-        summary: "The scrolling strip at the bottom of the hero section used to stop moving when you moved your cursor over it. It now scrolls continuously — hovering over it no longer interrupts the animation."
+        summary:
+            "The scrolling strip at the bottom of the hero section used to stop moving when you moved your cursor over it. It now scrolls continuously — hovering over it no longer interrupts the animation."
     },
     {
         date: "2026-03-22",
@@ -1103,7 +1181,8 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
         date: "2026-03-09",
         category: "Fix",
         headline: "Brand name animation plays correctly as you scroll",
-        summary: "The animation that brings the store name into view as you scroll down past the hero section was not triggering reliably. It now plays smoothly on every page load."
+        summary:
+            "The animation that brings the store name into view as you scroll down past the hero section was not triggering reliably. It now plays smoothly on every page load."
     },
     {
         date: "2026-03-08",
@@ -1116,7 +1195,8 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
         date: "2026-03-06",
         category: "Fix",
         headline: "Navigation links are now easier to read",
-        summary: "The colour of links in the top navigation bar has been adjusted for better readability, making it clearer which items are tappable and where they take you."
+        summary:
+            "The colour of links in the top navigation bar has been adjusted for better readability, making it clearer which items are tappable and where they take you."
     },
     {
         date: "2026-03-06",
@@ -1136,7 +1216,8 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
         date: "2026-03-04",
         category: "Fix",
         headline: "Checkout button now correctly opens the checkout page",
-        summary: "The 'Proceed to Checkout' button was not navigating to the checkout page — clicking it did nothing. It now takes you to your cart checkout every time."
+        summary:
+            "The 'Proceed to Checkout' button was not navigating to the checkout page — clicking it did nothing. It now takes you to your cart checkout every time."
     },
     {
         date: "2026-03-03",

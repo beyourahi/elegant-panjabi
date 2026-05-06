@@ -8,8 +8,8 @@
  */
 export const BRAND_NAME_SIZES_PX = {
     mobile: 14, // text-sm = 0.875rem  — viewport < 640px
-    sm: 18,     // text-lg = 1.125rem  — 640px ≤ viewport < 768px
-    md: 20,     // text-xl = 1.25rem   — viewport ≥ 768px
+    sm: 18, // text-lg = 1.125rem  — 640px ≤ viewport < 768px
+    md: 20 // text-xl = 1.25rem   — viewport ≥ 768px
 } as const;
 
 /** Breakpoint boundaries matching the Tailwind sm/md defaults. */

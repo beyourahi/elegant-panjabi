@@ -101,7 +101,12 @@ export function NewsletterForm({variant = "footer", className}: NewsletterFormPr
                 >
                     Stay in the Loop
                 </h3>
-                <p className={cn("text-base", isFooter ? "hidden md:block text-primary-foreground/70" : "text-muted-foreground")}>
+                <p
+                    className={cn(
+                        "text-base",
+                        isFooter ? "hidden md:block text-primary-foreground/70" : "text-muted-foreground"
+                    )}
+                >
                     Be the first to know about new arrivals, exclusive offers, and behind-the-scenes stories.
                 </p>
             </div>

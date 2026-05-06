@@ -123,9 +123,7 @@ const SummaryContent = ({
             <div className="border-t border-border" />
 
             <div className="flex items-center justify-between pt-0.5">
-                <span className="text-sm font-medium text-foreground">
-                    {hasExistingCart ? "New Total" : "Total"}
-                </span>
+                <span className="text-sm font-medium text-foreground">{hasExistingCart ? "New Total" : "Total"}</span>
                 <span className="font-mono tabular-nums text-base font-bold text-foreground">
                     {formatPrice(hasExistingCart ? newCartTotal : totalPrice, currencyCode)}
                 </span>

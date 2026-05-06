@@ -7,12 +7,7 @@
  * never included.
  */
 
-export type ChangelogCategory =
-    | "New Feature"
-    | "Improvement"
-    | "Fix"
-    | "Performance"
-    | "Design";
+export type ChangelogCategory = "New Feature" | "Improvement" | "Fix" | "Performance" | "Design";
 
 /** A single user-facing changelog entry. */
 export type ChangelogEntry = {

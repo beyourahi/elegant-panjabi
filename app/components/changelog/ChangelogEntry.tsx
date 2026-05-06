@@ -28,19 +28,19 @@ const CATEGORY_STYLES: Record<ChangelogCategory, CategoryStyle> = {
         background: "var(--brand-primary-subtle)",
         text: "var(--brand-primary-subtle-foreground)"
     },
-    "Improvement": {
+    Improvement: {
         background: "oklch(0.94 0.04 215)",
         text: "oklch(0.18 0.01 215)"
     },
-    "Fix": {
+    Fix: {
         background: "oklch(0.93 0.04 185)",
         text: "oklch(0.35 0.10 185)"
     },
-    "Performance": {
+    Performance: {
         background: "var(--brand-accent-subtle)",
         text: "oklch(0.38 0.14 70)"
     },
-    "Design": {
+    Design: {
         background: "oklch(0.93 0.04 270)",
         text: "oklch(0.46 0.12 270)"
     }
@@ -51,10 +51,10 @@ const CATEGORY_STYLES: Record<ChangelogCategory, CategoryStyle> = {
  */
 const CATEGORY_DOT_COLORS: Record<ChangelogCategory, string> = {
     "New Feature": "var(--brand-primary)",
-    "Improvement": "oklch(0.56 0.12 215)",
-    "Fix": "oklch(0.55 0.12 185)",
-    "Performance": "var(--brand-accent)",
-    "Design": "oklch(0.46 0.12 270)"
+    Improvement: "oklch(0.56 0.12 215)",
+    Fix: "oklch(0.55 0.12 185)",
+    Performance: "var(--brand-accent)",
+    Design: "oklch(0.46 0.12 270)"
 };
 
 /** Animation delay cap (11 items * 40ms = 440ms max) */

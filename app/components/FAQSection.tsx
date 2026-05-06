@@ -79,9 +79,7 @@ export function FAQSection({faqItems, maxItems = 10, title = "Frequently Asked Q
         <section className="py-10 sm:py-12 md:py-16">
             {/* Mobile header - shown above grid on mobile/tablet */}
             <div className="lg:hidden flex items-end justify-between gap-3 sm:gap-4 mb-5 sm:mb-6 md:mb-8">
-                <h2 className="font-serif text-2xl sm:text-3xl font-medium text-primary mb-0">
-                    {title}
-                </h2>
+                <h2 className="font-serif text-2xl sm:text-3xl font-medium text-primary mb-0">{title}</h2>
                 <Link
                     to="/faq"
                     prefetch="viewport"

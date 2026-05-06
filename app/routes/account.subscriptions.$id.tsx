@@ -377,7 +377,8 @@ export default function SubscriptionDetail() {
                                         <Badge variant={statusConfig.variant}>{statusConfig.label}</Badge>
                                     </div>
                                     <p className="text-muted-foreground text-sm md:text-base mt-1">
-                                        {frequency} &middot; Created {new Date(subscription.createdAt).toLocaleDateString()}
+                                        {frequency} &middot; Created{" "}
+                                        {new Date(subscription.createdAt).toLocaleDateString()}
                                     </p>
                                 </div>
                             </div>
@@ -423,7 +424,9 @@ export default function SubscriptionDetail() {
                                     <ShoppingBagIcon className="size-5 md:size-6 text-muted-foreground" />
                                 </div>
                                 <div>
-                                    <CardTitle className="text-base font-serif font-medium tracking-tight">Subscription Items</CardTitle>
+                                    <CardTitle className="text-base font-serif font-medium tracking-tight">
+                                        Subscription Items
+                                    </CardTitle>
                                     <CardDescription>Products included in this subscription</CardDescription>
                                 </div>
                             </div>
@@ -431,10 +434,7 @@ export default function SubscriptionDetail() {
                         <CardContent>
                             <div className="space-y-3">
                                 {subscription.lines.nodes.map(line => (
-                                    <div
-                                        key={line.id}
-                                        className="flex items-center gap-4 rounded-xl bg-muted/30 p-3"
-                                    >
+                                    <div key={line.id} className="flex items-center gap-4 rounded-xl bg-muted/30 p-3">
                                         {/* Product Image */}
                                         {line.image ? (
                                             <div className="size-16 sm:size-20 shrink-0 rounded-xl overflow-hidden ring-1 ring-border/50 shadow-sm">
@@ -453,9 +453,13 @@ export default function SubscriptionDetail() {
 
                                         {/* Product Info */}
                                         <div className="flex-1 min-w-0">
-                                            <p className="font-serif font-medium text-foreground truncate">{line.title}</p>
+                                            <p className="font-serif font-medium text-foreground truncate">
+                                                {line.title}
+                                            </p>
                                             {line.variantTitle && (
-                                                <p className="text-sm text-muted-foreground truncate">{line.variantTitle}</p>
+                                                <p className="text-sm text-muted-foreground truncate">
+                                                    {line.variantTitle}
+                                                </p>
                                             )}
                                             <p className="text-sm text-muted-foreground mt-1">Qty: {line.quantity}</p>
                                         </div>
@@ -487,7 +491,9 @@ export default function SubscriptionDetail() {
                                         <CalendarIcon className="size-5 md:size-6 text-muted-foreground" />
                                     </div>
                                     <div>
-                                        <CardTitle className="text-base font-serif font-medium tracking-tight">Next Billing</CardTitle>
+                                        <CardTitle className="text-base font-serif font-medium tracking-tight">
+                                            Next Billing
+                                        </CardTitle>
                                     </div>
                                 </div>
                             </CardHeader>
@@ -514,12 +520,16 @@ export default function SubscriptionDetail() {
                                         <CreditCardIcon className="size-5 md:size-6 text-muted-foreground" />
                                     </div>
                                     <div>
-                                        <CardTitle className="text-base font-serif font-medium tracking-tight">Payment Status</CardTitle>
+                                        <CardTitle className="text-base font-serif font-medium tracking-tight">
+                                            Payment Status
+                                        </CardTitle>
                                     </div>
                                 </div>
                             </CardHeader>
                             <CardContent>
-                                <Badge variant={subscription.lastPaymentStatus === "SUCCEEDED" ? "default" : "secondary"}>
+                                <Badge
+                                    variant={subscription.lastPaymentStatus === "SUCCEEDED" ? "default" : "secondary"}
+                                >
                                     {subscription.lastPaymentStatus ?? "N/A"}
                                 </Badge>
                             </CardContent>
@@ -537,7 +547,9 @@ export default function SubscriptionDetail() {
                                         <CalendarIcon className="size-5 md:size-6 text-muted-foreground" />
                                     </div>
                                     <div>
-                                        <CardTitle className="text-base font-serif font-medium tracking-tight">Upcoming Billing Cycles</CardTitle>
+                                        <CardTitle className="text-base font-serif font-medium tracking-tight">
+                                            Upcoming Billing Cycles
+                                        </CardTitle>
                                         <CardDescription>Skip or restore upcoming deliveries</CardDescription>
                                     </div>
                                 </div>
@@ -602,7 +614,9 @@ export default function SubscriptionDetail() {
                                         <PackageSearchIcon className="size-5 md:size-6 text-muted-foreground" />
                                     </div>
                                     <div>
-                                        <CardTitle className="text-base font-serif font-medium tracking-tight">Recent Orders</CardTitle>
+                                        <CardTitle className="text-base font-serif font-medium tracking-tight">
+                                            Recent Orders
+                                        </CardTitle>
                                         <CardDescription>Orders generated from this subscription</CardDescription>
                                     </div>
                                 </div>
@@ -615,7 +629,10 @@ export default function SubscriptionDetail() {
                                             className="flex items-center justify-between gap-3 rounded-xl bg-muted/30 p-3"
                                         >
                                             <div className="min-w-0">
-                                                <Link to="/account/orders" className="font-serif font-medium text-foreground hover:text-primary sleek">
+                                                <Link
+                                                    to="/account/orders"
+                                                    className="font-serif font-medium text-foreground hover:text-primary sleek"
+                                                >
                                                     {order.name}
                                                 </Link>
                                                 <p className="text-sm text-muted-foreground">
@@ -645,7 +662,9 @@ export default function SubscriptionDetail() {
                                     <SlidersHorizontalIcon className="size-5 md:size-6 text-muted-foreground" />
                                 </div>
                                 <div>
-                                    <CardTitle className="text-base font-serif font-medium tracking-tight">Manage Subscription</CardTitle>
+                                    <CardTitle className="text-base font-serif font-medium tracking-tight">
+                                        Manage Subscription
+                                    </CardTitle>
                                     <CardDescription>Pause, resume, or cancel your subscription</CardDescription>
                                 </div>
                             </div>
@@ -691,9 +710,9 @@ export default function SubscriptionDetail() {
                                             <AlertDialogHeader>
                                                 <AlertDialogTitle>Cancel Subscription?</AlertDialogTitle>
                                                 <AlertDialogDescription>
-                                                    This action cannot be undone. Once cancelled, you will no longer receive
-                                                    shipments and will need to create a new subscription if you change your
-                                                    mind.
+                                                    This action cannot be undone. Once cancelled, you will no longer
+                                                    receive shipments and will need to create a new subscription if you
+                                                    change your mind.
                                                 </AlertDialogDescription>
                                             </AlertDialogHeader>
                                             <AlertDialogFooter>
@@ -718,7 +737,10 @@ export default function SubscriptionDetail() {
                             {/* Back link with arrow icon */}
                             <div className="pt-2">
                                 <Button variant="link" className="h-auto p-0 group" asChild>
-                                    <Link to="/account/subscriptions" className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground sleek">
+                                    <Link
+                                        to="/account/subscriptions"
+                                        className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground sleek"
+                                    >
                                         <ArrowLeftIcon className="size-4 sleek group-hover:-translate-x-0.5" />
                                         Back to Subscriptions
                                     </Link>

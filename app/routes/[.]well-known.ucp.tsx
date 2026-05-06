@@ -47,7 +47,7 @@ import {buildUcpProfile} from "~/lib/agentic/ucp-profile";
  * The response is cached for 1 hour with a 5-hour stale-while-revalidate window.
  */
 export function loader({request, context}: Route.LoaderArgs) {
-    const profile = buildUcpProfile(context.env as unknown as Record<string, string | undefined> ?? {}, request);
+    const profile = buildUcpProfile((context.env as unknown as Record<string, string | undefined>) ?? {}, request);
 
     return new Response(JSON.stringify(profile), {
         status: 200,

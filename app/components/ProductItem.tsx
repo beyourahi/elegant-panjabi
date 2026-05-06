@@ -453,7 +453,9 @@ export function ProductItem({
                 viewTransition
                 className={cn(
                     "flex items-center gap-4 md:gap-6 py-4 md:pl-6 no-underline cursor-pointer",
-                    canHover ? "group motion-interactive motion-surface hover:bg-muted/30" : "motion-surface intent-press active:bg-muted/30",
+                    canHover
+                        ? "group motion-interactive motion-surface hover:bg-muted/30"
+                        : "motion-surface intent-press active:bg-muted/30",
                     "animate-product-fade-in",
                     "relative overflow-visible",
                     compactMode && "py-2 gap-2 md:gap-3",
@@ -485,10 +487,12 @@ export function ProductItem({
                         <ProductImagePlaceholder compact className="w-full h-full rounded-lg" />
                     )}
                     {/* Hover overlay for list variant */}
-                    <div className={cn(
-                        "absolute inset-0 bg-primary/0 motion-overlay rounded-lg",
-                        canHover && "group-hover:bg-primary/5"
-                    )} />
+                    <div
+                        className={cn(
+                            "absolute inset-0 bg-primary/0 motion-overlay rounded-lg",
+                            canHover && "group-hover:bg-primary/5"
+                        )}
+                    />
                 </div>
 
                 {/* Product info inline */}
@@ -750,8 +754,7 @@ export function ProductItem({
                         loading={loading}
                         isOutOfStock={isOutOfStock}
                         hasBottomAction={
-                            !!customActions ||
-                            (!hideDefaultActions && showQuickAdd && "variants" in product)
+                            !!customActions || (!hideDefaultActions && showQuickAdd && "variants" in product)
                         }
                         inCarousel={inCarousel}
                     />
@@ -760,10 +763,12 @@ export function ProductItem({
                 )}
 
                 {/* Hover overlay - subtle darkening effect */}
-                <div className={cn(
-                    "absolute inset-0 bg-primary/0 motion-overlay pointer-events-none z-10",
-                    canHover && !isOutOfStock && "group-hover:bg-primary/5"
-                )} />
+                <div
+                    className={cn(
+                        "absolute inset-0 bg-primary/0 motion-overlay pointer-events-none z-10",
+                        canHover && !isOutOfStock && "group-hover:bg-primary/5"
+                    )}
+                />
 
                 {/* Quick Add Button or Custom Actions - full width at bottom, visible on mobile, show on hover for desktop */}
                 {/* onClick + onPointerDown stop propagation: React portal events (Sheet/Dialog overlay
@@ -806,11 +811,13 @@ export function ProductItem({
             </div>
 
             {/* Product Details */}
-            <div className={cn(
-                "space-y-1",
-                canHover ? "motion-link group-hover:text-primary" : "",
-                compactMode && "space-y-0.5"
-            )}>
+            <div
+                className={cn(
+                    "space-y-1",
+                    canHover ? "motion-link group-hover:text-primary" : "",
+                    compactMode && "space-y-0.5"
+                )}
+            >
                 <ProductTitle
                     title={product.title}
                     gridColumns={gridColumns}

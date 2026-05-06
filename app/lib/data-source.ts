@@ -46,23 +46,11 @@ export interface DataAdapter {
         language?: string;
     }): Promise<UcpProductPage>;
     /** Fetch a single product by its Shopify GID. Returns null when not found. */
-    lookupProduct(variables: {
-        id: string;
-        country?: string;
-        language?: string;
-    }): Promise<UcpProduct | null>;
+    lookupProduct(variables: {id: string; country?: string; language?: string}): Promise<UcpProduct | null>;
     /** Resolves a product from a variant GID. Returns null if the GID is not a Product node. */
-    lookupByVariant(variables: {
-        variantId: string;
-        country?: string;
-        language?: string;
-    }): Promise<UcpProduct | null>;
+    lookupByVariant(variables: {variantId: string; country?: string; language?: string}): Promise<UcpProduct | null>;
     /** Fetch multiple products by GID in a single Storefront API `nodes` query. */
-    bulkLookupProducts(variables: {
-        ids: string[];
-        country?: string;
-        language?: string;
-    }): Promise<UcpProduct[]>;
+    bulkLookupProducts(variables: {ids: string[]; country?: string; language?: string}): Promise<UcpProduct[]>;
 }
 
 /** Minimal Hydrogen storefront client interface needed to construct an adapter. */

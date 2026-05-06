@@ -230,7 +230,9 @@ export function QuickAddDialog({product, open, onOpenChange}: QuickAddDialogProp
 
     // Get all product images — prefer media (already fetched) over the redundant images field
     const productImages: QuickAddImage[] = (() => {
-        const mediaImages = extractImagesFromMedia(product.media?.nodes as Parameters<typeof extractImagesFromMedia>[0]);
+        const mediaImages = extractImagesFromMedia(
+            product.media?.nodes as Parameters<typeof extractImagesFromMedia>[0]
+        );
         if (mediaImages.length > 0) return mediaImages;
         if (product.featuredImage) return [product.featuredImage];
         return [];
@@ -314,7 +316,10 @@ export function QuickAddDialog({product, open, onOpenChange}: QuickAddDialogProp
                                     >
                                         <div className="aspect-4/5 w-full">
                                             <Image
-                                                data={{url: image.url, altText: image.altText || `${product.title} - Image ${index + 1}`}}
+                                                data={{
+                                                    url: image.url,
+                                                    altText: image.altText || `${product.title} - Image ${index + 1}`
+                                                }}
                                                 sizes="(min-width: 1024px) 40vw, 100vw"
                                                 aspectRatio="4/5"
                                                 loading={index === 0 ? "eager" : "lazy"}
@@ -566,15 +571,15 @@ function QuickAddCartButton({
                     action: CartForm.ACTIONS.LinesAdd,
                     inputs: {
                         lines: [
-                                {
-                                    merchandiseId: variant.id,
-                                    quantity,
-                                    selectedVariant: {
-                                        ...variant,
-                                        product: {id: productId, title: productTitle, handle: productHandle}
-                                    }
+                            {
+                                merchandiseId: variant.id,
+                                quantity,
+                                selectedVariant: {
+                                    ...variant,
+                                    product: {id: productId, title: productTitle, handle: productHandle}
                                 }
-                            ]
+                            }
+                        ]
                     }
                 })
             },

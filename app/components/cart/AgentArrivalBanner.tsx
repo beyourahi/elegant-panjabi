@@ -50,12 +50,8 @@ export function AgentArrivalBanner() {
 
             {/* Copy block */}
             <div className="flex-1 min-w-0 space-y-0.5">
-                <p className="text-sm font-medium text-foreground leading-snug">
-                    {copy.title}
-                </p>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                    {copy.subtitle}
-                </p>
+                <p className="text-sm font-medium text-foreground leading-snug">{copy.title}</p>
+                <p className="text-xs text-muted-foreground leading-relaxed">{copy.subtitle}</p>
             </div>
 
             {/* Dismiss button */}

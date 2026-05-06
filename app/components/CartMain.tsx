@@ -26,7 +26,14 @@ import {CartSummary} from "./CartSummary";
 import {AgentArrivalBanner} from "~/components/cart/AgentArrivalBanner";
 import {AgentCartView, type AgentCart} from "~/components/cart/AgentCartView";
 import {Empty, EmptyHeader, EmptyMedia, EmptyTitle} from "~/components/ui/empty";
-import {type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext} from "~/components/ui/carousel";
+import {
+    type CarouselApi,
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselPrevious,
+    CarouselNext
+} from "~/components/ui/carousel";
 import {Skeleton} from "~/components/ui/skeleton";
 import {cn} from "~/lib/utils";
 import {ProductItem} from "~/components/ProductItem";
@@ -79,7 +86,9 @@ export function CartMain({layout, cart: originalCart, isLoggedIn, hasStoreCredit
                 if (!cancelled) setResolvedAuth({isLoggedIn: !!loggedIn, hasStoreCredit: !!credit});
             })
             .catch(() => {});
-        return () => { cancelled = true; };
+        return () => {
+            cancelled = true;
+        };
     }, [isLoggedIn, hasStoreCredit, rootData]);
 
     const resolvedShippingConfig = shippingConfig ?? rootData?.shippingConfig;
@@ -108,7 +117,11 @@ export function CartMain({layout, cart: originalCart, isLoggedIn, hasStoreCredit
                             className="space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6"
                         >
                             {(cart?.lines?.nodes ?? []).map(line => (
-                                <CartLineItem key={line.id} line={line as OptimisticCartLine<CartApiQueryFragment>} layout={layout} />
+                                <CartLineItem
+                                    key={line.id}
+                                    line={line as OptimisticCartLine<CartApiQueryFragment>}
+                                    layout={layout}
+                                />
                             ))}
                         </div>
                         {/* Cart summary - sticky on desktop with responsive top offset */}
@@ -137,7 +150,10 @@ export function CartMain({layout, cart: originalCart, isLoggedIn, hasStoreCredit
 
             {/* Scrollable items area - data-lenis-prevent allows native scroll when Lenis is active */}
             {/* flex flex-col enables mt-auto on the suggestions block to push it toward the bottom */}
-            <div className="flex flex-col flex-1 min-h-0 overflow-y-auto scroll-smooth px-2 sm:px-4 pt-4" data-lenis-prevent>
+            <div
+                className="flex flex-col flex-1 min-h-0 overflow-y-auto scroll-smooth px-2 sm:px-4 pt-4"
+                data-lenis-prevent
+            >
                 <CartEmpty hidden={linesCount} layout={layout} />
                 {linesCount && (
                     <div role="list" aria-label="Cart items" className="space-y-3">
@@ -274,7 +290,6 @@ function CartEmpty({hidden = false, layout}: {hidden: boolean; layout: CartLayou
                     Continue shopping
                 </Link>
             </Empty>
-
         </div>
     );
 }
@@ -329,7 +344,7 @@ const EMPTY_CART_HEADINGS = [
     "You might like these",
     "Discover something you'll love",
     "Hand-picked just for you",
-    "Something caught your eye?",
+    "Something caught your eye?"
 ] as const;
 
 const POPULATED_CART_HEADINGS = [
@@ -337,7 +352,7 @@ const POPULATED_CART_HEADINGS = [
     "Complete the look",
     "Others also loved",
     "Goes great with your choice",
-    "You may also want",
+    "You may also want"
 ] as const;
 
 function CartSuggestions({products, layout, cartLines}: CartSuggestionsProps) {
@@ -374,7 +389,9 @@ function CartSuggestions({products, layout, cartLines}: CartSuggestionsProps) {
             if (e.deltaX > 0) emblaApi.scrollNext();
             else emblaApi.scrollPrev();
             // Hold off new scrolls until the animation settles (~500 ms for duration:25 in Embla).
-            setTimeout(() => { locked = false; }, 500);
+            setTimeout(() => {
+                locked = false;
+            }, 500);
         };
         el.addEventListener("wheel", onWheel, {passive: false});
         return () => el.removeEventListener("wheel", onWheel);
@@ -409,9 +426,7 @@ function CartSuggestions({products, layout, cartLines}: CartSuggestionsProps) {
         >
             <div className="flex items-center gap-2 py-2 px-0">
                 <Sparkles className="size-3 shrink-0 text-primary-foreground/50" />
-                <p className="text-sm font-semibold tracking-wide text-primary-foreground">
-                    {suggestionsHeading}
-                </p>
+                <p className="text-sm font-semibold tracking-wide text-primary-foreground">{suggestionsHeading}</p>
             </div>
             {/* Carousel with navigation controls for desktop users */}
             <div className="relative" ref={carouselWrapperRef}>
@@ -452,24 +467,24 @@ function CartSuggestions({products, layout, cartLines}: CartSuggestionsProps) {
                         ))}
                     </CarouselContent>
 
-                                {/* Navigation arrows - hidden on mobile, shown on tablet+ */}
-                                {/* Custom styling to fit within aside drawer constraints
+                    {/* Navigation arrows - hidden on mobile, shown on tablet+ */}
+                    {/* Custom styling to fit within aside drawer constraints
                                      WCAG Compliance:
                                      - Size: 40px (size-10) → 44px (md:size-11) meets minimum touch target (WCAG 2.5.5)
                                      - Contrast: primary-foreground (#fff) on primary/90 = ~13:1 (WCAG AAA) ✓
                                      - Icons: 3:1 minimum for UI components (WCAG 1.4.11) - actual: ~13:1 ✓
                                      - Focus ring: Inherits from carousel component (14.68:1 contrast) ✓
                                 */}
-                                <CarouselPrevious
-                                    className="left-0 sm:left-1 bg-primary/90 hover:bg-primary text-primary-foreground border-0 size-10 md:size-11"
-                                    aria-label="Previous products"
-                                />
-                                <CarouselNext
-                                    className="right-0 sm:right-1 bg-primary/90 hover:bg-primary text-primary-foreground border-0 size-10 md:size-11"
-                                    aria-label="Next products"
-                                />
-                            </Carousel>
-                        </div>
+                    <CarouselPrevious
+                        className="left-0 sm:left-1 bg-primary/90 hover:bg-primary text-primary-foreground border-0 size-10 md:size-11"
+                        aria-label="Previous products"
+                    />
+                    <CarouselNext
+                        className="right-0 sm:right-1 bg-primary/90 hover:bg-primary text-primary-foreground border-0 size-10 md:size-11"
+                        aria-label="Next products"
+                    />
+                </Carousel>
+            </div>
         </section>
     );
 }
@@ -489,7 +504,10 @@ function CartSuggestionsSkeleton() {
             {/* Product cards skeleton - matches carousel breakpoints */}
             <div className="flex gap-2 md:gap-3 overflow-hidden">
                 {SKELETON_IDS.map(id => (
-                    <div key={id} className="shrink-0 basis-[48%] sm:basis-[40%] lg:basis-[35%] space-y-1.5 sm:space-y-2">
+                    <div
+                        key={id}
+                        className="shrink-0 basis-[48%] sm:basis-[40%] lg:basis-[35%] space-y-1.5 sm:space-y-2"
+                    >
                         <Skeleton className="aspect-4/5 w-full rounded-sm bg-overlay-light-hover" />
                         <Skeleton className="h-2.5 sm:h-3 w-3/4 bg-overlay-light-hover" />
                         <Skeleton className="h-2.5 sm:h-3 w-1/2 bg-overlay-light-hover" />

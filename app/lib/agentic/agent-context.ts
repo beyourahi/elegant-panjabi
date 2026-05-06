@@ -46,6 +46,6 @@ export function extractAgentContext(body: unknown, hydrogenCtx: HydrogenCtx): Ag
         isAgent: true,
         profile,
         storefront: hydrogenCtx.storefront,
-        dataAdapter: hydrogenCtx.dataAdapter,
+        dataAdapter: hydrogenCtx.dataAdapter
     };
 }

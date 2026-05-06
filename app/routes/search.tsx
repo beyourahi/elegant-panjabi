@@ -41,7 +41,15 @@
  */
 
 import * as React from "react";
-import {Link, useLoaderData, useNavigate, useRouteLoaderData, useRouteError, isRouteErrorResponse, useFetcher} from "react-router";
+import {
+    Link,
+    useLoaderData,
+    useNavigate,
+    useRouteLoaderData,
+    useRouteError,
+    isRouteErrorResponse,
+    useFetcher
+} from "react-router";
 import type {Route} from "./+types/search";
 import {Analytics, Image, getSeoMeta} from "@shopify/hydrogen";
 import {SearchForm} from "~/components/SearchForm";
@@ -158,10 +166,9 @@ export async function loader({request, context}: Route.LoaderArgs) {
     if (isAgent) {
         const term = String(url.searchParams.get("q") ?? "").trim();
         if (!term) {
-            return new Response(
-                JSON.stringify({products: [], pageInfo: {hasNextPage: false, endCursor: null}}),
-                {headers: {"Content-Type": "application/x-ucp+json", "Cache-Control": "no-store"}}
-            );
+            return new Response(JSON.stringify({products: [], pageInfo: {hasNextPage: false, endCursor: null}}), {
+                headers: {"Content-Type": "application/x-ucp+json", "Cache-Control": "no-store"}
+            });
         }
         const productsConnection = searchData.products;
         const storeUrl = getStoreUrl(context.env);
@@ -592,9 +599,7 @@ function SearchPageInitialState({
                                 className={cn(
                                     "motion-interactive motion-press cursor-pointer",
                                     // Thumbnail chips use compact left padding so the image sits flush
-                                    entry.image
-                                        ? "pl-1.5 pr-3 sm:pr-4 py-1.5"
-                                        : "px-3 sm:px-4 py-2",
+                                    entry.image ? "pl-1.5 pr-3 sm:pr-4 py-1.5" : "px-3 sm:px-4 py-2",
                                     "min-h-11 inline-flex items-center gap-2",
                                     "rounded-[var(--radius-pill-raw)] border border-[var(--border-strong)]",
                                     "text-sm font-medium text-primary",
@@ -862,10 +867,7 @@ function SearchProductItem({
                         data={image}
                         loading={loading}
                         sizes="(min-width: 45em) 400px, 100vw"
-                        className={cn(
-                            "h-auto w-full object-cover motion-image",
-                            canHover && "group-hover:scale-105"
-                        )}
+                        className={cn("h-auto w-full object-cover motion-image", canHover && "group-hover:scale-105")}
                     />
                 ) : (
                     <div className="aspect-4/5 bg-muted/50" />
@@ -1003,10 +1005,7 @@ function SearchCollectionCard({
                         alt={collection.image.altText || collection.title}
                         data={collection.image}
                         sizes="(min-width: 768px) 25vw, 50vw"
-                        className={cn(
-                            "w-full h-full object-cover motion-image",
-                            canHover && "group-hover:scale-105"
-                        )}
+                        className={cn("w-full h-full object-cover motion-image", canHover && "group-hover:scale-105")}
                     />
                 ) : (
                     <div className="w-full h-full bg-linear-to-br from-primary/5 to-primary/20 flex items-center justify-center">
@@ -1168,10 +1167,7 @@ function SearchArticleCard({
                         alt={article.image.altText || article.title}
                         data={article.image}
                         sizes="(min-width: 45em) 400px, 100vw"
-                        className={cn(
-                            "w-full h-full object-cover motion-image",
-                            canHover && "group-hover:scale-105"
-                        )}
+                        className={cn("w-full h-full object-cover motion-image", canHover && "group-hover:scale-105")}
                     />
                 ) : (
                     <div className="w-full h-full bg-linear-to-br from-primary/5 to-primary/20 flex items-center justify-center">
@@ -1798,7 +1794,7 @@ async function fetchMoreArticles({request, context}: Pick<Route.LoaderArgs, "req
  * Derives the store's public origin URL from environment variables.
  * Used to build absolute product URLs in UCP responses for agent consumers.
  */
-function getStoreUrl(env: { PUBLIC_STORE_DOMAIN?: string }): string {
+function getStoreUrl(env: {PUBLIC_STORE_DOMAIN?: string}): string {
     const domain = env.PUBLIC_STORE_DOMAIN;
     return domain ? `https://${domain}` : "";
 }
@@ -1986,21 +1982,21 @@ function AgentSearchResults({term, products}: {term: string; products: SearchPro
         const jsonLd = {
             "@context": "https://schema.org",
             "@type": "ItemList",
-            "name": term ? `Search results for "${term}"` : "Search Results",
-            "numberOfItems": products.length,
-            "itemListElement": products.map((p, i) => ({
+            name: term ? `Search results for "${term}"` : "Search Results",
+            numberOfItems: products.length,
+            itemListElement: products.map((p, i) => ({
                 "@type": "ListItem",
-                "position": i + 1,
-                "item": {
+                position: i + 1,
+                item: {
                     "@type": "Product",
-                    "name": p.title,
-                    "url": `/products/${p.handle}`,
+                    name: p.title,
+                    url: `/products/${p.handle}`,
                     ...(p.featuredImage?.url ? {image: p.featuredImage.url} : {}),
-                    "offers": {
+                    offers: {
                         "@type": "Offer",
-                        "price": p.priceRange.minVariantPrice.amount,
-                        "priceCurrency": p.priceRange.minVariantPrice.currencyCode,
-                        "availability": p.availableForSale
+                        price: p.priceRange.minVariantPrice.amount,
+                        priceCurrency: p.priceRange.minVariantPrice.currencyCode,
+                        availability: p.availableForSale
                             ? "https://schema.org/InStock"
                             : "https://schema.org/OutOfStock"
                     }
@@ -2021,7 +2017,7 @@ function AgentSearchResults({term, products}: {term: string; products: SearchPro
         return () => {
             scriptRef.current?.remove();
         };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [products.length, term]);
 
     return (
@@ -2047,9 +2043,7 @@ function AgentSearchResults({term, products}: {term: string; products: SearchPro
                     <p className="border-y border-border py-4 text-xs text-muted-foreground">No products found.</p>
                 ) : (
                     <section>
-                        <h3 className="mb-3 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                            Products
-                        </h3>
+                        <h3 className="mb-3 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Products</h3>
                         <div className="divide-y divide-border/50 border-y border-border">
                             {products.map(p => (
                                 <div key={p.id} className="flex items-start justify-between gap-4 py-3">

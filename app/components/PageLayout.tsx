@@ -335,9 +335,7 @@ function CartSheet({
                 hideCloseButton
             >
                 <SheetTitle className="sr-only">Shopping Cart</SheetTitle>
-                <SheetDescription className="sr-only">
-                    Your cart items and checkout options
-                </SheetDescription>
+                <SheetDescription className="sr-only">Your cart items and checkout options</SheetDescription>
                 <Suspense fallback={<CartLoadingSkeleton />}>
                     <Await resolve={cart}>
                         <CartSheetContent

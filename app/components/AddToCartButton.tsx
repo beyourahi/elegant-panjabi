@@ -65,7 +65,10 @@ export function AddToCartButton({
                             <Button
                                 type="submit"
                                 variant="default"
-                                onClick={() => { setForceIdle(false); onClick?.(); }}
+                                onClick={() => {
+                                    setForceIdle(false);
+                                    onClick?.();
+                                }}
                                 disabled={isDisabled}
                                 className="w-full min-h-10 justify-between gap-4 py-1.5 text-base sm:text-lg"
                             >

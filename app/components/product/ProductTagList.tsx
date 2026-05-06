@@ -23,11 +23,7 @@ export function ProductTagList({tags, className}: ProductTagListProps) {
     if (displayTags.length === 0) return null;
 
     return (
-        <div
-            role="group"
-            aria-label="Product tags"
-            className={cn("flex flex-wrap items-center gap-1.5", className)}
-        >
+        <div role="group" aria-label="Product tags" className={cn("flex flex-wrap items-center gap-1.5", className)}>
             {displayTags.map(tag => (
                 <Badge
                     key={tag}

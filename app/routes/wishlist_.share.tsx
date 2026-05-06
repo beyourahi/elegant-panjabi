@@ -200,12 +200,7 @@ function SharedWishlistHeader({count, onSaveAll}: {count: number; onSaveAll?: ()
 
                 {/* Save All Button - Desktop */}
                 {count > 0 && onSaveAll && (
-                    <Button
-                        type="button"
-                        size="lg"
-                        onClick={onSaveAll}
-                        className="hidden sm:inline-flex text-sm"
-                    >
+                    <Button type="button" size="lg" onClick={onSaveAll} className="hidden sm:inline-flex text-sm">
                         <Plus className="size-5" />
                         Save All
                     </Button>

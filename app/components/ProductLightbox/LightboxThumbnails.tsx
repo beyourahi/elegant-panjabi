@@ -30,9 +30,7 @@ function getThumbnailUrl(item: ProductMediaItem): string | null {
         return item.image.url;
     }
     if (
-        (item.__typename === "Video" ||
-            item.__typename === "ExternalVideo" ||
-            item.__typename === "Model3d") &&
+        (item.__typename === "Video" || item.__typename === "ExternalVideo" || item.__typename === "Model3d") &&
         item.previewImage
     ) {
         return item.previewImage.url;
@@ -134,7 +132,16 @@ export function LightboxThumbnails({media, currentIndex, onSelect}: LightboxThum
 
                             {is3d && (
                                 <div className="absolute inset-0 flex items-center justify-center bg-dark/40">
-                                    <svg width="16" height="16" viewBox="0 0 12 12" aria-hidden="true" fill="none" stroke="white" strokeWidth="1" className="md:w-5 md:h-5">
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 12 12"
+                                        aria-hidden="true"
+                                        fill="none"
+                                        stroke="white"
+                                        strokeWidth="1"
+                                        className="md:w-5 md:h-5"
+                                    >
                                         <path d="M6 0.5L11 3.25V8.75L6 11.5L1 8.75V3.25L6 0.5Z" />
                                         <path d="M6 0.5V6M6 6L11 3.25M6 6L1 3.25M6 6V11.5" strokeWidth="0.75" />
                                     </svg>

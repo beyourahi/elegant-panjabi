@@ -122,12 +122,15 @@ import {
     type OrderHistoryProduct
 } from "~/graphql/customer-account/CustomerOrderHistoryQuery";
 import type {CuratedProductFragment, CuratedCollectionsQuery, ExploreCollectionFragment} from "storefrontapi.generated";
+import {generateFAQPageSchema, generateOrganizationSchema, getSeoDefaults} from "~/lib/seo";
 import {
-    generateFAQPageSchema,
-    generateOrganizationSchema,
-    getSeoDefaults
-} from "~/lib/seo";
-import {useTestimonials, useInstagramMedia, useFaqItems, usePromotionalBanners, useTrafficSourceBanners, useHomepageVariants} from "~/lib/site-content-context";
+    useTestimonials,
+    useInstagramMedia,
+    useFaqItems,
+    usePromotionalBanners,
+    useTrafficSourceBanners,
+    useHomepageVariants
+} from "~/lib/site-content-context";
 import {useAgentSurface} from "~/lib/agent-surface-context";
 import {ShopLocation} from "~/components/ShopLocation";
 import {useWishlist} from "~/lib/wishlist-context";
@@ -259,9 +262,7 @@ async function loadOrderHistory(
         let products = extractOrderHistoryProducts(data?.customer?.orders?.nodes ?? [], 16);
 
         if (products.length > 0) {
-            const productIds = products
-                .map(p => p.productId)
-                .filter((id): id is string => id !== null);
+            const productIds = products.map(p => p.productId).filter((id): id is string => id !== null);
 
             if (productIds.length > 0) {
                 try {
@@ -309,7 +310,9 @@ export const meta: Route.MetaFunction = ({matches}) => {
         | undefined;
     const seoDefaults = getSeoDefaults(rootData?.siteContent?.siteSettings, rootData?.siteContent?.themeConfig);
     const socialLinks = rootData?.siteContent?.siteSettings?.socialLinks;
-    const faqItems = (rootData?.siteContent?.siteSettings as {faqItems?: Array<{question: string; answer: string}>} | undefined)?.faqItems;
+    const faqItems = (
+        rootData?.siteContent?.siteSettings as {faqItems?: Array<{question: string; answer: string}>} | undefined
+    )?.faqItems;
     const organizationSchema = generateOrganizationSchema(rootData?.siteContent?.siteSettings, socialLinks);
 
     return [
@@ -478,7 +481,9 @@ export default function Homepage() {
             {isAgent ? (
                 <section className="px-6 py-16 max-w-3xl mx-auto">
                     <h1 className="text-3xl font-bold mb-4">{agentVariant?.heroHeading ?? "Explore our catalog"}</h1>
-                    <p className="text-muted-foreground mb-8">{agentVariant?.heroDescription ?? "Browse products, collections, and policies below."}</p>
+                    <p className="text-muted-foreground mb-8">
+                        {agentVariant?.heroDescription ?? "Browse products, collections, and policies below."}
+                    </p>
                     {agentVariant?.ctaUrl ? (
                         <a href={agentVariant.ctaUrl} className="text-primary underline underline-offset-4">
                             {agentVariant.ctaLabel ?? "Browse catalog"}
@@ -543,9 +548,13 @@ export default function Homepage() {
                      AUDIENCE: 100% of visitors */}
                 <Suspense fallback={null}>
                     <Await resolve={data.exploreCollections}>
-                        {(collections) =>
+                        {collections =>
                             collections && collections.length > 0 ? (
-                                <AnimatedSection animation="section" threshold={0.1} className="mt-12 md:mt-16 lg:mt-20">
+                                <AnimatedSection
+                                    animation="section"
+                                    threshold={0.1}
+                                    className="mt-12 md:mt-16 lg:mt-20"
+                                >
                                     <ExploreCollectionsSection collections={collections} />
                                 </AnimatedSection>
                             ) : null
@@ -559,9 +568,13 @@ export default function Homepage() {
                      AUDIENCE: ~30% of visitors (has browsing history) */}
                 <Suspense fallback={null}>
                     <Await resolve={data.recentlyViewed}>
-                        {(rv) =>
+                        {rv =>
                             rv?.products?.length > 0 ? (
-                                <AnimatedSection animation="slide-up" threshold={0.1} className="mt-12 md:mt-16 lg:mt-20">
+                                <AnimatedSection
+                                    animation="slide-up"
+                                    threshold={0.1}
+                                    className="mt-12 md:mt-16 lg:mt-20"
+                                >
                                     <RecentlyViewedSection products={rv.products} allProducts={rv.allProducts} />
                                 </AnimatedSection>
                             ) : null
@@ -589,9 +602,13 @@ export default function Homepage() {
                      AUDIENCE: ~10% of visitors (logged-in customers) */}
                 <Suspense fallback={null}>
                     <Await resolve={data.orderHistory}>
-                        {(oh) =>
+                        {oh =>
                             oh?.isLoggedIn && oh.products.length > 0 ? (
-                                <AnimatedSection animation="slide-up" threshold={0.1} className="mt-12 md:mt-16 lg:mt-20">
+                                <AnimatedSection
+                                    animation="slide-up"
+                                    threshold={0.1}
+                                    className="mt-12 md:mt-16 lg:mt-20"
+                                >
                                     <OrderHistorySection products={oh.products} />
                                 </AnimatedSection>
                             ) : null
@@ -624,9 +641,13 @@ export default function Homepage() {
                       AUDIENCE: ~25% of visitors (high engagement) */}
                 <Suspense fallback={null}>
                     <Await resolve={data.recentArticles}>
-                        {(articles) =>
+                        {articles =>
                             articles && articles.length > 0 ? (
-                                <AnimatedSection animation="section" threshold={0.1} className="mt-12 md:mt-16 lg:mt-20">
+                                <AnimatedSection
+                                    animation="section"
+                                    threshold={0.1}
+                                    className="mt-12 md:mt-16 lg:mt-20"
+                                >
                                     <BlogSection articles={articles} />
                                 </AnimatedSection>
                             ) : null

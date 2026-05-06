@@ -1,4 +1,4 @@
-import { cn } from "~/lib/utils";
+import {cn} from "~/lib/utils";
 
 interface PageHeadingProps {
     title: React.ReactNode;
@@ -13,7 +13,7 @@ export function PageHeading({
     description,
     variant = "light",
     className,
-    descriptionClassName,
+    descriptionClassName
 }: PageHeadingProps) {
     const isDark = variant === "dark";
 
