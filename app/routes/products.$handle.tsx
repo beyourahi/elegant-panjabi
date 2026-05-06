@@ -383,7 +383,7 @@ export default function Product() {
                         images={product.images.nodes}
                         selectedVariantImage={selectedVariant?.image}
                         media={product.media?.nodes}
-                        isAvailableForSale={product.availableForSale}
+                        isAvailableForSale={selectedVariant?.availableForSale ?? product.availableForSale}
                     />
                 </div>
 
@@ -514,7 +514,7 @@ export default function Product() {
                                     images={product.images.nodes}
                                     selectedVariantImage={selectedVariant?.image}
                                     media={product.media?.nodes}
-                                    isAvailableForSale={product.availableForSale}
+                                    isAvailableForSale={selectedVariant?.availableForSale ?? product.availableForSale}
                                 />
                             </div>
                             {/* Product Info — sticky on lg+ screens until all product media scrolls away.

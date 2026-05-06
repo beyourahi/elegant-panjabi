@@ -30,6 +30,27 @@ import type {ChangelogEntry} from "~/lib/types/changelog";
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
     {
         date: "2026-05-06",
+        category: "Fix",
+        headline: "Sold-out sticky bar stays fully visible and never fades out",
+        summary:
+            "The sticky 'Sold Out' bar at the bottom of the screen on mobile is now shown at full opacity — it will no longer appear semi-transparent or washed out when a product is unavailable."
+    },
+    {
+        date: "2026-05-06",
+        category: "Fix",
+        headline: "Product image gallery now greys out for sold-out variants",
+        summary:
+            "When you select a sold-out variant on a product page, all images and videos in the gallery now correctly switch to the greyscale treatment — including products where only some variants are unavailable."
+    },
+    {
+        date: "2026-05-06",
+        category: "Fix",
+        headline: "Browse arrows available on sold-out product cards",
+        summary:
+            "Product cards with multiple images now show navigation arrows on hover even when the product is out of stock, so you can still browse all photos before deciding."
+    },
+    {
+        date: "2026-05-06",
         category: "Improvement",
         headline: "Sticky mobile button now shows sold-out state clearly",
         summary:

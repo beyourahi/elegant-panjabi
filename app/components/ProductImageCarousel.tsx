@@ -441,7 +441,7 @@ export function ProductImageCarousel({
                 tabIndex={0}
                 className={cn(
                     "absolute left-2 top-1/2 -translate-y-1/2 z-20 size-8 rounded-full hidden md:flex items-center justify-center motion-overlay bg-primary border-0 hover:bg-primary/90 cursor-pointer",
-                    isOutOfStock ? "opacity-0 pointer-events-none" : "opacity-0 group-hover:opacity-100"
+                    "opacity-0 group-hover:opacity-100"
                 )}
                 onClick={e => {
                     e.preventDefault();
@@ -464,7 +464,7 @@ export function ProductImageCarousel({
                 tabIndex={0}
                 className={cn(
                     "absolute right-2 top-1/2 -translate-y-1/2 z-20 size-8 rounded-full hidden md:flex items-center justify-center motion-overlay bg-primary border-0 hover:bg-primary/90 cursor-pointer",
-                    isOutOfStock ? "opacity-0 pointer-events-none" : "opacity-0 group-hover:opacity-100"
+                    "opacity-0 group-hover:opacity-100"
                 )}
                 onClick={e => {
                     e.preventDefault();

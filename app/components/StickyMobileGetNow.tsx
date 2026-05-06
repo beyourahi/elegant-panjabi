@@ -210,7 +210,6 @@ export function StickyMobileGetNow({
             <button
                 type="button"
                 onClick={outOfStock ? undefined : handleClick}
-                disabled={outOfStock}
                 className={cn(
                     "w-full flex items-center min-h-[62px] rounded-[20px] select-none shadow-xl ring-1 overflow-hidden outline-none transition-transform duration-100",
                     outOfStock

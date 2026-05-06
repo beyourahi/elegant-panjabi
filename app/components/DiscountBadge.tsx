@@ -132,7 +132,7 @@ export function DiscountBadge({discountInfo, percentage, position = "absolute", 
                 // Positioning - absolute for card overlay, inline for list view
                 position === "absolute" && "absolute top-2 left-2 z-10",
                 // Shape & Layout
-                "inline-flex items-center gap-1.5 rounded-full",
+                "inline-flex items-center gap-1 sm:gap-1.5 rounded-full",
                 // Background + border ring (matches storefront_001 spec)
                 "bg-discount-bg border-discount-icon-bg border",
                 // Padding

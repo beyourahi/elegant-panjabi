@@ -709,7 +709,7 @@ export function ProductItem({
                         {/* Low stock badge - shown when tracked inventory <= 10 and product is available */}
                         {isLowStock && (
                             <span
-                                className="inline-flex items-center gap-1.5 rounded-full bg-warning/80 pl-0.5 pr-2 py-0.5 text-xs text-warning-foreground shadow-md"
+                                className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full bg-warning/80 pl-0.5 pr-2 py-0.5 text-xs text-warning-foreground shadow-md"
                                 role="status"
                                 aria-label="Limited stock — limited quantity available"
                             >
